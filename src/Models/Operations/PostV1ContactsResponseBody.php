@@ -6,7 +6,7 @@
 
 declare(strict_types=1);
 
-namespace Luqra\LuqraNowPhp\Models\Operations;
+namespace Luqra\Now\Models\Operations;
 
 
 /** PostV1ContactsResponseBody - Default Response */
@@ -17,7 +17,7 @@ class PostV1ContactsResponseBody
      * @var Data $data
      */
     #[\Speakeasy\Serializer\Annotation\SerializedName('data')]
-    #[\Speakeasy\Serializer\Annotation\Type('\Luqra\LuqraNowPhp\Models\Operations\Data')]
+    #[\Speakeasy\Serializer\Annotation\Type('\Luqra\Now\Models\Operations\Data')]
     public Data $data;
 
     /**
@@ -25,7 +25,7 @@ class PostV1ContactsResponseBody
      * @var Meta $meta
      */
     #[\Speakeasy\Serializer\Annotation\SerializedName('meta')]
-    #[\Speakeasy\Serializer\Annotation\Type('\Luqra\LuqraNowPhp\Models\Operations\Meta')]
+    #[\Speakeasy\Serializer\Annotation\Type('\Luqra\Now\Models\Operations\Meta')]
     public Meta $meta;
 
     /**

@@ -6,7 +6,7 @@
 
 declare(strict_types=1);
 
-namespace Luqra\LuqraNowPhp\Models\Operations;
+namespace Luqra\Now\Models\Operations;
 
 
 class GetV1PaymentsItemIdData
@@ -23,7 +23,7 @@ class GetV1PaymentsItemIdData
      * @var GetV1PaymentsItemIdStatus $status
      */
     #[\Speakeasy\Serializer\Annotation\SerializedName('status')]
-    #[\Speakeasy\Serializer\Annotation\Type('\Luqra\LuqraNowPhp\Models\Operations\GetV1PaymentsItemIdStatus')]
+    #[\Speakeasy\Serializer\Annotation\Type('\Luqra\Now\Models\Operations\GetV1PaymentsItemIdStatus')]
     public GetV1PaymentsItemIdStatus $status;
 
     /**
@@ -66,7 +66,7 @@ class GetV1PaymentsItemIdData
      * @var GetV1PaymentsItemIdAmountInputMode $amountInputMode
      */
     #[\Speakeasy\Serializer\Annotation\SerializedName('amountInputMode')]
-    #[\Speakeasy\Serializer\Annotation\Type('\Luqra\LuqraNowPhp\Models\Operations\GetV1PaymentsItemIdAmountInputMode')]
+    #[\Speakeasy\Serializer\Annotation\Type('\Luqra\Now\Models\Operations\GetV1PaymentsItemIdAmountInputMode')]
     public GetV1PaymentsItemIdAmountInputMode $amountInputMode;
 
     /**
@@ -81,7 +81,7 @@ class GetV1PaymentsItemIdData
      * @var GetV1PaymentsItemIdPaymentRail $paymentRail
      */
     #[\Speakeasy\Serializer\Annotation\SerializedName('paymentRail')]
-    #[\Speakeasy\Serializer\Annotation\Type('\Luqra\LuqraNowPhp\Models\Operations\GetV1PaymentsItemIdPaymentRail')]
+    #[\Speakeasy\Serializer\Annotation\Type('\Luqra\Now\Models\Operations\GetV1PaymentsItemIdPaymentRail')]
     public GetV1PaymentsItemIdPaymentRail $paymentRail;
 
     /**
@@ -89,7 +89,7 @@ class GetV1PaymentsItemIdData
      * @var GetV1PaymentsItemIdDirection $direction
      */
     #[\Speakeasy\Serializer\Annotation\SerializedName('direction')]
-    #[\Speakeasy\Serializer\Annotation\Type('\Luqra\LuqraNowPhp\Models\Operations\GetV1PaymentsItemIdDirection')]
+    #[\Speakeasy\Serializer\Annotation\Type('\Luqra\Now\Models\Operations\GetV1PaymentsItemIdDirection')]
     public GetV1PaymentsItemIdDirection $direction;
 
     /**

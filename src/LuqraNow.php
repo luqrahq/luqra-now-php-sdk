@@ -6,7 +6,7 @@
 
 declare(strict_types=1);
 
-namespace Luqra\LuqraNowPhp;
+namespace Luqra\Now;
 
 
 

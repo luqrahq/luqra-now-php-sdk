@@ -6,11 +6,11 @@
 
 declare(strict_types=1);
 
-namespace Luqra\LuqraNowPhp;
+namespace Luqra\Now;
 
-use Luqra\LuqraNowPhp\Hooks\HookContext;
-use Luqra\LuqraNowPhp\Models\Operations;
-use Luqra\LuqraNowPhp\Utils\Options;
+use Luqra\Now\Hooks\HookContext;
+use Luqra\Now\Models\Operations;
+use Luqra\Now\Utils\Options;
 use Speakeasy\Serializer\DeserializationContext;
 
 class Contacts
@@ -50,7 +50,7 @@ class Contacts
      * @param  string  $originatorId
      * @param  ?string  $search
      * @return Operations\GetV1ContactsResponse
-     * @throws \Luqra\LuqraNowPhp\Models\Errors\APIException
+     * @throws \Luqra\Now\Models\Errors\APIException
      */
     public function getV1Contacts(string $originatorId, ?string $search = null, ?Options $options = null): Operations\GetV1ContactsResponse
     {
@@ -91,7 +91,7 @@ class Contacts
 
                 $serializer = Utils\JSON::createSerializer();
                 $responseData = (string) $httpResponse->getBody();
-                $obj = $serializer->deserialize($responseData, '\Luqra\LuqraNowPhp\Models\Operations\GetV1ContactsResponseBody', 'json', DeserializationContext::create()->setRequireAllRequiredProperties(true));
+                $obj = $serializer->deserialize($responseData, '\Luqra\Now\Models\Operations\GetV1ContactsResponseBody', 'json', DeserializationContext::create()->setRequireAllRequiredProperties(true));
                 $response = new Operations\GetV1ContactsResponse(
                     statusCode: $statusCode,
                     contentType: $contentType,
@@ -100,7 +100,7 @@ class Contacts
 
                 return $response;
             } else {
-                throw new \Luqra\LuqraNowPhp\Models\Errors\APIException('Unknown content type received', $statusCode, $httpResponse->getBody()->getContents(), $httpResponse);
+                throw new \Luqra\Now\Models\Errors\APIException('Unknown content type received', $statusCode, $httpResponse->getBody()->getContents(), $httpResponse);
             }
         } elseif (Utils\Utils::matchStatusCodes($statusCode, ['400'])) {
             if (Utils\Utils::matchContentType($contentType, 'application/json')) {
@@ -108,10 +108,10 @@ class Contacts
 
                 $serializer = Utils\JSON::createSerializer();
                 $responseData = (string) $httpResponse->getBody();
-                $obj = $serializer->deserialize($responseData, '\Luqra\LuqraNowPhp\Models\Errors\ErrorResponse', 'json', DeserializationContext::create()->setRequireAllRequiredProperties(true));
+                $obj = $serializer->deserialize($responseData, '\Luqra\Now\Models\Errors\ErrorResponse', 'json', DeserializationContext::create()->setRequireAllRequiredProperties(true));
                 throw $obj->toException();
             } else {
-                throw new \Luqra\LuqraNowPhp\Models\Errors\APIException('Unknown content type received', $statusCode, $httpResponse->getBody()->getContents(), $httpResponse);
+                throw new \Luqra\Now\Models\Errors\APIException('Unknown content type received', $statusCode, $httpResponse->getBody()->getContents(), $httpResponse);
             }
         } elseif (Utils\Utils::matchStatusCodes($statusCode, ['500'])) {
             if (Utils\Utils::matchContentType($contentType, 'application/json')) {
@@ -119,17 +119,17 @@ class Contacts
 
                 $serializer = Utils\JSON::createSerializer();
                 $responseData = (string) $httpResponse->getBody();
-                $obj = $serializer->deserialize($responseData, '\Luqra\LuqraNowPhp\Models\Errors\ErrorResponse', 'json', DeserializationContext::create()->setRequireAllRequiredProperties(true));
+                $obj = $serializer->deserialize($responseData, '\Luqra\Now\Models\Errors\ErrorResponse', 'json', DeserializationContext::create()->setRequireAllRequiredProperties(true));
                 throw $obj->toException();
             } else {
-                throw new \Luqra\LuqraNowPhp\Models\Errors\APIException('Unknown content type received', $statusCode, $httpResponse->getBody()->getContents(), $httpResponse);
+                throw new \Luqra\Now\Models\Errors\APIException('Unknown content type received', $statusCode, $httpResponse->getBody()->getContents(), $httpResponse);
             }
         } elseif (Utils\Utils::matchStatusCodes($statusCode, ['4XX'])) {
-            throw new \Luqra\LuqraNowPhp\Models\Errors\APIException('API error occurred', $statusCode, $httpResponse->getBody()->getContents(), $httpResponse);
+            throw new \Luqra\Now\Models\Errors\APIException('API error occurred', $statusCode, $httpResponse->getBody()->getContents(), $httpResponse);
         } elseif (Utils\Utils::matchStatusCodes($statusCode, ['5XX'])) {
-            throw new \Luqra\LuqraNowPhp\Models\Errors\APIException('API error occurred', $statusCode, $httpResponse->getBody()->getContents(), $httpResponse);
+            throw new \Luqra\Now\Models\Errors\APIException('API error occurred', $statusCode, $httpResponse->getBody()->getContents(), $httpResponse);
         } else {
-            throw new \Luqra\LuqraNowPhp\Models\Errors\APIException('Unknown status code received', $statusCode, $httpResponse->getBody()->getContents(), $httpResponse);
+            throw new \Luqra\Now\Models\Errors\APIException('Unknown status code received', $statusCode, $httpResponse->getBody()->getContents(), $httpResponse);
         }
     }
 
@@ -138,7 +138,7 @@ class Contacts
      *
      * @param  Operations\PostV1ContactsRequestBody  $request
      * @return Operations\PostV1ContactsResponse
-     * @throws \Luqra\LuqraNowPhp\Models\Errors\APIException
+     * @throws \Luqra\Now\Models\Errors\APIException
      */
     public function postV1Contacts(Operations\PostV1ContactsRequestBody $request, ?Options $options = null): Operations\PostV1ContactsResponse
     {
@@ -177,7 +177,7 @@ class Contacts
 
                 $serializer = Utils\JSON::createSerializer();
                 $responseData = (string) $httpResponse->getBody();
-                $obj = $serializer->deserialize($responseData, '\Luqra\LuqraNowPhp\Models\Operations\PostV1ContactsResponseBody', 'json', DeserializationContext::create()->setRequireAllRequiredProperties(true));
+                $obj = $serializer->deserialize($responseData, '\Luqra\Now\Models\Operations\PostV1ContactsResponseBody', 'json', DeserializationContext::create()->setRequireAllRequiredProperties(true));
                 $response = new Operations\PostV1ContactsResponse(
                     statusCode: $statusCode,
                     contentType: $contentType,
@@ -186,7 +186,7 @@ class Contacts
 
                 return $response;
             } else {
-                throw new \Luqra\LuqraNowPhp\Models\Errors\APIException('Unknown content type received', $statusCode, $httpResponse->getBody()->getContents(), $httpResponse);
+                throw new \Luqra\Now\Models\Errors\APIException('Unknown content type received', $statusCode, $httpResponse->getBody()->getContents(), $httpResponse);
             }
         } elseif (Utils\Utils::matchStatusCodes($statusCode, ['400', '404', '409'])) {
             if (Utils\Utils::matchContentType($contentType, 'application/json')) {
@@ -194,10 +194,10 @@ class Contacts
 
                 $serializer = Utils\JSON::createSerializer();
                 $responseData = (string) $httpResponse->getBody();
-                $obj = $serializer->deserialize($responseData, '\Luqra\LuqraNowPhp\Models\Errors\ErrorResponse', 'json', DeserializationContext::create()->setRequireAllRequiredProperties(true));
+                $obj = $serializer->deserialize($responseData, '\Luqra\Now\Models\Errors\ErrorResponse', 'json', DeserializationContext::create()->setRequireAllRequiredProperties(true));
                 throw $obj->toException();
             } else {
-                throw new \Luqra\LuqraNowPhp\Models\Errors\APIException('Unknown content type received', $statusCode, $httpResponse->getBody()->getContents(), $httpResponse);
+                throw new \Luqra\Now\Models\Errors\APIException('Unknown content type received', $statusCode, $httpResponse->getBody()->getContents(), $httpResponse);
             }
         } elseif (Utils\Utils::matchStatusCodes($statusCode, ['500'])) {
             if (Utils\Utils::matchContentType($contentType, 'application/json')) {
@@ -205,17 +205,17 @@ class Contacts
 
                 $serializer = Utils\JSON::createSerializer();
                 $responseData = (string) $httpResponse->getBody();
-                $obj = $serializer->deserialize($responseData, '\Luqra\LuqraNowPhp\Models\Errors\ErrorResponse', 'json', DeserializationContext::create()->setRequireAllRequiredProperties(true));
+                $obj = $serializer->deserialize($responseData, '\Luqra\Now\Models\Errors\ErrorResponse', 'json', DeserializationContext::create()->setRequireAllRequiredProperties(true));
                 throw $obj->toException();
             } else {
-                throw new \Luqra\LuqraNowPhp\Models\Errors\APIException('Unknown content type received', $statusCode, $httpResponse->getBody()->getContents(), $httpResponse);
+                throw new \Luqra\Now\Models\Errors\APIException('Unknown content type received', $statusCode, $httpResponse->getBody()->getContents(), $httpResponse);
             }
         } elseif (Utils\Utils::matchStatusCodes($statusCode, ['4XX'])) {
-            throw new \Luqra\LuqraNowPhp\Models\Errors\APIException('API error occurred', $statusCode, $httpResponse->getBody()->getContents(), $httpResponse);
+            throw new \Luqra\Now\Models\Errors\APIException('API error occurred', $statusCode, $httpResponse->getBody()->getContents(), $httpResponse);
         } elseif (Utils\Utils::matchStatusCodes($statusCode, ['5XX'])) {
-            throw new \Luqra\LuqraNowPhp\Models\Errors\APIException('API error occurred', $statusCode, $httpResponse->getBody()->getContents(), $httpResponse);
+            throw new \Luqra\Now\Models\Errors\APIException('API error occurred', $statusCode, $httpResponse->getBody()->getContents(), $httpResponse);
         } else {
-            throw new \Luqra\LuqraNowPhp\Models\Errors\APIException('Unknown status code received', $statusCode, $httpResponse->getBody()->getContents(), $httpResponse);
+            throw new \Luqra\Now\Models\Errors\APIException('Unknown status code received', $statusCode, $httpResponse->getBody()->getContents(), $httpResponse);
         }
     }
 

@@ -6,9 +6,9 @@
 
 declare(strict_types=1);
 
-namespace Luqra\LuqraNowPhp\Utils;
+namespace Luqra\Now\Utils;
 
-use Luqra\LuqraNowPhp\Utils\Retry\RetryConfig;
+use Luqra\Now\Utils\Retry\RetryConfig;
 
 class Options
 {

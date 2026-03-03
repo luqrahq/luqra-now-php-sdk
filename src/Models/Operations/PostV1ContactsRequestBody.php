@@ -6,7 +6,7 @@
 
 declare(strict_types=1);
 
-namespace Luqra\LuqraNowPhp\Models\Operations;
+namespace Luqra\Now\Models\Operations;
 
 
 class PostV1ContactsRequestBody
@@ -44,7 +44,7 @@ class PostV1ContactsRequestBody
      * @var Address $address
      */
     #[\Speakeasy\Serializer\Annotation\SerializedName('address')]
-    #[\Speakeasy\Serializer\Annotation\Type('\Luqra\LuqraNowPhp\Models\Operations\Address')]
+    #[\Speakeasy\Serializer\Annotation\Type('\Luqra\Now\Models\Operations\Address')]
     public Address $address;
 
     /**
@@ -52,7 +52,7 @@ class PostV1ContactsRequestBody
      * @var BankAccount $bankAccount
      */
     #[\Speakeasy\Serializer\Annotation\SerializedName('bankAccount')]
-    #[\Speakeasy\Serializer\Annotation\Type('\Luqra\LuqraNowPhp\Models\Operations\BankAccount')]
+    #[\Speakeasy\Serializer\Annotation\Type('\Luqra\Now\Models\Operations\BankAccount')]
     public BankAccount $bankAccount;
 
     /**

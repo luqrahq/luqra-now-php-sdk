@@ -6,9 +6,9 @@
 
 declare(strict_types=1);
 
-namespace Luqra\LuqraNowPhp\Models\Operations;
+namespace Luqra\Now\Models\Operations;
 
-use Luqra\LuqraNowPhp\Utils\SpeakeasyMetadata;
+use Luqra\Now\Utils\SpeakeasyMetadata;
 class GetV1PaymentsRequest
 {
     /**

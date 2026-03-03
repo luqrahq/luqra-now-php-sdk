@@ -21,10 +21,10 @@ declare(strict_types=1);
 
 require 'vendor/autoload.php';
 
-use Luqra\LuqraNowPhp;
-use Luqra\LuqraNowPhp\Models\Operations;
+use Luqra\Now;
+use Luqra\Now\Models\Operations;
 
-$sdk = LuqraNowPhp\LuqraNow::builder()
+$sdk = Now\LuqraNow::builder()
     ->setSecurity(
         '<YOUR_BEARER_TOKEN_HERE>'
     )
@@ -87,9 +87,9 @@ declare(strict_types=1);
 
 require 'vendor/autoload.php';
 
-use Luqra\LuqraNowPhp;
+use Luqra\Now;
 
-$sdk = LuqraNowPhp\LuqraNow::builder()
+$sdk = Now\LuqraNow::builder()
     ->setSecurity(
         '<YOUR_BEARER_TOKEN_HERE>'
     )
