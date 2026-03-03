@@ -1,0 +1,35 @@
+overlay: 1.0.0
+info:
+  title: CodeSamples overlay for php target
+  version: 0.0.0
+actions:
+  - target: $["paths"]["/v1/contacts/"]["get"]
+    update:
+      "x-codeSamples":
+        - "lang": "php"
+          "label": "get_/v1/contacts/"
+          "source": "declare(strict_types=1);\n\nrequire 'vendor/autoload.php';\n\nuse Luqra\\LuqraNowPhp;\n\n$sdk = LuqraNowPhp\\LuqraNow::builder()\n    ->setSecurity(\n        '<YOUR_BEARER_TOKEN_HERE>'\n    )\n    ->build();\n\n\n\n$response = $sdk->contacts->getV1Contacts(\n    originatorId: 'c3d44417-4992-4661-bbef-89efdfc752f5'\n);\n\nif ($response->object !== null) {\n    // handle response\n}"
+  - target: $["paths"]["/v1/contacts/"]["post"]
+    update:
+      "x-codeSamples":
+        - "lang": "php"
+          "label": "post_/v1/contacts/"
+          "source": "declare(strict_types=1);\n\nrequire 'vendor/autoload.php';\n\nuse Luqra\\LuqraNowPhp;\nuse Luqra\\LuqraNowPhp\\Models\\Operations;\n\n$sdk = LuqraNowPhp\\LuqraNow::builder()\n    ->setSecurity(\n        '<YOUR_BEARER_TOKEN_HERE>'\n    )\n    ->build();\n\n$request = new Operations\\PostV1ContactsRequestBody(\n    originatorId: '39430363-1129-4726-ab2f-656e7f7a63ac',\n    firstName: 'Jarrod',\n    lastName: 'Smith',\n    email: 'Elyssa17@hotmail.com',\n    address: new Operations\\Address(\n        addressLine1: '225 S Maple Street',\n        city: 'West Chad',\n        state: 'Pennsylvania',\n        postalCode: '38469',\n        countryCode: 'KR',\n    ),\n    bankAccount: new Operations\\BankAccount(\n        subType: Operations\\SubType::Savings,\n        achRoutingNumber: '<value>',\n        achAccountNumber: '<value>',\n    ),\n);\n\n$response = $sdk->contacts->postV1Contacts(\n    request: $request\n);\n\nif ($response->object !== null) {\n    // handle response\n}"
+  - target: $["paths"]["/v1/payments/"]["get"]
+    update:
+      "x-codeSamples":
+        - "lang": "php"
+          "label": "get_/v1/payments/"
+          "source": "declare(strict_types=1);\n\nrequire 'vendor/autoload.php';\n\nuse Luqra\\LuqraNowPhp;\nuse Luqra\\LuqraNowPhp\\Models\\Operations;\n\n$sdk = LuqraNowPhp\\LuqraNow::builder()\n    ->setSecurity(\n        '<YOUR_BEARER_TOKEN_HERE>'\n    )\n    ->build();\n\n$request = new Operations\\GetV1PaymentsRequest();\n\n$response = $sdk->payments->getV1Payments(\n    request: $request\n);\n\nif ($response->object !== null) {\n    // handle response\n}"
+  - target: $["paths"]["/v1/payments/"]["post"]
+    update:
+      "x-codeSamples":
+        - "lang": "php"
+          "label": "post_/v1/payments/"
+          "source": "declare(strict_types=1);\n\nrequire 'vendor/autoload.php';\n\nuse Luqra\\LuqraNowPhp;\nuse Luqra\\LuqraNowPhp\\Models\\Operations;\n\n$sdk = LuqraNowPhp\\LuqraNow::builder()\n    ->setSecurity(\n        '<YOUR_BEARER_TOKEN_HERE>'\n    )\n    ->build();\n\n$request = new Operations\\PostV1PaymentsRequestBody(\n    originatorId: '<id>',\n    contactId: '<id>',\n    paymentAmount: 9075.22,\n    direction: Operations\\Direction::Inbound,\n);\n\n$response = $sdk->payments->postV1Payments(\n    request: $request\n);\n\nif ($response->object !== null) {\n    // handle response\n}"
+  - target: $["paths"]["/v1/payments/item/{id}"]["get"]
+    update:
+      "x-codeSamples":
+        - "lang": "php"
+          "label": "get_/v1/payments/item/{id}"
+          "source": "declare(strict_types=1);\n\nrequire 'vendor/autoload.php';\n\nuse Luqra\\LuqraNowPhp;\n\n$sdk = LuqraNowPhp\\LuqraNow::builder()\n    ->setSecurity(\n        '<YOUR_BEARER_TOKEN_HERE>'\n    )\n    ->build();\n\n\n\n$response = $sdk->payments->getV1PaymentsItemId(\n    id: '<id>'\n);\n\nif ($response->object !== null) {\n    // handle response\n}"
