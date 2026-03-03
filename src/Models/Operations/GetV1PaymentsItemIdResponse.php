@@ -6,7 +6,7 @@
 
 declare(strict_types=1);
 
-namespace Luqra\LuqraNowPhp\Models\Operations;
+namespace Luqra\NowPhp\Models\Operations;
 
 
 class GetV1PaymentsItemIdResponse

@@ -19,7 +19,7 @@ Luqra NOW API: External API for Luqra NOW
 <!-- Start Table of Contents [toc] -->
 ## Table of Contents
 <!-- $toc-max-depth=2 -->
-* [luqra/luqra-now-php](#luqraluqra-now-php)
+* [luqra/now-php](#luqranow-php)
   * [SDK Installation](#sdk-installation)
   * [SDK Example Usage](#sdk-example-usage)
   * [Authentication](#authentication)
@@ -39,7 +39,7 @@ The SDK relies on [Composer](https://getcomposer.org/) to manage its dependencie
 
 To install the SDK and add it as a dependency to an existing `composer.json` file:
 ```bash
-composer require "luqra/luqra-now-php"
+composer require "luqra/now-php"
 ```
 <!-- End SDK Installation [installation] -->
 
@@ -53,10 +53,10 @@ declare(strict_types=1);
 
 require 'vendor/autoload.php';
 
-use Luqra\LuqraNowPhp;
-use Luqra\LuqraNowPhp\Models\Operations;
+use Luqra\NowPhp;
+use Luqra\NowPhp\Models\Operations;
 
-$sdk = LuqraNowPhp\LuqraNow::builder()
+$sdk = NowPhp\LuqraNow::builder()
     ->setSecurity(
         '<YOUR_BEARER_TOKEN_HERE>'
     )
@@ -108,10 +108,10 @@ declare(strict_types=1);
 
 require 'vendor/autoload.php';
 
-use Luqra\LuqraNowPhp;
-use Luqra\LuqraNowPhp\Models\Operations;
+use Luqra\NowPhp;
+use Luqra\NowPhp\Models\Operations;
 
-$sdk = LuqraNowPhp\LuqraNow::builder()
+$sdk = NowPhp\LuqraNow::builder()
     ->setSecurity(
         '<YOUR_BEARER_TOKEN_HERE>'
     )
@@ -196,11 +196,11 @@ declare(strict_types=1);
 
 require 'vendor/autoload.php';
 
-use Luqra\LuqraNowPhp;
-use Luqra\LuqraNowPhp\Models\Errors;
-use Luqra\LuqraNowPhp\Models\Operations;
+use Luqra\NowPhp;
+use Luqra\NowPhp\Models\Errors;
+use Luqra\NowPhp\Models\Operations;
 
-$sdk = LuqraNowPhp\LuqraNow::builder()
+$sdk = NowPhp\LuqraNow::builder()
     ->setSecurity(
         '<YOUR_BEARER_TOKEN_HERE>'
     )
@@ -265,10 +265,10 @@ declare(strict_types=1);
 
 require 'vendor/autoload.php';
 
-use Luqra\LuqraNowPhp;
-use Luqra\LuqraNowPhp\Models\Operations;
+use Luqra\NowPhp;
+use Luqra\NowPhp\Models\Operations;
 
-$sdk = LuqraNowPhp\LuqraNow::builder()
+$sdk = NowPhp\LuqraNow::builder()
     ->setServerIndex(1)
     ->setSecurity(
         '<YOUR_BEARER_TOKEN_HERE>'
@@ -311,10 +311,10 @@ declare(strict_types=1);
 
 require 'vendor/autoload.php';
 
-use Luqra\LuqraNowPhp;
-use Luqra\LuqraNowPhp\Models\Operations;
+use Luqra\NowPhp;
+use Luqra\NowPhp\Models\Operations;
 
-$sdk = LuqraNowPhp\LuqraNow::builder()
+$sdk = NowPhp\LuqraNow::builder()
     ->setServerURL('https://api.now.luqra.com')
     ->setSecurity(
         '<YOUR_BEARER_TOKEN_HERE>'

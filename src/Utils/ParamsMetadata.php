@@ -6,7 +6,7 @@
 
 declare(strict_types=1);
 
-namespace Luqra\LuqraNowPhp\Utils;
+namespace Luqra\NowPhp\Utils;
 
 class ParamsMetadata
 {

@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 require 'vendor/autoload.php';
 
-use Luqra\LuqraNowPhp;
-use Luqra\LuqraNowPhp\Models\Operations;
+use Luqra\NowPhp;
+use Luqra\NowPhp\Models\Operations;
 
-$sdk = LuqraNowPhp\LuqraNow::builder()
+$sdk = NowPhp\LuqraNow::builder()
     ->setSecurity(
         '<YOUR_BEARER_TOKEN_HERE>'
     )

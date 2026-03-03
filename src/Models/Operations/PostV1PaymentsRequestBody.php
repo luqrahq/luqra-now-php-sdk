@@ -6,7 +6,7 @@
 
 declare(strict_types=1);
 
-namespace Luqra\LuqraNowPhp\Models\Operations;
+namespace Luqra\NowPhp\Models\Operations;
 
 
 class PostV1PaymentsRequestBody
@@ -37,7 +37,7 @@ class PostV1PaymentsRequestBody
      * @var Direction $direction
      */
     #[\Speakeasy\Serializer\Annotation\SerializedName('direction')]
-    #[\Speakeasy\Serializer\Annotation\Type('\Luqra\LuqraNowPhp\Models\Operations\Direction')]
+    #[\Speakeasy\Serializer\Annotation\Type('\Luqra\NowPhp\Models\Operations\Direction')]
     public Direction $direction;
 
     /**

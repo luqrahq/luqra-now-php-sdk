@@ -7,7 +7,7 @@
 
 declare(strict_types=1);
 
-namespace Luqra\LuqraNowPhp\Hooks;
+namespace Luqra\NowPhp\Hooks;
 use Psr\Http\Message\ResponseInterface;
 
 class ErrorResponseContext

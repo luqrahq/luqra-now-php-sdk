@@ -6,7 +6,7 @@
 
 declare(strict_types=1);
 
-namespace Luqra\LuqraNowPhp\Utils\Retry;
+namespace Luqra\NowPhp\Utils\Retry;
 use Psr\Http\Message\ResponseInterface;
 
 class TemporaryError extends \Exception

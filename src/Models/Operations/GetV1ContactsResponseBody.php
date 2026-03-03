@@ -6,7 +6,7 @@
 
 declare(strict_types=1);
 
-namespace Luqra\LuqraNowPhp\Models\Operations;
+namespace Luqra\NowPhp\Models\Operations;
 
 
 /** GetV1ContactsResponseBody - Default Response */
@@ -18,7 +18,7 @@ class GetV1ContactsResponseBody
      * @var array<GetV1ContactsData> $data
      */
     #[\Speakeasy\Serializer\Annotation\SerializedName('data')]
-    #[\Speakeasy\Serializer\Annotation\Type('array<\Luqra\LuqraNowPhp\Models\Operations\GetV1ContactsData>')]
+    #[\Speakeasy\Serializer\Annotation\Type('array<\Luqra\NowPhp\Models\Operations\GetV1ContactsData>')]
     public array $data;
 
     /**
@@ -26,7 +26,7 @@ class GetV1ContactsResponseBody
      * @var GetV1ContactsMeta $meta
      */
     #[\Speakeasy\Serializer\Annotation\SerializedName('meta')]
-    #[\Speakeasy\Serializer\Annotation\Type('\Luqra\LuqraNowPhp\Models\Operations\GetV1ContactsMeta')]
+    #[\Speakeasy\Serializer\Annotation\Type('\Luqra\NowPhp\Models\Operations\GetV1ContactsMeta')]
     public GetV1ContactsMeta $meta;
 
     /**

@@ -6,7 +6,7 @@
 
 declare(strict_types=1);
 
-namespace Luqra\LuqraNowPhp\Models\Operations;
+namespace Luqra\NowPhp\Models\Operations;
 
 
 class GetV1PaymentsData
@@ -23,7 +23,7 @@ class GetV1PaymentsData
      * @var GetV1PaymentsStatus $status
      */
     #[\Speakeasy\Serializer\Annotation\SerializedName('status')]
-    #[\Speakeasy\Serializer\Annotation\Type('\Luqra\LuqraNowPhp\Models\Operations\GetV1PaymentsStatus')]
+    #[\Speakeasy\Serializer\Annotation\Type('\Luqra\NowPhp\Models\Operations\GetV1PaymentsStatus')]
     public GetV1PaymentsStatus $status;
 
     /**
@@ -66,7 +66,7 @@ class GetV1PaymentsData
      * @var AmountInputMode $amountInputMode
      */
     #[\Speakeasy\Serializer\Annotation\SerializedName('amountInputMode')]
-    #[\Speakeasy\Serializer\Annotation\Type('\Luqra\LuqraNowPhp\Models\Operations\AmountInputMode')]
+    #[\Speakeasy\Serializer\Annotation\Type('\Luqra\NowPhp\Models\Operations\AmountInputMode')]
     public AmountInputMode $amountInputMode;
 
     /**
@@ -81,7 +81,7 @@ class GetV1PaymentsData
      * @var PaymentRail $paymentRail
      */
     #[\Speakeasy\Serializer\Annotation\SerializedName('paymentRail')]
-    #[\Speakeasy\Serializer\Annotation\Type('\Luqra\LuqraNowPhp\Models\Operations\PaymentRail')]
+    #[\Speakeasy\Serializer\Annotation\Type('\Luqra\NowPhp\Models\Operations\PaymentRail')]
     public PaymentRail $paymentRail;
 
     /**
@@ -89,7 +89,7 @@ class GetV1PaymentsData
      * @var GetV1PaymentsDirection $direction
      */
     #[\Speakeasy\Serializer\Annotation\SerializedName('direction')]
-    #[\Speakeasy\Serializer\Annotation\Type('\Luqra\LuqraNowPhp\Models\Operations\GetV1PaymentsDirection')]
+    #[\Speakeasy\Serializer\Annotation\Type('\Luqra\NowPhp\Models\Operations\GetV1PaymentsDirection')]
     public GetV1PaymentsDirection $direction;
 
     /**
