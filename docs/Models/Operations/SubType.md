@@ -5,5 +5,5 @@
 
 | Name       | Value      |
 | ---------- | ---------- |
-| `Checking` | checking   |
-| `Savings`  | savings    |
+| `Checking` | CHECKING   |
+| `Savings`  | SAVINGS    |

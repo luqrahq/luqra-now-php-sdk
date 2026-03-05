@@ -7,7 +7,7 @@
 
 declare(strict_types=1);
 
-namespace Luqra\LuqraNowPhp\Hooks;
+namespace Luqra\Now\Hooks;
 
 use Psr\Http\Message\ResponseInterface;
 
