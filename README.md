@@ -19,7 +19,7 @@ Luqra NOW API: External API for Luqra NOW
 <!-- Start Table of Contents [toc] -->
 ## Table of Contents
 <!-- $toc-max-depth=2 -->
-* [luqra/luqra-now-php](#luqraluqra-now-php)
+* [luqra/now-php](#luqranow-php)
   * [SDK Installation](#sdk-installation)
   * [SDK Example Usage](#sdk-example-usage)
   * [Authentication](#authentication)
@@ -39,7 +39,7 @@ The SDK relies on [Composer](https://getcomposer.org/) to manage its dependencie
 
 To install the SDK and add it as a dependency to an existing `composer.json` file:
 ```bash
-composer require "luqra/luqra-now-php"
+composer require "luqra/now-php"
 ```
 <!-- End SDK Installation [installation] -->
 
@@ -53,36 +53,21 @@ declare(strict_types=1);
 
 require 'vendor/autoload.php';
 
-use Luqra\LuqraNowPhp;
-use Luqra\LuqraNowPhp\Models\Operations;
+use Luqra\Now;
+use Luqra\Now\Models\Operations;
 
-$sdk = LuqraNowPhp\LuqraNow::builder()
+$sdk = Now\LuqraNow::builder()
     ->setSecurity(
         '<YOUR_BEARER_TOKEN_HERE>'
     )
     ->build();
 
-$request = new Operations\PostV1ContactsRequestBody(
-    originatorId: '39430363-1129-4726-ab2f-656e7f7a63ac',
-    firstName: 'Jarrod',
-    lastName: 'Smith',
-    email: 'Elyssa17@hotmail.com',
-    address: new Operations\Address(
-        addressLine1: '225 S Maple Street',
-        city: 'West Chad',
-        state: 'Pennsylvania',
-        postalCode: '38469',
-        countryCode: 'KR',
-    ),
-    bankAccount: new Operations\BankAccount(
-        subType: Operations\SubType::Savings,
-        achRoutingNumber: '<value>',
-        achAccountNumber: '<value>',
-    ),
-);
+$requestBody = new Operations\PatchV0ContactsIdRequestBody();
 
-$response = $sdk->contacts->postV1Contacts(
-    request: $request
+$response = $sdk->patchV0ContactsId(
+    id: '<id>',
+    requestBody: $requestBody
+
 );
 
 if ($response->object !== null) {
@@ -108,36 +93,21 @@ declare(strict_types=1);
 
 require 'vendor/autoload.php';
 
-use Luqra\LuqraNowPhp;
-use Luqra\LuqraNowPhp\Models\Operations;
+use Luqra\Now;
+use Luqra\Now\Models\Operations;
 
-$sdk = LuqraNowPhp\LuqraNow::builder()
+$sdk = Now\LuqraNow::builder()
     ->setSecurity(
         '<YOUR_BEARER_TOKEN_HERE>'
     )
     ->build();
 
-$request = new Operations\PostV1ContactsRequestBody(
-    originatorId: '39430363-1129-4726-ab2f-656e7f7a63ac',
-    firstName: 'Jarrod',
-    lastName: 'Smith',
-    email: 'Elyssa17@hotmail.com',
-    address: new Operations\Address(
-        addressLine1: '225 S Maple Street',
-        city: 'West Chad',
-        state: 'Pennsylvania',
-        postalCode: '38469',
-        countryCode: 'KR',
-    ),
-    bankAccount: new Operations\BankAccount(
-        subType: Operations\SubType::Savings,
-        achRoutingNumber: '<value>',
-        achAccountNumber: '<value>',
-    ),
-);
+$requestBody = new Operations\PatchV0ContactsIdRequestBody();
 
-$response = $sdk->contacts->postV1Contacts(
-    request: $request
+$response = $sdk->patchV0ContactsId(
+    id: '<id>',
+    requestBody: $requestBody
+
 );
 
 if ($response->object !== null) {
@@ -154,15 +124,17 @@ if ($response->object !== null) {
 
 ### [contacts](docs/sdks/contacts/README.md)
 
-* [postV1Contacts](docs/sdks/contacts/README.md#postv1contacts) - Create contact
-* [getV1Contacts](docs/sdks/contacts/README.md#getv1contacts) - List contacts
+* [getV0Contacts](docs/sdks/contacts/README.md#getv0contacts) - List contacts
+* [postV0Contacts](docs/sdks/contacts/README.md#postv0contacts) - Create contact
 
+### [LuqraNow SDK](docs/sdks/luqranow/README.md)
+
+* [patchV0ContactsId](docs/sdks/luqranow/README.md#patchv0contactsid)
+* [getV0Originators](docs/sdks/luqranow/README.md#getv0originators)
 
 ### [payments](docs/sdks/payments/README.md)
 
-* [getV1Payments](docs/sdks/payments/README.md#getv1payments) - List payments
-* [postV1Payments](docs/sdks/payments/README.md#postv1payments) - Create payment
-* [getV1PaymentsItemId](docs/sdks/payments/README.md#getv1paymentsitemid) - Get payment
+* [postV0Payments](docs/sdks/payments/README.md#postv0payments) - Create payment
 
 </details>
 <!-- End Available Resources and Operations [operations] -->
@@ -181,13 +153,13 @@ By default an API error will raise a `Errors\APIException` exception, which has 
 | `$rawResponse` | *?\Psr\Http\Message\ResponseInterface*  | The raw HTTP response |
 | `$body`        | *string*                                | The response content  |
 
-When custom error responses are specified for an operation, the SDK may also throw their associated exception. You can refer to respective *Errors* tables in SDK docs for more details on possible exception types for each operation. For example, the `postV1Contacts` method throws the following exceptions:
+When custom error responses are specified for an operation, the SDK may also throw their associated exception. You can refer to respective *Errors* tables in SDK docs for more details on possible exception types for each operation. For example, the `patchV0ContactsId` method throws the following exceptions:
 
-| Error Type           | Status Code   | Content Type     |
-| -------------------- | ------------- | ---------------- |
-| Errors\ErrorResponse | 400, 404, 409 | application/json |
-| Errors\ErrorResponse | 500           | application/json |
-| Errors\APIException  | 4XX, 5XX      | \*/\*            |
+| Error Type           | Status Code             | Content Type     |
+| -------------------- | ----------------------- | ---------------- |
+| Errors\ErrorResponse | 400, 401, 403, 404, 409 | application/json |
+| Errors\ErrorResponse | 500                     | application/json |
+| Errors\APIException  | 4XX, 5XX                | \*/\*            |
 
 ### Example
 
@@ -196,38 +168,23 @@ declare(strict_types=1);
 
 require 'vendor/autoload.php';
 
-use Luqra\LuqraNowPhp;
-use Luqra\LuqraNowPhp\Models\Errors;
-use Luqra\LuqraNowPhp\Models\Operations;
+use Luqra\Now;
+use Luqra\Now\Models\Errors;
+use Luqra\Now\Models\Operations;
 
-$sdk = LuqraNowPhp\LuqraNow::builder()
+$sdk = Now\LuqraNow::builder()
     ->setSecurity(
         '<YOUR_BEARER_TOKEN_HERE>'
     )
     ->build();
 
 try {
-    $request = new Operations\PostV1ContactsRequestBody(
-        originatorId: '39430363-1129-4726-ab2f-656e7f7a63ac',
-        firstName: 'Jarrod',
-        lastName: 'Smith',
-        email: 'Elyssa17@hotmail.com',
-        address: new Operations\Address(
-            addressLine1: '225 S Maple Street',
-            city: 'West Chad',
-            state: 'Pennsylvania',
-            postalCode: '38469',
-            countryCode: 'KR',
-        ),
-        bankAccount: new Operations\BankAccount(
-            subType: Operations\SubType::Savings,
-            achRoutingNumber: '<value>',
-            achAccountNumber: '<value>',
-        ),
-    );
+    $requestBody = new Operations\PatchV0ContactsIdRequestBody();
 
-    $response = $sdk->contacts->postV1Contacts(
-        request: $request
+    $response = $sdk->patchV0ContactsId(
+        id: '<id>',
+        requestBody: $requestBody
+
     );
 
     if ($response->object !== null) {
@@ -265,37 +222,22 @@ declare(strict_types=1);
 
 require 'vendor/autoload.php';
 
-use Luqra\LuqraNowPhp;
-use Luqra\LuqraNowPhp\Models\Operations;
+use Luqra\Now;
+use Luqra\Now\Models\Operations;
 
-$sdk = LuqraNowPhp\LuqraNow::builder()
+$sdk = Now\LuqraNow::builder()
     ->setServerIndex(1)
     ->setSecurity(
         '<YOUR_BEARER_TOKEN_HERE>'
     )
     ->build();
 
-$request = new Operations\PostV1ContactsRequestBody(
-    originatorId: '39430363-1129-4726-ab2f-656e7f7a63ac',
-    firstName: 'Jarrod',
-    lastName: 'Smith',
-    email: 'Elyssa17@hotmail.com',
-    address: new Operations\Address(
-        addressLine1: '225 S Maple Street',
-        city: 'West Chad',
-        state: 'Pennsylvania',
-        postalCode: '38469',
-        countryCode: 'KR',
-    ),
-    bankAccount: new Operations\BankAccount(
-        subType: Operations\SubType::Savings,
-        achRoutingNumber: '<value>',
-        achAccountNumber: '<value>',
-    ),
-);
+$requestBody = new Operations\PatchV0ContactsIdRequestBody();
 
-$response = $sdk->contacts->postV1Contacts(
-    request: $request
+$response = $sdk->patchV0ContactsId(
+    id: '<id>',
+    requestBody: $requestBody
+
 );
 
 if ($response->object !== null) {
@@ -311,37 +253,22 @@ declare(strict_types=1);
 
 require 'vendor/autoload.php';
 
-use Luqra\LuqraNowPhp;
-use Luqra\LuqraNowPhp\Models\Operations;
+use Luqra\Now;
+use Luqra\Now\Models\Operations;
 
-$sdk = LuqraNowPhp\LuqraNow::builder()
+$sdk = Now\LuqraNow::builder()
     ->setServerURL('https://api.now.luqra.com')
     ->setSecurity(
         '<YOUR_BEARER_TOKEN_HERE>'
     )
     ->build();
 
-$request = new Operations\PostV1ContactsRequestBody(
-    originatorId: '39430363-1129-4726-ab2f-656e7f7a63ac',
-    firstName: 'Jarrod',
-    lastName: 'Smith',
-    email: 'Elyssa17@hotmail.com',
-    address: new Operations\Address(
-        addressLine1: '225 S Maple Street',
-        city: 'West Chad',
-        state: 'Pennsylvania',
-        postalCode: '38469',
-        countryCode: 'KR',
-    ),
-    bankAccount: new Operations\BankAccount(
-        subType: Operations\SubType::Savings,
-        achRoutingNumber: '<value>',
-        achAccountNumber: '<value>',
-    ),
-);
+$requestBody = new Operations\PatchV0ContactsIdRequestBody();
 
-$response = $sdk->contacts->postV1Contacts(
-    request: $request
+$response = $sdk->patchV0ContactsId(
+    id: '<id>',
+    requestBody: $requestBody
+
 );
 
 if ($response->object !== null) {

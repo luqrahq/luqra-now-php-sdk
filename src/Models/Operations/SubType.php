@@ -6,11 +6,11 @@
 
 declare(strict_types=1);
 
-namespace Luqra\LuqraNowPhp\Models\Operations;
+namespace Luqra\Now\Models\Operations;
 
 
 enum SubType: string
 {
-    case Checking = 'checking';
-    case Savings = 'savings';
+    case Checking = 'CHECKING';
+    case Savings = 'SAVINGS';
 }

@@ -7,76 +7,10 @@ Contact management endpoints
 
 ### Available Operations
 
-* [postV1Contacts](#postv1contacts) - Create contact
-* [getV1Contacts](#getv1contacts) - List contacts
+* [getV0Contacts](#getv0contacts) - List contacts
+* [postV0Contacts](#postv0contacts) - Create contact
 
-## postV1Contacts
-
-Create contact
-
-### Example Usage
-
-```php
-declare(strict_types=1);
-
-require 'vendor/autoload.php';
-
-use Luqra\LuqraNowPhp;
-use Luqra\LuqraNowPhp\Models\Operations;
-
-$sdk = LuqraNowPhp\LuqraNow::builder()
-    ->setSecurity(
-        '<YOUR_BEARER_TOKEN_HERE>'
-    )
-    ->build();
-
-$request = new Operations\PostV1ContactsRequestBody(
-    originatorId: '39430363-1129-4726-ab2f-656e7f7a63ac',
-    firstName: 'Jarrod',
-    lastName: 'Smith',
-    email: 'Elyssa17@hotmail.com',
-    address: new Operations\Address(
-        addressLine1: '225 S Maple Street',
-        city: 'West Chad',
-        state: 'Pennsylvania',
-        postalCode: '38469',
-        countryCode: 'KR',
-    ),
-    bankAccount: new Operations\BankAccount(
-        subType: Operations\SubType::Savings,
-        achRoutingNumber: '<value>',
-        achAccountNumber: '<value>',
-    ),
-);
-
-$response = $sdk->contacts->postV1Contacts(
-    request: $request
-);
-
-if ($response->object !== null) {
-    // handle response
-}
-```
-
-### Parameters
-
-| Parameter                                                                                    | Type                                                                                         | Required                                                                                     | Description                                                                                  |
-| -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
-| `$request`                                                                                   | [Operations\PostV1ContactsRequestBody](../../Models/Operations/PostV1ContactsRequestBody.md) | :heavy_check_mark:                                                                           | The request object to use for the request.                                                   |
-
-### Response
-
-**[?Operations\PostV1ContactsResponse](../../Models/Operations/PostV1ContactsResponse.md)**
-
-### Errors
-
-| Error Type           | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| Errors\ErrorResponse | 400, 404, 409        | application/json     |
-| Errors\ErrorResponse | 500                  | application/json     |
-| Errors\APIException  | 4XX, 5XX             | \*/\*                |
-
-## getV1Contacts
+## getV0Contacts
 
 List contacts
 
@@ -87,9 +21,9 @@ declare(strict_types=1);
 
 require 'vendor/autoload.php';
 
-use Luqra\LuqraNowPhp;
+use Luqra\Now;
 
-$sdk = LuqraNowPhp\LuqraNow::builder()
+$sdk = Now\LuqraNow::builder()
     ->setSecurity(
         '<YOUR_BEARER_TOKEN_HERE>'
     )
@@ -97,8 +31,8 @@ $sdk = LuqraNowPhp\LuqraNow::builder()
 
 
 
-$response = $sdk->contacts->getV1Contacts(
-    originatorId: 'c3d44417-4992-4661-bbef-89efdfc752f5'
+$response = $sdk->contacts->getV0Contacts(
+    originatorId: '025261e4-2e17-473c-bc9c-8a61654f55e9'
 );
 
 if ($response->object !== null) {
@@ -115,12 +49,79 @@ if ($response->object !== null) {
 
 ### Response
 
-**[?Operations\GetV1ContactsResponse](../../Models/Operations/GetV1ContactsResponse.md)**
+**[?Operations\GetV0ContactsResponse](../../Models/Operations/GetV0ContactsResponse.md)**
 
 ### Errors
 
 | Error Type           | Status Code          | Content Type         |
 | -------------------- | -------------------- | -------------------- |
-| Errors\ErrorResponse | 400                  | application/json     |
+| Errors\ErrorResponse | 400, 401             | application/json     |
+| Errors\ErrorResponse | 500                  | application/json     |
+| Errors\APIException  | 4XX, 5XX             | \*/\*                |
+
+## postV0Contacts
+
+Create contact
+
+### Example Usage
+
+```php
+declare(strict_types=1);
+
+require 'vendor/autoload.php';
+
+use Luqra\Now;
+use Luqra\Now\Models\Operations;
+
+$sdk = Now\LuqraNow::builder()
+    ->setSecurity(
+        '<YOUR_BEARER_TOKEN_HERE>'
+    )
+    ->build();
+
+$request = new Operations\PostV0ContactsRequestBody(
+    bankAccount: new Operations\BankAccount(
+        achAccountNumber: '<value>',
+        achRoutingNumber: '<value>',
+        subType: Operations\SubType::Savings,
+    ),
+    email: 'Madalyn_Franey32@hotmail.com',
+    entityType: Operations\EntityType::Business,
+    firstName: 'Bailey',
+    lastName: 'Schamberger',
+    legalAddress: new Operations\LegalAddress(
+        addressLine1: '864 Gusikowski Club',
+        city: 'East Osvaldo',
+        countryCode: 'PL',
+        postalCode: '02220',
+        state: 'Virginia',
+    ),
+    originatorId: '6ddab750-fd0f-4109-a303-e68b411dbb07',
+);
+
+$response = $sdk->contacts->postV0Contacts(
+    request: $request
+);
+
+if ($response->object !== null) {
+    // handle response
+}
+```
+
+### Parameters
+
+| Parameter                                                                                    | Type                                                                                         | Required                                                                                     | Description                                                                                  |
+| -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| `$request`                                                                                   | [Operations\PostV0ContactsRequestBody](../../Models/Operations/PostV0ContactsRequestBody.md) | :heavy_check_mark:                                                                           | The request object to use for the request.                                                   |
+
+### Response
+
+**[?Operations\PostV0ContactsResponse](../../Models/Operations/PostV0ContactsResponse.md)**
+
+### Errors
+
+| Error Type           | Status Code          | Content Type         |
+| -------------------- | -------------------- | -------------------- |
+| Errors\ErrorResponse | 400, 404, 409        | application/json     |
 | Errors\ErrorResponse | 500                  | application/json     |
 | Errors\APIException  | 4XX, 5XX             | \*/\*                |

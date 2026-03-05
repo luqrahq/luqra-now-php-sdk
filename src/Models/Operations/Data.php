@@ -6,7 +6,7 @@
 
 declare(strict_types=1);
 
-namespace Luqra\LuqraNowPhp\Models\Operations;
+namespace Luqra\Now\Models\Operations;
 
 
 class Data
@@ -20,19 +20,94 @@ class Data
 
     /**
      *
-     * @var \DateTime $createdAt
+     * @var PatchV0ContactsIdResponseEntityType $entityType
      */
-    #[\Speakeasy\Serializer\Annotation\SerializedName('createdAt')]
-    public \DateTime $createdAt;
+    #[\Speakeasy\Serializer\Annotation\SerializedName('entityType')]
+    #[\Speakeasy\Serializer\Annotation\Type('\Luqra\Now\Models\Operations\PatchV0ContactsIdResponseEntityType')]
+    public PatchV0ContactsIdResponseEntityType $entityType;
+
+    /**
+     *
+     * @var string $firstName
+     */
+    #[\Speakeasy\Serializer\Annotation\SerializedName('firstName')]
+    public string $firstName;
+
+    /**
+     *
+     * @var string $lastName
+     */
+    #[\Speakeasy\Serializer\Annotation\SerializedName('lastName')]
+    public string $lastName;
+
+    /**
+     *
+     * @var PatchV0ContactsIdResponseLegalAddress $legalAddress
+     */
+    #[\Speakeasy\Serializer\Annotation\SerializedName('legalAddress')]
+    #[\Speakeasy\Serializer\Annotation\Type('\Luqra\Now\Models\Operations\PatchV0ContactsIdResponseLegalAddress')]
+    public PatchV0ContactsIdResponseLegalAddress $legalAddress;
+
+    /**
+     *
+     * @var \DateTime $updatedAt
+     */
+    #[\Speakeasy\Serializer\Annotation\SerializedName('updatedAt')]
+    public \DateTime $updatedAt;
+
+    /**
+     *
+     * @var ?PatchV0ContactsIdResponseBankAccount $bankAccount
+     */
+    #[\Speakeasy\Serializer\Annotation\SerializedName('bankAccount')]
+    #[\Speakeasy\Serializer\Annotation\Type('\Luqra\Now\Models\Operations\PatchV0ContactsIdResponseBankAccount|null')]
+    public ?PatchV0ContactsIdResponseBankAccount $bankAccount;
+
+    /**
+     *
+     * @var ?string $companyName
+     */
+    #[\Speakeasy\Serializer\Annotation\SerializedName('companyName')]
+    public ?string $companyName;
+
+    /**
+     *
+     * @var ?string $email
+     */
+    #[\Speakeasy\Serializer\Annotation\SerializedName('email')]
+    public ?string $email;
+
+    /**
+     *
+     * @var ?string $phoneNumber
+     */
+    #[\Speakeasy\Serializer\Annotation\SerializedName('phoneNumber')]
+    public ?string $phoneNumber;
 
     /**
      * @param  string  $contactId
-     * @param  \DateTime  $createdAt
+     * @param  PatchV0ContactsIdResponseEntityType  $entityType
+     * @param  string  $firstName
+     * @param  string  $lastName
+     * @param  PatchV0ContactsIdResponseLegalAddress  $legalAddress
+     * @param  \DateTime  $updatedAt
+     * @param  ?PatchV0ContactsIdResponseBankAccount  $bankAccount
+     * @param  ?string  $companyName
+     * @param  ?string  $email
+     * @param  ?string  $phoneNumber
      * @phpstan-pure
      */
-    public function __construct(string $contactId, \DateTime $createdAt)
+    public function __construct(string $contactId, PatchV0ContactsIdResponseEntityType $entityType, string $firstName, string $lastName, PatchV0ContactsIdResponseLegalAddress $legalAddress, \DateTime $updatedAt, ?PatchV0ContactsIdResponseBankAccount $bankAccount = null, ?string $companyName = null, ?string $email = null, ?string $phoneNumber = null)
     {
         $this->contactId = $contactId;
-        $this->createdAt = $createdAt;
+        $this->entityType = $entityType;
+        $this->firstName = $firstName;
+        $this->lastName = $lastName;
+        $this->legalAddress = $legalAddress;
+        $this->updatedAt = $updatedAt;
+        $this->bankAccount = $bankAccount;
+        $this->companyName = $companyName;
+        $this->email = $email;
+        $this->phoneNumber = $phoneNumber;
     }
 }

@@ -1,9 +1,9 @@
 {
-  "name": "luqra/luqra-now-php",
+  "name": "luqra/now-php",
   "type": "library",
   "autoload": {
     "psr-4": {
-      "Luqra\\LuqraNowPhp\\": "src/"
+      "Luqra\\Now\\": "src/"
     }
   },
   "license": "MIT",

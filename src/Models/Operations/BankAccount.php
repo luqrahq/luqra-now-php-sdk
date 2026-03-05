@@ -6,18 +6,17 @@
 
 declare(strict_types=1);
 
-namespace Luqra\LuqraNowPhp\Models\Operations;
+namespace Luqra\Now\Models\Operations;
 
 
 class BankAccount
 {
     /**
      *
-     * @var SubType $subType
+     * @var string $achAccountNumber
      */
-    #[\Speakeasy\Serializer\Annotation\SerializedName('subType')]
-    #[\Speakeasy\Serializer\Annotation\Type('\Luqra\LuqraNowPhp\Models\Operations\SubType')]
-    public SubType $subType;
+    #[\Speakeasy\Serializer\Annotation\SerializedName('achAccountNumber')]
+    public string $achAccountNumber;
 
     /**
      *
@@ -28,10 +27,11 @@ class BankAccount
 
     /**
      *
-     * @var string $achAccountNumber
+     * @var SubType $subType
      */
-    #[\Speakeasy\Serializer\Annotation\SerializedName('achAccountNumber')]
-    public string $achAccountNumber;
+    #[\Speakeasy\Serializer\Annotation\SerializedName('subType')]
+    #[\Speakeasy\Serializer\Annotation\Type('\Luqra\Now\Models\Operations\SubType')]
+    public SubType $subType;
 
     /**
      *
@@ -50,18 +50,18 @@ class BankAccount
     public ?string $swiftCode = null;
 
     /**
-     * @param  SubType  $subType
-     * @param  string  $achRoutingNumber
      * @param  string  $achAccountNumber
+     * @param  string  $achRoutingNumber
+     * @param  SubType  $subType
      * @param  ?string  $bankName
      * @param  ?string  $swiftCode
      * @phpstan-pure
      */
-    public function __construct(SubType $subType, string $achRoutingNumber, string $achAccountNumber, ?string $bankName = null, ?string $swiftCode = null)
+    public function __construct(string $achAccountNumber, string $achRoutingNumber, SubType $subType, ?string $bankName = null, ?string $swiftCode = null)
     {
-        $this->subType = $subType;
-        $this->achRoutingNumber = $achRoutingNumber;
         $this->achAccountNumber = $achAccountNumber;
+        $this->achRoutingNumber = $achRoutingNumber;
+        $this->subType = $subType;
         $this->bankName = $bankName;
         $this->swiftCode = $swiftCode;
     }

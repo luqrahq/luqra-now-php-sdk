@@ -6,8 +6,8 @@
 
 declare(strict_types=1);
 
-namespace Luqra\LuqraNowPhp;
-use Luqra\LuqraNowPhp\Utils\Retry\RetryConfig;
+namespace Luqra\Now;
+use Luqra\Now\Utils\Retry\RetryConfig;
 
 class SDKConfiguration
 {
@@ -22,13 +22,13 @@ class SDKConfiguration
 
     public string $language = 'php';
 
-    public string $openapiDocVersion = '1.0.0';
+    public string $openapiDocVersion = 'v0.2.0';
 
-    public string $sdkVersion = '1.0.0';
+    public string $sdkVersion = 'v0.2.0';
 
     public string $genVersion = '2.634.2';
 
-    public string $userAgent = 'speakeasy-sdk/php 1.0.0 2.634.2 1.0.0 luqra/luqra-now-php';
+    public string $userAgent = 'speakeasy-sdk/php v0.2.0 2.634.2 v0.2.0 luqra/now-php';
 
     public ?RetryConfig $retryConfig = null;
 

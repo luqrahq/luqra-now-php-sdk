@@ -6,9 +6,9 @@
 
 declare(strict_types=1);
 
-namespace Luqra\LuqraNowPhp;
+namespace Luqra\Now;
 
-use Luqra\LuqraNowPhp\Utils\Retry;
+use Luqra\Now\Utils\Retry;
 
 /**
  * LuqraNowBuilder is used to configure and build an instance of the SDK.

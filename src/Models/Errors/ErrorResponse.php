@@ -6,9 +6,9 @@
 
 declare(strict_types=1);
 
-namespace Luqra\LuqraNowPhp\Models\Errors;
+namespace Luqra\Now\Models\Errors;
 
-use Luqra\LuqraNowPhp\Utils;
+use Luqra\Now\Utils;
 class ErrorResponse
 {
     /**
@@ -16,7 +16,7 @@ class ErrorResponse
      * @var Error $error
      */
     #[\Speakeasy\Serializer\Annotation\SerializedName('error')]
-    #[\Speakeasy\Serializer\Annotation\Type('\Luqra\LuqraNowPhp\Models\Errors\Error')]
+    #[\Speakeasy\Serializer\Annotation\Type('\Luqra\Now\Models\Errors\Error')]
     public Error $error;
 
     /**
