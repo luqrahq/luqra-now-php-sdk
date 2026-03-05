@@ -1,5 +1,5 @@
 {
-  "name": "luqra/now-php",
+  "name": "luqrahq/now-php",
   "description": "PHP SDK for the Luqra Now API",
   "type": "library",
   "autoload": {
