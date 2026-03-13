@@ -9,8 +9,7 @@ declare(strict_types=1);
 namespace Luqra\Now\Models\Operations;
 
 
-
-enum QueryParamDirection: string
+enum GetV0PaymentsDirection: string
 {
     case Inbound = 'INBOUND';
     case Outbound = 'OUTBOUND';

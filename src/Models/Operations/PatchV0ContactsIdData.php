@@ -9,7 +9,7 @@ declare(strict_types=1);
 namespace Luqra\Now\Models\Operations;
 
 
-class Data
+class PatchV0ContactsIdData
 {
     /**
      *
@@ -20,18 +20,11 @@ class Data
 
     /**
      *
-     * @var \DateTime $createdAt
-     */
-    #[\Speakeasy\Serializer\Annotation\SerializedName('createdAt')]
-    public \DateTime $createdAt;
-
-    /**
-     *
-     * @var GetV0ContactsEntityType $entityType
+     * @var PatchV0ContactsIdContactsEntityType $entityType
      */
     #[\Speakeasy\Serializer\Annotation\SerializedName('entityType')]
-    #[\Speakeasy\Serializer\Annotation\Type('\Luqra\Now\Models\Operations\GetV0ContactsEntityType')]
-    public GetV0ContactsEntityType $entityType;
+    #[\Speakeasy\Serializer\Annotation\Type('\Luqra\Now\Models\Operations\PatchV0ContactsIdContactsEntityType')]
+    public PatchV0ContactsIdContactsEntityType $entityType;
 
     /**
      *
@@ -49,19 +42,26 @@ class Data
 
     /**
      *
-     * @var GetV0ContactsLegalAddress $legalAddress
+     * @var PatchV0ContactsIdContactsLegalAddress $legalAddress
      */
     #[\Speakeasy\Serializer\Annotation\SerializedName('legalAddress')]
-    #[\Speakeasy\Serializer\Annotation\Type('\Luqra\Now\Models\Operations\GetV0ContactsLegalAddress')]
-    public GetV0ContactsLegalAddress $legalAddress;
+    #[\Speakeasy\Serializer\Annotation\Type('\Luqra\Now\Models\Operations\PatchV0ContactsIdContactsLegalAddress')]
+    public PatchV0ContactsIdContactsLegalAddress $legalAddress;
 
     /**
      *
-     * @var ?GetV0ContactsBankAccount $bankAccount
+     * @var \DateTime $updatedAt
+     */
+    #[\Speakeasy\Serializer\Annotation\SerializedName('updatedAt')]
+    public \DateTime $updatedAt;
+
+    /**
+     *
+     * @var ?PatchV0ContactsIdContactsBankAccount $bankAccount
      */
     #[\Speakeasy\Serializer\Annotation\SerializedName('bankAccount')]
-    #[\Speakeasy\Serializer\Annotation\Type('\Luqra\Now\Models\Operations\GetV0ContactsBankAccount|null')]
-    public ?GetV0ContactsBankAccount $bankAccount;
+    #[\Speakeasy\Serializer\Annotation\Type('\Luqra\Now\Models\Operations\PatchV0ContactsIdContactsBankAccount|null')]
+    public ?PatchV0ContactsIdContactsBankAccount $bankAccount;
 
     /**
      *
@@ -86,25 +86,25 @@ class Data
 
     /**
      * @param  string  $contactId
-     * @param  \DateTime  $createdAt
-     * @param  GetV0ContactsEntityType  $entityType
+     * @param  PatchV0ContactsIdContactsEntityType  $entityType
      * @param  string  $firstName
      * @param  string  $lastName
-     * @param  GetV0ContactsLegalAddress  $legalAddress
-     * @param  ?GetV0ContactsBankAccount  $bankAccount
+     * @param  PatchV0ContactsIdContactsLegalAddress  $legalAddress
+     * @param  \DateTime  $updatedAt
+     * @param  ?PatchV0ContactsIdContactsBankAccount  $bankAccount
      * @param  ?string  $companyName
      * @param  ?string  $email
      * @param  ?string  $phoneNumber
      * @phpstan-pure
      */
-    public function __construct(string $contactId, \DateTime $createdAt, GetV0ContactsEntityType $entityType, string $firstName, string $lastName, GetV0ContactsLegalAddress $legalAddress, ?GetV0ContactsBankAccount $bankAccount = null, ?string $companyName = null, ?string $email = null, ?string $phoneNumber = null)
+    public function __construct(string $contactId, PatchV0ContactsIdContactsEntityType $entityType, string $firstName, string $lastName, PatchV0ContactsIdContactsLegalAddress $legalAddress, \DateTime $updatedAt, ?PatchV0ContactsIdContactsBankAccount $bankAccount = null, ?string $companyName = null, ?string $email = null, ?string $phoneNumber = null)
     {
         $this->contactId = $contactId;
-        $this->createdAt = $createdAt;
         $this->entityType = $entityType;
         $this->firstName = $firstName;
         $this->lastName = $lastName;
         $this->legalAddress = $legalAddress;
+        $this->updatedAt = $updatedAt;
         $this->bankAccount = $bankAccount;
         $this->companyName = $companyName;
         $this->email = $email;

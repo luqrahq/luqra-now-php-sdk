@@ -20,13 +20,19 @@ actions:
       "x-codeSamples":
         - "lang": "php"
           "label": "patch_/v0/contacts/{id}"
-          "source": "declare(strict_types=1);\n\nrequire 'vendor/autoload.php';\n\nuse Luqra\\Now;\nuse Luqra\\Now\\Models\\Operations;\n\n$sdk = Now\\LuqraNow::builder()\n    ->setSecurity(\n        '<YOUR_BEARER_TOKEN_HERE>'\n    )\n    ->build();\n\n$requestBody = new Operations\\PatchV0ContactsIdRequestBody();\n\n$response = $sdk->patchV0ContactsId(\n    id: '<id>',\n    requestBody: $requestBody\n\n);\n\nif ($response->object !== null) {\n    // handle response\n}"
+          "source": "declare(strict_types=1);\n\nrequire 'vendor/autoload.php';\n\nuse Luqra\\Now;\nuse Luqra\\Now\\Models\\Operations;\n\n$sdk = Now\\LuqraNow::builder()\n    ->setSecurity(\n        '<YOUR_BEARER_TOKEN_HERE>'\n    )\n    ->build();\n\n$requestBody = new Operations\\PatchV0ContactsIdRequestBody();\n\n$response = $sdk->contacts->patchV0ContactsId(\n    id: '<id>',\n    requestBody: $requestBody\n\n);\n\nif ($response->object !== null) {\n    // handle response\n}"
   - target: $["paths"]["/v0/originators/"]["get"]
     update:
       "x-codeSamples":
         - "lang": "php"
           "label": "get_/v0/originators/"
-          "source": "declare(strict_types=1);\n\nrequire 'vendor/autoload.php';\n\nuse Luqra\\Now;\n\n$sdk = Now\\LuqraNow::builder()\n    ->setSecurity(\n        '<YOUR_BEARER_TOKEN_HERE>'\n    )\n    ->build();\n\n\n\n$response = $sdk->getV0Originators(\n\n);\n\nif ($response->object !== null) {\n    // handle response\n}"
+          "source": "declare(strict_types=1);\n\nrequire 'vendor/autoload.php';\n\nuse Luqra\\Now;\n\n$sdk = Now\\LuqraNow::builder()\n    ->setSecurity(\n        '<YOUR_BEARER_TOKEN_HERE>'\n    )\n    ->build();\n\n\n\n$response = $sdk->originators->getV0Originators(\n\n);\n\nif ($response->object !== null) {\n    // handle response\n}"
+  - target: $["paths"]["/v0/payments/"]["get"]
+    update:
+      "x-codeSamples":
+        - "lang": "php"
+          "label": "get_/v0/payments/"
+          "source": "declare(strict_types=1);\n\nrequire 'vendor/autoload.php';\n\nuse Luqra\\Now;\nuse Luqra\\Now\\Models\\Operations;\n\n$sdk = Now\\LuqraNow::builder()\n    ->setSecurity(\n        '<YOUR_BEARER_TOKEN_HERE>'\n    )\n    ->build();\n\n$request = new Operations\\GetV0PaymentsRequest();\n\n$response = $sdk->payments->getV0Payments(\n    request: $request\n);\n\nif ($response->object !== null) {\n    // handle response\n}"
   - target: $["paths"]["/v0/payments/"]["post"]
     update:
       "x-codeSamples":

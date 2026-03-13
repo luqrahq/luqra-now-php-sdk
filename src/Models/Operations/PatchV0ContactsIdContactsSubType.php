@@ -9,9 +9,8 @@ declare(strict_types=1);
 namespace Luqra\Now\Models\Operations;
 
 
-
-enum QueryParamDirection: string
+enum PatchV0ContactsIdContactsSubType: string
 {
-    case Inbound = 'INBOUND';
-    case Outbound = 'OUTBOUND';
+    case Checking = 'CHECKING';
+    case Savings = 'SAVINGS';
 }

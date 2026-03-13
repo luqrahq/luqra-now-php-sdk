@@ -9,9 +9,8 @@ declare(strict_types=1);
 namespace Luqra\Now\Models\Operations;
 
 
-
-enum QueryParamDirection: string
+enum GetV0PaymentsEntityType: string
 {
-    case Inbound = 'INBOUND';
-    case Outbound = 'OUTBOUND';
+    case Business = 'BUSINESS';
+    case Individual = 'INDIVIDUAL';
 }

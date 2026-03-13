@@ -9,8 +9,7 @@ declare(strict_types=1);
 namespace Luqra\Now\Models\Operations;
 
 
-
-enum Status: string
+enum GetV0PaymentsStatus: string
 {
     case AwaitingConfirmation = 'AWAITING_CONFIRMATION';
     case Canceled = 'CANCELED';
