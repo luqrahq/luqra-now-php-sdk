@@ -6,17 +6,17 @@
 
 declare(strict_types=1);
 
-namespace Luqra\LuqraNowPhp\Models\Operations;
+namespace Luqra\Now\Models\Operations;
 
 
 
 enum Status: string
 {
     case AwaitingConfirmation = 'AWAITING_CONFIRMATION';
-    case Scheduled = 'SCHEDULED';
-    case Processing = 'PROCESSING';
+    case Canceled = 'CANCELED';
     case Completed = 'COMPLETED';
     case Failed = 'FAILED';
-    case Canceled = 'CANCELED';
+    case Processing = 'PROCESSING';
     case Returned = 'RETURNED';
+    case Scheduled = 'SCHEDULED';
 }

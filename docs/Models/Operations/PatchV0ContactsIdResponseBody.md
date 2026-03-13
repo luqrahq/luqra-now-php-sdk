@@ -5,7 +5,7 @@ Default Response
 
 ## Fields
 
-| Field                                              | Type                                               | Required                                           | Description                                        |
-| -------------------------------------------------- | -------------------------------------------------- | -------------------------------------------------- | -------------------------------------------------- |
-| `data`                                             | [Operations\Data](../../Models/Operations/Data.md) | :heavy_check_mark:                                 | N/A                                                |
-| `meta`                                             | [Operations\Meta](../../Models/Operations/Meta.md) | :heavy_check_mark:                                 | N/A                                                |
+| Field                                                                                | Type                                                                                 | Required                                                                             | Description                                                                          |
+| ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ |
+| `data`                                                                               | [Operations\PatchV0ContactsIdData](../../Models/Operations/PatchV0ContactsIdData.md) | :heavy_check_mark:                                                                   | N/A                                                                                  |
+| `meta`                                                                               | [Operations\PatchV0ContactsIdMeta](../../Models/Operations/PatchV0ContactsIdMeta.md) | :heavy_check_mark:                                                                   | N/A                                                                                  |

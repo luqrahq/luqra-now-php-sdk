@@ -7,6 +7,6 @@
 | --------- | --------- |
 | `Ach`     | ACH       |
 | `Fednow`  | FEDNOW    |
-| `Rtp`     | RTP       |
 | `Fedwire` | FEDWIRE   |
+| `Rtp`     | RTP       |
 | `Swift`   | SWIFT     |

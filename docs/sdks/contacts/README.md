@@ -7,10 +7,11 @@ Contact management endpoints
 
 ### Available Operations
 
-* [getV0Contacts](#getv0contacts) - List contacts
-* [postV0Contacts](#postv0contacts) - Create contact
+* [list](#list) - List contacts
+* [create](#create) - Create contact
+* [update](#update) - Update contact
 
-## getV0Contacts
+## list
 
 List contacts
 
@@ -31,8 +32,8 @@ $sdk = Now\LuqraNow::builder()
 
 
 
-$response = $sdk->contacts->getV0Contacts(
-    originatorId: '025261e4-2e17-473c-bc9c-8a61654f55e9'
+$response = $sdk->contacts->list(
+    originatorId: '1d7999d2-66f8-428f-af77-7a969541638f'
 );
 
 if ($response->object !== null) {
@@ -49,7 +50,7 @@ if ($response->object !== null) {
 
 ### Response
 
-**[?Operations\GetV0ContactsResponse](../../Models/Operations/GetV0ContactsResponse.md)**
+**[?Operations\ListContactsResponse](../../Models/Operations/ListContactsResponse.md)**
 
 ### Errors
 
@@ -59,7 +60,7 @@ if ($response->object !== null) {
 | Errors\ErrorResponse | 500                  | application/json     |
 | Errors\APIException  | 4XX, 5XX             | \*/\*                |
 
-## postV0Contacts
+## create
 
 Create contact
 
@@ -79,27 +80,27 @@ $sdk = Now\LuqraNow::builder()
     )
     ->build();
 
-$request = new Operations\PostV0ContactsRequestBody(
+$request = new Operations\CreateContactRequestBody(
     bankAccount: new Operations\BankAccount(
         achAccountNumber: '<value>',
         achRoutingNumber: '<value>',
-        subType: Operations\SubType::Savings,
+        subType: Operations\SubType::Checking,
     ),
-    email: 'Madalyn_Franey32@hotmail.com',
+    email: 'Hyman_Krajcik-OHara@yahoo.com',
     entityType: Operations\EntityType::Business,
-    firstName: 'Bailey',
-    lastName: 'Schamberger',
+    firstName: 'Lila',
+    lastName: 'Halvorson',
     legalAddress: new Operations\LegalAddress(
-        addressLine1: '864 Gusikowski Club',
-        city: 'East Osvaldo',
-        countryCode: 'PL',
-        postalCode: '02220',
-        state: 'Virginia',
+        addressLine1: '624 Turner View',
+        city: 'Delray Beach',
+        countryCode: 'GT',
+        postalCode: '09260',
+        state: 'Maryland',
     ),
-    originatorId: '6ddab750-fd0f-4109-a303-e68b411dbb07',
+    originatorId: '0a3f3b5a-5a52-41c3-b54f-8e133700579f',
 );
 
-$response = $sdk->contacts->postV0Contacts(
+$response = $sdk->contacts->create(
     request: $request
 );
 
@@ -110,13 +111,13 @@ if ($response->object !== null) {
 
 ### Parameters
 
-| Parameter                                                                                    | Type                                                                                         | Required                                                                                     | Description                                                                                  |
-| -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
-| `$request`                                                                                   | [Operations\PostV0ContactsRequestBody](../../Models/Operations/PostV0ContactsRequestBody.md) | :heavy_check_mark:                                                                           | The request object to use for the request.                                                   |
+| Parameter                                                                                  | Type                                                                                       | Required                                                                                   | Description                                                                                |
+| ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ |
+| `$request`                                                                                 | [Operations\CreateContactRequestBody](../../Models/Operations/CreateContactRequestBody.md) | :heavy_check_mark:                                                                         | The request object to use for the request.                                                 |
 
 ### Response
 
-**[?Operations\PostV0ContactsResponse](../../Models/Operations/PostV0ContactsResponse.md)**
+**[?Operations\CreateContactResponse](../../Models/Operations/CreateContactResponse.md)**
 
 ### Errors
 
@@ -125,3 +126,55 @@ if ($response->object !== null) {
 | Errors\ErrorResponse | 400, 404, 409        | application/json     |
 | Errors\ErrorResponse | 500                  | application/json     |
 | Errors\APIException  | 4XX, 5XX             | \*/\*                |
+
+## update
+
+Update contact
+
+### Example Usage
+
+```php
+declare(strict_types=1);
+
+require 'vendor/autoload.php';
+
+use Luqra\Now;
+use Luqra\Now\Models\Operations;
+
+$sdk = Now\LuqraNow::builder()
+    ->setSecurity(
+        '<YOUR_BEARER_TOKEN_HERE>'
+    )
+    ->build();
+
+$requestBody = new Operations\UpdateContactRequestBody();
+
+$response = $sdk->contacts->update(
+    id: '<id>',
+    requestBody: $requestBody
+
+);
+
+if ($response->object !== null) {
+    // handle response
+}
+```
+
+### Parameters
+
+| Parameter                                                                                  | Type                                                                                       | Required                                                                                   | Description                                                                                |
+| ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ |
+| `id`                                                                                       | *string*                                                                                   | :heavy_check_mark:                                                                         | N/A                                                                                        |
+| `requestBody`                                                                              | [Operations\UpdateContactRequestBody](../../Models/Operations/UpdateContactRequestBody.md) | :heavy_check_mark:                                                                         | N/A                                                                                        |
+
+### Response
+
+**[?Operations\UpdateContactResponse](../../Models/Operations/UpdateContactResponse.md)**
+
+### Errors
+
+| Error Type              | Status Code             | Content Type            |
+| ----------------------- | ----------------------- | ----------------------- |
+| Errors\ErrorResponse    | 400, 401, 403, 404, 409 | application/json        |
+| Errors\ErrorResponse    | 500                     | application/json        |
+| Errors\APIException     | 4XX, 5XX                | \*/\*                   |

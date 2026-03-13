@@ -6,9 +6,9 @@
 | Name                   | Value                  |
 | ---------------------- | ---------------------- |
 | `AwaitingConfirmation` | AWAITING_CONFIRMATION  |
-| `Scheduled`            | SCHEDULED              |
-| `Processing`           | PROCESSING             |
+| `Canceled`             | CANCELED               |
 | `Completed`            | COMPLETED              |
 | `Failed`               | FAILED                 |
-| `Canceled`             | CANCELED               |
+| `Processing`           | PROCESSING             |
 | `Returned`             | RETURNED               |
+| `Scheduled`            | SCHEDULED              |

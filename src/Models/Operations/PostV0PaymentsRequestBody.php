@@ -34,6 +34,7 @@ class PostV0PaymentsRequestBody
     public string $originatorId;
 
     /**
+     * In minor units (cents)
      *
      * @var int $paymentAmount
      */

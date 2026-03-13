@@ -6,14 +6,14 @@
 
 declare(strict_types=1);
 
-namespace Luqra\LuqraNowPhp\Models\Operations;
+namespace Luqra\Now\Models\Operations;
 
 
 enum PaymentRail: string
 {
     case Ach = 'ACH';
     case Fednow = 'FEDNOW';
-    case Rtp = 'RTP';
     case Fedwire = 'FEDWIRE';
+    case Rtp = 'RTP';
     case Swift = 'SWIFT';
 }

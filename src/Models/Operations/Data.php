@@ -20,48 +20,34 @@ class Data
 
     /**
      *
-     * @var PatchV0ContactsIdResponseEntityType $entityType
+     * @var \DateTime $createdAt
+     */
+    #[\Speakeasy\Serializer\Annotation\SerializedName('createdAt')]
+    public \DateTime $createdAt;
+
+    /**
+     *
+     * @var ListContactsEntityType $entityType
      */
     #[\Speakeasy\Serializer\Annotation\SerializedName('entityType')]
-    #[\Speakeasy\Serializer\Annotation\Type('\Luqra\Now\Models\Operations\PatchV0ContactsIdResponseEntityType')]
-    public PatchV0ContactsIdResponseEntityType $entityType;
+    #[\Speakeasy\Serializer\Annotation\Type('\Luqra\Now\Models\Operations\ListContactsEntityType')]
+    public ListContactsEntityType $entityType;
 
     /**
      *
-     * @var string $firstName
-     */
-    #[\Speakeasy\Serializer\Annotation\SerializedName('firstName')]
-    public string $firstName;
-
-    /**
-     *
-     * @var string $lastName
-     */
-    #[\Speakeasy\Serializer\Annotation\SerializedName('lastName')]
-    public string $lastName;
-
-    /**
-     *
-     * @var PatchV0ContactsIdResponseLegalAddress $legalAddress
+     * @var ListContactsLegalAddress $legalAddress
      */
     #[\Speakeasy\Serializer\Annotation\SerializedName('legalAddress')]
-    #[\Speakeasy\Serializer\Annotation\Type('\Luqra\Now\Models\Operations\PatchV0ContactsIdResponseLegalAddress')]
-    public PatchV0ContactsIdResponseLegalAddress $legalAddress;
+    #[\Speakeasy\Serializer\Annotation\Type('\Luqra\Now\Models\Operations\ListContactsLegalAddress')]
+    public ListContactsLegalAddress $legalAddress;
 
     /**
      *
-     * @var \DateTime $updatedAt
-     */
-    #[\Speakeasy\Serializer\Annotation\SerializedName('updatedAt')]
-    public \DateTime $updatedAt;
-
-    /**
-     *
-     * @var ?PatchV0ContactsIdResponseBankAccount $bankAccount
+     * @var ?ListContactsBankAccount $bankAccount
      */
     #[\Speakeasy\Serializer\Annotation\SerializedName('bankAccount')]
-    #[\Speakeasy\Serializer\Annotation\Type('\Luqra\Now\Models\Operations\PatchV0ContactsIdResponseBankAccount|null')]
-    public ?PatchV0ContactsIdResponseBankAccount $bankAccount;
+    #[\Speakeasy\Serializer\Annotation\Type('\Luqra\Now\Models\Operations\ListContactsBankAccount|null')]
+    public ?ListContactsBankAccount $bankAccount;
 
     /**
      *
@@ -79,6 +65,20 @@ class Data
 
     /**
      *
+     * @var ?string $firstName
+     */
+    #[\Speakeasy\Serializer\Annotation\SerializedName('firstName')]
+    public ?string $firstName;
+
+    /**
+     *
+     * @var ?string $lastName
+     */
+    #[\Speakeasy\Serializer\Annotation\SerializedName('lastName')]
+    public ?string $lastName;
+
+    /**
+     *
      * @var ?string $phoneNumber
      */
     #[\Speakeasy\Serializer\Annotation\SerializedName('phoneNumber')]
@@ -86,28 +86,28 @@ class Data
 
     /**
      * @param  string  $contactId
-     * @param  PatchV0ContactsIdResponseEntityType  $entityType
-     * @param  string  $firstName
-     * @param  string  $lastName
-     * @param  PatchV0ContactsIdResponseLegalAddress  $legalAddress
-     * @param  \DateTime  $updatedAt
-     * @param  ?PatchV0ContactsIdResponseBankAccount  $bankAccount
+     * @param  \DateTime  $createdAt
+     * @param  ListContactsEntityType  $entityType
+     * @param  ListContactsLegalAddress  $legalAddress
+     * @param  ?ListContactsBankAccount  $bankAccount
      * @param  ?string  $companyName
      * @param  ?string  $email
+     * @param  ?string  $firstName
+     * @param  ?string  $lastName
      * @param  ?string  $phoneNumber
      * @phpstan-pure
      */
-    public function __construct(string $contactId, PatchV0ContactsIdResponseEntityType $entityType, string $firstName, string $lastName, PatchV0ContactsIdResponseLegalAddress $legalAddress, \DateTime $updatedAt, ?PatchV0ContactsIdResponseBankAccount $bankAccount = null, ?string $companyName = null, ?string $email = null, ?string $phoneNumber = null)
+    public function __construct(string $contactId, \DateTime $createdAt, ListContactsEntityType $entityType, ListContactsLegalAddress $legalAddress, ?ListContactsBankAccount $bankAccount = null, ?string $companyName = null, ?string $email = null, ?string $firstName = null, ?string $lastName = null, ?string $phoneNumber = null)
     {
         $this->contactId = $contactId;
+        $this->createdAt = $createdAt;
         $this->entityType = $entityType;
-        $this->firstName = $firstName;
-        $this->lastName = $lastName;
         $this->legalAddress = $legalAddress;
-        $this->updatedAt = $updatedAt;
         $this->bankAccount = $bankAccount;
         $this->companyName = $companyName;
         $this->email = $email;
+        $this->firstName = $firstName;
+        $this->lastName = $lastName;
         $this->phoneNumber = $phoneNumber;
     }
 }

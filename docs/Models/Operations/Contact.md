@@ -1,0 +1,12 @@
+# Contact
+
+
+## Fields
+
+| Field                                                                                  | Type                                                                                   | Required                                                                               | Description                                                                            |
+| -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
+| `companyName`                                                                          | *string*                                                                               | :heavy_check_mark:                                                                     | N/A                                                                                    |
+| `entityType`                                                                           | [Operations\ListPaymentsEntityType](../../Models/Operations/ListPaymentsEntityType.md) | :heavy_check_mark:                                                                     | N/A                                                                                    |
+| `firstName`                                                                            | *string*                                                                               | :heavy_check_mark:                                                                     | N/A                                                                                    |
+| `id`                                                                                   | *string*                                                                               | :heavy_check_mark:                                                                     | N/A                                                                                    |
+| `lastName`                                                                             | *string*                                                                               | :heavy_check_mark:                                                                     | N/A                                                                                    |

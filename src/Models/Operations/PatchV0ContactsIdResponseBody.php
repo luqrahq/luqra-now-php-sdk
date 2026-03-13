@@ -14,26 +14,26 @@ class PatchV0ContactsIdResponseBody
 {
     /**
      *
-     * @var Data $data
+     * @var PatchV0ContactsIdData $data
      */
     #[\Speakeasy\Serializer\Annotation\SerializedName('data')]
-    #[\Speakeasy\Serializer\Annotation\Type('\Luqra\Now\Models\Operations\Data')]
-    public Data $data;
+    #[\Speakeasy\Serializer\Annotation\Type('\Luqra\Now\Models\Operations\PatchV0ContactsIdData')]
+    public PatchV0ContactsIdData $data;
 
     /**
      *
-     * @var Meta $meta
+     * @var PatchV0ContactsIdMeta $meta
      */
     #[\Speakeasy\Serializer\Annotation\SerializedName('meta')]
-    #[\Speakeasy\Serializer\Annotation\Type('\Luqra\Now\Models\Operations\Meta')]
-    public Meta $meta;
+    #[\Speakeasy\Serializer\Annotation\Type('\Luqra\Now\Models\Operations\PatchV0ContactsIdMeta')]
+    public PatchV0ContactsIdMeta $meta;
 
     /**
-     * @param  Data  $data
-     * @param  Meta  $meta
+     * @param  PatchV0ContactsIdData  $data
+     * @param  PatchV0ContactsIdMeta  $meta
      * @phpstan-pure
      */
-    public function __construct(Data $data, Meta $meta)
+    public function __construct(PatchV0ContactsIdData $data, PatchV0ContactsIdMeta $meta)
     {
         $this->data = $data;
         $this->meta = $meta;

@@ -6,17 +6,17 @@
 
 declare(strict_types=1);
 
-namespace Luqra\LuqraNowPhp\Models\Operations;
+namespace Luqra\Now\Models\Operations;
 
 
 class Pagination
 {
     /**
      *
-     * @var float $page
+     * @var bool $hasMore
      */
-    #[\Speakeasy\Serializer\Annotation\SerializedName('page')]
-    public float $page;
+    #[\Speakeasy\Serializer\Annotation\SerializedName('hasMore')]
+    public bool $hasMore;
 
     /**
      *
@@ -27,30 +27,30 @@ class Pagination
 
     /**
      *
+     * @var float $page
+     */
+    #[\Speakeasy\Serializer\Annotation\SerializedName('page')]
+    public float $page;
+
+    /**
+     *
      * @var float $total
      */
     #[\Speakeasy\Serializer\Annotation\SerializedName('total')]
     public float $total;
 
     /**
-     *
-     * @var bool $hasMore
-     */
-    #[\Speakeasy\Serializer\Annotation\SerializedName('hasMore')]
-    public bool $hasMore;
-
-    /**
-     * @param  float  $page
-     * @param  float  $limit
-     * @param  float  $total
      * @param  bool  $hasMore
+     * @param  float  $limit
+     * @param  float  $page
+     * @param  float  $total
      * @phpstan-pure
      */
-    public function __construct(float $page, float $limit, float $total, bool $hasMore)
+    public function __construct(bool $hasMore, float $limit, float $page, float $total)
     {
-        $this->page = $page;
-        $this->limit = $limit;
-        $this->total = $total;
         $this->hasMore = $hasMore;
+        $this->limit = $limit;
+        $this->page = $page;
+        $this->total = $total;
     }
 }
