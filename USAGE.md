@@ -5,7 +5,6 @@ declare(strict_types=1);
 require 'vendor/autoload.php';
 
 use Luqra\Now;
-use Luqra\Now\Models\Operations;
 
 $sdk = Now\LuqraNow::builder()
     ->setSecurity(
@@ -13,12 +12,10 @@ $sdk = Now\LuqraNow::builder()
     )
     ->build();
 
-$requestBody = new Operations\PatchV0ContactsIdRequestBody();
 
-$response = $sdk->patchV0ContactsId(
-    id: '<id>',
-    requestBody: $requestBody
 
+$response = $sdk->contacts->getV0Contacts(
+    originatorId: '025261e4-2e17-473c-bc9c-8a61654f55e9'
 );
 
 if ($response->object !== null) {

@@ -9,6 +9,7 @@ Contact management endpoints
 
 * [getV0Contacts](#getv0contacts) - List contacts
 * [postV0Contacts](#postv0contacts) - Create contact
+* [patchV0ContactsId](#patchv0contactsid) - Update contact
 
 ## getV0Contacts
 
@@ -125,3 +126,55 @@ if ($response->object !== null) {
 | Errors\ErrorResponse | 400, 404, 409        | application/json     |
 | Errors\ErrorResponse | 500                  | application/json     |
 | Errors\APIException  | 4XX, 5XX             | \*/\*                |
+
+## patchV0ContactsId
+
+Update contact
+
+### Example Usage
+
+```php
+declare(strict_types=1);
+
+require 'vendor/autoload.php';
+
+use Luqra\Now;
+use Luqra\Now\Models\Operations;
+
+$sdk = Now\LuqraNow::builder()
+    ->setSecurity(
+        '<YOUR_BEARER_TOKEN_HERE>'
+    )
+    ->build();
+
+$requestBody = new Operations\PatchV0ContactsIdRequestBody();
+
+$response = $sdk->contacts->patchV0ContactsId(
+    id: '<id>',
+    requestBody: $requestBody
+
+);
+
+if ($response->object !== null) {
+    // handle response
+}
+```
+
+### Parameters
+
+| Parameter                                                                                          | Type                                                                                               | Required                                                                                           | Description                                                                                        |
+| -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| `id`                                                                                               | *string*                                                                                           | :heavy_check_mark:                                                                                 | N/A                                                                                                |
+| `requestBody`                                                                                      | [Operations\PatchV0ContactsIdRequestBody](../../Models/Operations/PatchV0ContactsIdRequestBody.md) | :heavy_check_mark:                                                                                 | N/A                                                                                                |
+
+### Response
+
+**[?Operations\PatchV0ContactsIdResponse](../../Models/Operations/PatchV0ContactsIdResponse.md)**
+
+### Errors
+
+| Error Type              | Status Code             | Content Type            |
+| ----------------------- | ----------------------- | ----------------------- |
+| Errors\ErrorResponse    | 400, 401, 403, 404, 409 | application/json        |
+| Errors\ErrorResponse    | 500                     | application/json        |
+| Errors\APIException     | 4XX, 5XX                | \*/\*                   |

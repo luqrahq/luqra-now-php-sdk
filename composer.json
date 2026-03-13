@@ -1,6 +1,5 @@
 {
   "name": "luqra/now-php",
-  "description": "PHP SDK for the Luqra Now API",
   "type": "library",
   "autoload": {
     "psr-4": {
@@ -38,5 +37,9 @@
     "stan": [
       "./vendor/bin/phpstan analyse --memory-limit=2g --error-format=table"
     ]
+  },
+  "script-descriptions": {
+    "test": "Run PhpUnit test scripts.",
+    "stan": "Run PhpStan static analysis."
   }
 }

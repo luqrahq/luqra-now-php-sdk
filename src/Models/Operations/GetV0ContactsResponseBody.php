@@ -15,26 +15,26 @@ class GetV0ContactsResponseBody
     /**
      * $data
      *
-     * @var array<GetV0ContactsData> $data
+     * @var array<Data> $data
      */
     #[\Speakeasy\Serializer\Annotation\SerializedName('data')]
-    #[\Speakeasy\Serializer\Annotation\Type('array<\Luqra\Now\Models\Operations\GetV0ContactsData>')]
+    #[\Speakeasy\Serializer\Annotation\Type('array<\Luqra\Now\Models\Operations\Data>')]
     public array $data;
 
     /**
      *
-     * @var GetV0ContactsMeta $meta
+     * @var Meta $meta
      */
     #[\Speakeasy\Serializer\Annotation\SerializedName('meta')]
-    #[\Speakeasy\Serializer\Annotation\Type('\Luqra\Now\Models\Operations\GetV0ContactsMeta')]
-    public GetV0ContactsMeta $meta;
+    #[\Speakeasy\Serializer\Annotation\Type('\Luqra\Now\Models\Operations\Meta')]
+    public Meta $meta;
 
     /**
-     * @param  array<GetV0ContactsData>  $data
-     * @param  GetV0ContactsMeta  $meta
+     * @param  array<Data>  $data
+     * @param  Meta  $meta
      * @phpstan-pure
      */
-    public function __construct(array $data, GetV0ContactsMeta $meta)
+    public function __construct(array $data, Meta $meta)
     {
         $this->data = $data;
         $this->meta = $meta;
