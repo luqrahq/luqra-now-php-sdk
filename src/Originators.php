@@ -48,12 +48,12 @@ class Originators
      * List originators
      *
      * @param  ?string  $search
-     * @return Operations\GetV0OriginatorsResponse
+     * @return Operations\ListOriginatorsResponse
      * @throws \Luqra\Now\Models\Errors\APIException
      */
-    public function getV0Originators(?string $search = null, ?Options $options = null): Operations\GetV0OriginatorsResponse
+    public function list(?string $search = null, ?Options $options = null): Operations\ListOriginatorsResponse
     {
-        $request = new Operations\GetV0OriginatorsRequest(
+        $request = new Operations\ListOriginatorsRequest(
             search: $search,
         );
         $baseUrl = $this->sdkConfiguration->getTemplatedServerUrl();
@@ -61,11 +61,11 @@ class Originators
         $urlOverride = null;
         $httpOptions = ['http_errors' => false];
 
-        $qp = Utils\Utils::getQueryParams(Operations\GetV0OriginatorsRequest::class, $request, $urlOverride);
+        $qp = Utils\Utils::getQueryParams(Operations\ListOriginatorsRequest::class, $request, $urlOverride);
         $httpOptions['headers']['Accept'] = 'application/json';
         $httpOptions['headers']['user-agent'] = $this->sdkConfiguration->userAgent;
         $httpRequest = new \GuzzleHttp\Psr7\Request('GET', $url);
-        $hookContext = new HookContext($this->sdkConfiguration, $baseUrl, 'get_/v0/originators/', [], $this->sdkConfiguration->securitySource);
+        $hookContext = new HookContext($this->sdkConfiguration, $baseUrl, 'listOriginators', [], $this->sdkConfiguration->securitySource);
         $httpRequest = $this->sdkConfiguration->hooks->beforeRequest(new Hooks\BeforeRequestContext($hookContext), $httpRequest);
         $httpOptions['query'] = Utils\QueryParameters::standardizeQueryParams($httpRequest, $qp);
         $httpOptions = Utils\Utils::convertHeadersToOptions($httpRequest, $httpOptions);
@@ -89,8 +89,8 @@ class Originators
 
                 $serializer = Utils\JSON::createSerializer();
                 $responseData = (string) $httpResponse->getBody();
-                $obj = $serializer->deserialize($responseData, '\Luqra\Now\Models\Operations\GetV0OriginatorsResponseBody', 'json', DeserializationContext::create()->setRequireAllRequiredProperties(true));
-                $response = new Operations\GetV0OriginatorsResponse(
+                $obj = $serializer->deserialize($responseData, '\Luqra\Now\Models\Operations\ListOriginatorsResponseBody', 'json', DeserializationContext::create()->setRequireAllRequiredProperties(true));
+                $response = new Operations\ListOriginatorsResponse(
                     statusCode: $statusCode,
                     contentType: $contentType,
                     rawResponse: $httpResponse,

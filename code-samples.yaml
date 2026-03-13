@@ -7,35 +7,35 @@ actions:
     update:
       "x-codeSamples":
         - "lang": "php"
-          "label": "get_/v0/contacts/"
-          "source": "declare(strict_types=1);\n\nrequire 'vendor/autoload.php';\n\nuse Luqra\\Now;\n\n$sdk = Now\\LuqraNow::builder()\n    ->setSecurity(\n        '<YOUR_BEARER_TOKEN_HERE>'\n    )\n    ->build();\n\n\n\n$response = $sdk->contacts->getV0Contacts(\n    originatorId: '025261e4-2e17-473c-bc9c-8a61654f55e9'\n);\n\nif ($response->object !== null) {\n    // handle response\n}"
+          "label": "listContacts"
+          "source": "declare(strict_types=1);\n\nrequire 'vendor/autoload.php';\n\nuse Luqra\\Now;\n\n$sdk = Now\\LuqraNow::builder()\n    ->setSecurity(\n        '<YOUR_BEARER_TOKEN_HERE>'\n    )\n    ->build();\n\n\n\n$response = $sdk->contacts->list(\n    originatorId: '1d7999d2-66f8-428f-af77-7a969541638f'\n);\n\nif ($response->object !== null) {\n    // handle response\n}"
   - target: $["paths"]["/v0/contacts/"]["post"]
     update:
       "x-codeSamples":
         - "lang": "php"
-          "label": "post_/v0/contacts/"
-          "source": "declare(strict_types=1);\n\nrequire 'vendor/autoload.php';\n\nuse Luqra\\Now;\nuse Luqra\\Now\\Models\\Operations;\n\n$sdk = Now\\LuqraNow::builder()\n    ->setSecurity(\n        '<YOUR_BEARER_TOKEN_HERE>'\n    )\n    ->build();\n\n$request = new Operations\\PostV0ContactsRequestBody(\n    bankAccount: new Operations\\BankAccount(\n        achAccountNumber: '<value>',\n        achRoutingNumber: '<value>',\n        subType: Operations\\SubType::Savings,\n    ),\n    email: 'Madalyn_Franey32@hotmail.com',\n    entityType: Operations\\EntityType::Business,\n    firstName: 'Bailey',\n    lastName: 'Schamberger',\n    legalAddress: new Operations\\LegalAddress(\n        addressLine1: '864 Gusikowski Club',\n        city: 'East Osvaldo',\n        countryCode: 'PL',\n        postalCode: '02220',\n        state: 'Virginia',\n    ),\n    originatorId: '6ddab750-fd0f-4109-a303-e68b411dbb07',\n);\n\n$response = $sdk->contacts->postV0Contacts(\n    request: $request\n);\n\nif ($response->object !== null) {\n    // handle response\n}"
+          "label": "createContact"
+          "source": "declare(strict_types=1);\n\nrequire 'vendor/autoload.php';\n\nuse Luqra\\Now;\nuse Luqra\\Now\\Models\\Operations;\n\n$sdk = Now\\LuqraNow::builder()\n    ->setSecurity(\n        '<YOUR_BEARER_TOKEN_HERE>'\n    )\n    ->build();\n\n$request = new Operations\\CreateContactRequestBody(\n    bankAccount: new Operations\\BankAccount(\n        achAccountNumber: '<value>',\n        achRoutingNumber: '<value>',\n        subType: Operations\\SubType::Checking,\n    ),\n    email: 'Hyman_Krajcik-OHara@yahoo.com',\n    entityType: Operations\\EntityType::Business,\n    firstName: 'Lila',\n    lastName: 'Halvorson',\n    legalAddress: new Operations\\LegalAddress(\n        addressLine1: '624 Turner View',\n        city: 'Delray Beach',\n        countryCode: 'GT',\n        postalCode: '09260',\n        state: 'Maryland',\n    ),\n    originatorId: '0a3f3b5a-5a52-41c3-b54f-8e133700579f',\n);\n\n$response = $sdk->contacts->create(\n    request: $request\n);\n\nif ($response->object !== null) {\n    // handle response\n}"
   - target: $["paths"]["/v0/contacts/{id}"]["patch"]
     update:
       "x-codeSamples":
         - "lang": "php"
-          "label": "patch_/v0/contacts/{id}"
-          "source": "declare(strict_types=1);\n\nrequire 'vendor/autoload.php';\n\nuse Luqra\\Now;\nuse Luqra\\Now\\Models\\Operations;\n\n$sdk = Now\\LuqraNow::builder()\n    ->setSecurity(\n        '<YOUR_BEARER_TOKEN_HERE>'\n    )\n    ->build();\n\n$requestBody = new Operations\\PatchV0ContactsIdRequestBody();\n\n$response = $sdk->contacts->patchV0ContactsId(\n    id: '<id>',\n    requestBody: $requestBody\n\n);\n\nif ($response->object !== null) {\n    // handle response\n}"
+          "label": "updateContact"
+          "source": "declare(strict_types=1);\n\nrequire 'vendor/autoload.php';\n\nuse Luqra\\Now;\nuse Luqra\\Now\\Models\\Operations;\n\n$sdk = Now\\LuqraNow::builder()\n    ->setSecurity(\n        '<YOUR_BEARER_TOKEN_HERE>'\n    )\n    ->build();\n\n$requestBody = new Operations\\UpdateContactRequestBody();\n\n$response = $sdk->contacts->update(\n    id: '<id>',\n    requestBody: $requestBody\n\n);\n\nif ($response->object !== null) {\n    // handle response\n}"
   - target: $["paths"]["/v0/originators/"]["get"]
     update:
       "x-codeSamples":
         - "lang": "php"
-          "label": "get_/v0/originators/"
-          "source": "declare(strict_types=1);\n\nrequire 'vendor/autoload.php';\n\nuse Luqra\\Now;\n\n$sdk = Now\\LuqraNow::builder()\n    ->setSecurity(\n        '<YOUR_BEARER_TOKEN_HERE>'\n    )\n    ->build();\n\n\n\n$response = $sdk->originators->getV0Originators(\n\n);\n\nif ($response->object !== null) {\n    // handle response\n}"
+          "label": "listOriginators"
+          "source": "declare(strict_types=1);\n\nrequire 'vendor/autoload.php';\n\nuse Luqra\\Now;\n\n$sdk = Now\\LuqraNow::builder()\n    ->setSecurity(\n        '<YOUR_BEARER_TOKEN_HERE>'\n    )\n    ->build();\n\n\n\n$response = $sdk->originators->list(\n\n);\n\nif ($response->object !== null) {\n    // handle response\n}"
   - target: $["paths"]["/v0/payments/"]["get"]
     update:
       "x-codeSamples":
         - "lang": "php"
-          "label": "get_/v0/payments/"
-          "source": "declare(strict_types=1);\n\nrequire 'vendor/autoload.php';\n\nuse Luqra\\Now;\nuse Luqra\\Now\\Models\\Operations;\n\n$sdk = Now\\LuqraNow::builder()\n    ->setSecurity(\n        '<YOUR_BEARER_TOKEN_HERE>'\n    )\n    ->build();\n\n$request = new Operations\\GetV0PaymentsRequest();\n\n$response = $sdk->payments->getV0Payments(\n    request: $request\n);\n\nif ($response->object !== null) {\n    // handle response\n}"
+          "label": "listPayments"
+          "source": "declare(strict_types=1);\n\nrequire 'vendor/autoload.php';\n\nuse Luqra\\Now;\nuse Luqra\\Now\\Models\\Operations;\n\n$sdk = Now\\LuqraNow::builder()\n    ->setSecurity(\n        '<YOUR_BEARER_TOKEN_HERE>'\n    )\n    ->build();\n\n$request = new Operations\\ListPaymentsRequest();\n\n$response = $sdk->payments->list(\n    request: $request\n);\n\nif ($response->object !== null) {\n    // handle response\n}"
   - target: $["paths"]["/v0/payments/"]["post"]
     update:
       "x-codeSamples":
         - "lang": "php"
-          "label": "post_/v0/payments/"
-          "source": "declare(strict_types=1);\n\nrequire 'vendor/autoload.php';\n\nuse Luqra\\Now;\nuse Luqra\\Now\\Models\\Operations;\n\n$sdk = Now\\LuqraNow::builder()\n    ->setSecurity(\n        '<YOUR_BEARER_TOKEN_HERE>'\n    )\n    ->build();\n\n$request = new Operations\\PostV0PaymentsRequestBody(\n    contactId: '<id>',\n    direction: Operations\\Direction::Outbound,\n    originatorId: '<id>',\n    paymentAmount: 155444,\n);\n\n$response = $sdk->payments->postV0Payments(\n    request: $request\n);\n\nif ($response->object !== null) {\n    // handle response\n}"
+          "label": "createPayment"
+          "source": "declare(strict_types=1);\n\nrequire 'vendor/autoload.php';\n\nuse Luqra\\Now;\nuse Luqra\\Now\\Models\\Operations;\n\n$sdk = Now\\LuqraNow::builder()\n    ->setSecurity(\n        '<YOUR_BEARER_TOKEN_HERE>'\n    )\n    ->build();\n\n$request = new Operations\\CreatePaymentRequestBody(\n    contactId: '<id>',\n    direction: Operations\\Direction::Outbound,\n    originatorId: '<id>',\n    paymentAmount: 960074,\n);\n\n$response = $sdk->payments->create(\n    request: $request\n);\n\nif ($response->object !== null) {\n    // handle response\n}"

@@ -13,11 +13,11 @@ class Contact
 {
     /**
      *
-     * @var GetV0PaymentsEntityType $entityType
+     * @var ListPaymentsEntityType $entityType
      */
     #[\Speakeasy\Serializer\Annotation\SerializedName('entityType')]
-    #[\Speakeasy\Serializer\Annotation\Type('\Luqra\Now\Models\Operations\GetV0PaymentsEntityType')]
-    public GetV0PaymentsEntityType $entityType;
+    #[\Speakeasy\Serializer\Annotation\Type('\Luqra\Now\Models\Operations\ListPaymentsEntityType')]
+    public ListPaymentsEntityType $entityType;
 
     /**
      *
@@ -48,14 +48,14 @@ class Contact
     public ?string $companyName;
 
     /**
-     * @param  GetV0PaymentsEntityType  $entityType
+     * @param  ListPaymentsEntityType  $entityType
      * @param  string  $firstName
      * @param  string  $id
      * @param  string  $lastName
      * @param  ?string  $companyName
      * @phpstan-pure
      */
-    public function __construct(GetV0PaymentsEntityType $entityType, string $firstName, string $id, string $lastName, ?string $companyName = null)
+    public function __construct(ListPaymentsEntityType $entityType, string $firstName, string $id, string $lastName, ?string $companyName = null)
     {
         $this->entityType = $entityType;
         $this->firstName = $firstName;

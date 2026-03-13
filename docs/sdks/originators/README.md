@@ -7,9 +7,9 @@ Originator endpoints
 
 ### Available Operations
 
-* [getV0Originators](#getv0originators) - List originators
+* [list](#list) - List originators
 
-## getV0Originators
+## list
 
 List originators
 
@@ -30,7 +30,7 @@ $sdk = Now\LuqraNow::builder()
 
 
 
-$response = $sdk->originators->getV0Originators(
+$response = $sdk->originators->list(
 
 );
 
@@ -47,7 +47,7 @@ if ($response->object !== null) {
 
 ### Response
 
-**[?Operations\GetV0OriginatorsResponse](../../Models/Operations/GetV0OriginatorsResponse.md)**
+**[?Operations\ListOriginatorsResponse](../../Models/Operations/ListOriginatorsResponse.md)**
 
 ### Errors
 

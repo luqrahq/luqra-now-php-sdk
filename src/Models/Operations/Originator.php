@@ -13,11 +13,11 @@ class Originator
 {
     /**
      *
-     * @var GetV0PaymentsPaymentsEntityType $entityType
+     * @var ListPaymentsPaymentsEntityType $entityType
      */
     #[\Speakeasy\Serializer\Annotation\SerializedName('entityType')]
-    #[\Speakeasy\Serializer\Annotation\Type('\Luqra\Now\Models\Operations\GetV0PaymentsPaymentsEntityType')]
-    public GetV0PaymentsPaymentsEntityType $entityType;
+    #[\Speakeasy\Serializer\Annotation\Type('\Luqra\Now\Models\Operations\ListPaymentsPaymentsEntityType')]
+    public ListPaymentsPaymentsEntityType $entityType;
 
     /**
      *
@@ -48,14 +48,14 @@ class Originator
     public ?string $companyName;
 
     /**
-     * @param  GetV0PaymentsPaymentsEntityType  $entityType
+     * @param  ListPaymentsPaymentsEntityType  $entityType
      * @param  string  $firstName
      * @param  string  $id
      * @param  string  $lastName
      * @param  ?string  $companyName
      * @phpstan-pure
      */
-    public function __construct(GetV0PaymentsPaymentsEntityType $entityType, string $firstName, string $id, string $lastName, ?string $companyName = null)
+    public function __construct(ListPaymentsPaymentsEntityType $entityType, string $firstName, string $id, string $lastName, ?string $companyName = null)
     {
         $this->entityType = $entityType;
         $this->firstName = $firstName;

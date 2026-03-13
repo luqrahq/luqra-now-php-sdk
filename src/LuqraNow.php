@@ -10,10 +10,12 @@ namespace Luqra\Now;
 
 
 
-/** LuqraNow - Luqra NOW API: External API for Luqra NOW */
+/** LuqraNow - Luqra Now API: External API for Luqra Now */
 class LuqraNow
 {
     public const SERVERS = [
+        /** Local */
+        'http://localhost:3005',
         /** Test */
         'https://staging.api.now.luqra.com',
         /** Production */

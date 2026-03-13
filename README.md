@@ -13,7 +13,7 @@ Developer-friendly, idiomatic PHP SDK for the *luqra-now-php* API.
 
 ## Summary
 
-Luqra NOW API: External API for Luqra NOW
+Luqra Now API: External API for Luqra Now
 <!-- End Summary [summary] -->
 
 <!-- Start Table of Contents [toc] -->
@@ -63,8 +63,8 @@ $sdk = Now\LuqraNow::builder()
 
 
 
-$response = $sdk->contacts->getV0Contacts(
-    originatorId: '025261e4-2e17-473c-bc9c-8a61654f55e9'
+$response = $sdk->contacts->list(
+    originatorId: '1d7999d2-66f8-428f-af77-7a969541638f'
 );
 
 if ($response->object !== null) {
@@ -100,8 +100,8 @@ $sdk = Now\LuqraNow::builder()
 
 
 
-$response = $sdk->contacts->getV0Contacts(
-    originatorId: '025261e4-2e17-473c-bc9c-8a61654f55e9'
+$response = $sdk->contacts->list(
+    originatorId: '1d7999d2-66f8-428f-af77-7a969541638f'
 );
 
 if ($response->object !== null) {
@@ -118,19 +118,19 @@ if ($response->object !== null) {
 
 ### [contacts](docs/sdks/contacts/README.md)
 
-* [getV0Contacts](docs/sdks/contacts/README.md#getv0contacts) - List contacts
-* [postV0Contacts](docs/sdks/contacts/README.md#postv0contacts) - Create contact
-* [patchV0ContactsId](docs/sdks/contacts/README.md#patchv0contactsid) - Update contact
+* [list](docs/sdks/contacts/README.md#list) - List contacts
+* [create](docs/sdks/contacts/README.md#create) - Create contact
+* [update](docs/sdks/contacts/README.md#update) - Update contact
 
 
 ### [originators](docs/sdks/originators/README.md)
 
-* [getV0Originators](docs/sdks/originators/README.md#getv0originators) - List originators
+* [list](docs/sdks/originators/README.md#list) - List originators
 
 ### [payments](docs/sdks/payments/README.md)
 
-* [getV0Payments](docs/sdks/payments/README.md#getv0payments) - List payments
-* [postV0Payments](docs/sdks/payments/README.md#postv0payments) - Create payment
+* [list](docs/sdks/payments/README.md#list) - List payments
+* [create](docs/sdks/payments/README.md#create) - Create payment
 
 </details>
 <!-- End Available Resources and Operations [operations] -->
@@ -149,7 +149,7 @@ By default an API error will raise a `Errors\APIException` exception, which has 
 | `$rawResponse` | *?\Psr\Http\Message\ResponseInterface*  | The raw HTTP response |
 | `$body`        | *string*                                | The response content  |
 
-When custom error responses are specified for an operation, the SDK may also throw their associated exception. You can refer to respective *Errors* tables in SDK docs for more details on possible exception types for each operation. For example, the `getV0Contacts` method throws the following exceptions:
+When custom error responses are specified for an operation, the SDK may also throw their associated exception. You can refer to respective *Errors* tables in SDK docs for more details on possible exception types for each operation. For example, the `list` method throws the following exceptions:
 
 | Error Type           | Status Code | Content Type     |
 | -------------------- | ----------- | ---------------- |
@@ -174,8 +174,8 @@ $sdk = Now\LuqraNow::builder()
     ->build();
 
 try {
-    $response = $sdk->contacts->getV0Contacts(
-        originatorId: '025261e4-2e17-473c-bc9c-8a61654f55e9'
+    $response = $sdk->contacts->list(
+        originatorId: '1d7999d2-66f8-428f-af77-7a969541638f'
     );
 
     if ($response->object !== null) {
@@ -203,8 +203,9 @@ You can override the default server globally using the `setServerIndex(int $serv
 
 | #   | Server                              | Description |
 | --- | ----------------------------------- | ----------- |
-| 0   | `https://staging.api.now.luqra.com` | Test        |
-| 1   | `https://api.now.luqra.com`         | Production  |
+| 0   | `http://localhost:3005`             | Local       |
+| 1   | `https://staging.api.now.luqra.com` | Test        |
+| 2   | `https://api.now.luqra.com`         | Production  |
 
 #### Example
 
@@ -216,7 +217,7 @@ require 'vendor/autoload.php';
 use Luqra\Now;
 
 $sdk = Now\LuqraNow::builder()
-    ->setServerIndex(1)
+    ->setServerIndex(2)
     ->setSecurity(
         '<YOUR_BEARER_TOKEN_HERE>'
     )
@@ -224,8 +225,8 @@ $sdk = Now\LuqraNow::builder()
 
 
 
-$response = $sdk->contacts->getV0Contacts(
-    originatorId: '025261e4-2e17-473c-bc9c-8a61654f55e9'
+$response = $sdk->contacts->list(
+    originatorId: '1d7999d2-66f8-428f-af77-7a969541638f'
 );
 
 if ($response->object !== null) {
@@ -252,8 +253,8 @@ $sdk = Now\LuqraNow::builder()
 
 
 
-$response = $sdk->contacts->getV0Contacts(
-    originatorId: '025261e4-2e17-473c-bc9c-8a61654f55e9'
+$response = $sdk->contacts->list(
+    originatorId: '1d7999d2-66f8-428f-af77-7a969541638f'
 );
 
 if ($response->object !== null) {

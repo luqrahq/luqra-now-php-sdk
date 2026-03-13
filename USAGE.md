@@ -14,8 +14,8 @@ $sdk = Now\LuqraNow::builder()
 
 
 
-$response = $sdk->contacts->getV0Contacts(
-    originatorId: '025261e4-2e17-473c-bc9c-8a61654f55e9'
+$response = $sdk->contacts->list(
+    originatorId: '1d7999d2-66f8-428f-af77-7a969541638f'
 );
 
 if ($response->object !== null) {

@@ -1,0 +1,16 @@
+# CreateContactRequestBody
+
+
+## Fields
+
+| Field                                                              | Type                                                               | Required                                                           | Description                                                        |
+| ------------------------------------------------------------------ | ------------------------------------------------------------------ | ------------------------------------------------------------------ | ------------------------------------------------------------------ |
+| `bankAccount`                                                      | [Operations\BankAccount](../../Models/Operations/BankAccount.md)   | :heavy_check_mark:                                                 | N/A                                                                |
+| `companyName`                                                      | *?string*                                                          | :heavy_minus_sign:                                                 | N/A                                                                |
+| `email`                                                            | *string*                                                           | :heavy_check_mark:                                                 | N/A                                                                |
+| `entityType`                                                       | [Operations\EntityType](../../Models/Operations/EntityType.md)     | :heavy_check_mark:                                                 | N/A                                                                |
+| `firstName`                                                        | *string*                                                           | :heavy_check_mark:                                                 | N/A                                                                |
+| `lastName`                                                         | *string*                                                           | :heavy_check_mark:                                                 | N/A                                                                |
+| `legalAddress`                                                     | [Operations\LegalAddress](../../Models/Operations/LegalAddress.md) | :heavy_check_mark:                                                 | N/A                                                                |
+| `originatorId`                                                     | *string*                                                           | :heavy_check_mark:                                                 | N/A                                                                |
+| `phoneNumber`                                                      | *?string*                                                          | :heavy_minus_sign:                                                 | N/A                                                                |

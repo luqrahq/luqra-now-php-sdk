@@ -2,6 +2,6 @@
 
 ## Overview
 
-Luqra NOW API: External API for Luqra NOW
+Luqra Now API: External API for Luqra Now
 
 ### Available Operations

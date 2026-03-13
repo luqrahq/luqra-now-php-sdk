@@ -27,41 +27,27 @@ class Data
 
     /**
      *
-     * @var GetV0ContactsEntityType $entityType
+     * @var ListContactsEntityType $entityType
      */
     #[\Speakeasy\Serializer\Annotation\SerializedName('entityType')]
-    #[\Speakeasy\Serializer\Annotation\Type('\Luqra\Now\Models\Operations\GetV0ContactsEntityType')]
-    public GetV0ContactsEntityType $entityType;
+    #[\Speakeasy\Serializer\Annotation\Type('\Luqra\Now\Models\Operations\ListContactsEntityType')]
+    public ListContactsEntityType $entityType;
 
     /**
      *
-     * @var string $firstName
-     */
-    #[\Speakeasy\Serializer\Annotation\SerializedName('firstName')]
-    public string $firstName;
-
-    /**
-     *
-     * @var string $lastName
-     */
-    #[\Speakeasy\Serializer\Annotation\SerializedName('lastName')]
-    public string $lastName;
-
-    /**
-     *
-     * @var GetV0ContactsLegalAddress $legalAddress
+     * @var ListContactsLegalAddress $legalAddress
      */
     #[\Speakeasy\Serializer\Annotation\SerializedName('legalAddress')]
-    #[\Speakeasy\Serializer\Annotation\Type('\Luqra\Now\Models\Operations\GetV0ContactsLegalAddress')]
-    public GetV0ContactsLegalAddress $legalAddress;
+    #[\Speakeasy\Serializer\Annotation\Type('\Luqra\Now\Models\Operations\ListContactsLegalAddress')]
+    public ListContactsLegalAddress $legalAddress;
 
     /**
      *
-     * @var ?GetV0ContactsBankAccount $bankAccount
+     * @var ?ListContactsBankAccount $bankAccount
      */
     #[\Speakeasy\Serializer\Annotation\SerializedName('bankAccount')]
-    #[\Speakeasy\Serializer\Annotation\Type('\Luqra\Now\Models\Operations\GetV0ContactsBankAccount|null')]
-    public ?GetV0ContactsBankAccount $bankAccount;
+    #[\Speakeasy\Serializer\Annotation\Type('\Luqra\Now\Models\Operations\ListContactsBankAccount|null')]
+    public ?ListContactsBankAccount $bankAccount;
 
     /**
      *
@@ -79,6 +65,20 @@ class Data
 
     /**
      *
+     * @var ?string $firstName
+     */
+    #[\Speakeasy\Serializer\Annotation\SerializedName('firstName')]
+    public ?string $firstName;
+
+    /**
+     *
+     * @var ?string $lastName
+     */
+    #[\Speakeasy\Serializer\Annotation\SerializedName('lastName')]
+    public ?string $lastName;
+
+    /**
+     *
      * @var ?string $phoneNumber
      */
     #[\Speakeasy\Serializer\Annotation\SerializedName('phoneNumber')]
@@ -87,27 +87,27 @@ class Data
     /**
      * @param  string  $contactId
      * @param  \DateTime  $createdAt
-     * @param  GetV0ContactsEntityType  $entityType
-     * @param  string  $firstName
-     * @param  string  $lastName
-     * @param  GetV0ContactsLegalAddress  $legalAddress
-     * @param  ?GetV0ContactsBankAccount  $bankAccount
+     * @param  ListContactsEntityType  $entityType
+     * @param  ListContactsLegalAddress  $legalAddress
+     * @param  ?ListContactsBankAccount  $bankAccount
      * @param  ?string  $companyName
      * @param  ?string  $email
+     * @param  ?string  $firstName
+     * @param  ?string  $lastName
      * @param  ?string  $phoneNumber
      * @phpstan-pure
      */
-    public function __construct(string $contactId, \DateTime $createdAt, GetV0ContactsEntityType $entityType, string $firstName, string $lastName, GetV0ContactsLegalAddress $legalAddress, ?GetV0ContactsBankAccount $bankAccount = null, ?string $companyName = null, ?string $email = null, ?string $phoneNumber = null)
+    public function __construct(string $contactId, \DateTime $createdAt, ListContactsEntityType $entityType, ListContactsLegalAddress $legalAddress, ?ListContactsBankAccount $bankAccount = null, ?string $companyName = null, ?string $email = null, ?string $firstName = null, ?string $lastName = null, ?string $phoneNumber = null)
     {
         $this->contactId = $contactId;
         $this->createdAt = $createdAt;
         $this->entityType = $entityType;
-        $this->firstName = $firstName;
-        $this->lastName = $lastName;
         $this->legalAddress = $legalAddress;
         $this->bankAccount = $bankAccount;
         $this->companyName = $companyName;
         $this->email = $email;
+        $this->firstName = $firstName;
+        $this->lastName = $lastName;
         $this->phoneNumber = $phoneNumber;
     }
 }
