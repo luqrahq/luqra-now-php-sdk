@@ -1,0 +1,16 @@
+workflowVersion: 1.0.0
+speakeasyVersion: latest
+sources:
+    luqra-api:
+        inputs:
+            - location: ./openapi.json
+targets:
+    php-sdk:
+        target: php
+        source: luqra-api
+        output: .
+        codeSamples:
+            output: code-samples.yaml
+            labelOverride:
+                fixedValue: Php (SDK)
+            blocking: false

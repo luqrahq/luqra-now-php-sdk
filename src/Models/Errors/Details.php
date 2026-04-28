@@ -6,7 +6,7 @@
 
 declare(strict_types=1);
 
-namespace Luqra\Now\Models\Errors;
+namespace Luqra\LuqraNowPhp\Models\Errors;
 
 
 class Details

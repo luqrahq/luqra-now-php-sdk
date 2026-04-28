@@ -6,26 +6,38 @@
 
 declare(strict_types=1);
 
-namespace Luqra\Now\Models\Errors;
+namespace Luqra\LuqraNowPhp\Models\Errors;
 
-use Luqra\Now\Utils;
+use Luqra\LuqraNowPhp\Models\Components;
+use Luqra\LuqraNowPhp\Utils;
 class ErrorResponse
 {
     /**
      *
-     * @var Error $error
+     * @var \Luqra\LuqraNowPhp\Models\Components\Error $error
      */
     #[\Speakeasy\Serializer\Annotation\SerializedName('error')]
-    #[\Speakeasy\Serializer\Annotation\Type('\Luqra\Now\Models\Errors\Error')]
-    public Error $error;
+    #[\Speakeasy\Serializer\Annotation\Type('\Luqra\LuqraNowPhp\Models\Components\Error')]
+    public Components\Error $error;
 
     /**
-     * @param  Error  $error
+     * Raw HTTP response; suitable for custom response parsing
+     *
+     * @var ?\Psr\Http\Message\ResponseInterface $rawResponse
+     */
+    #[\Speakeasy\Serializer\Annotation\Exclude]
+
+    public ?\Psr\Http\Message\ResponseInterface $rawResponse = null;
+
+    /**
+     * @param  \Luqra\LuqraNowPhp\Models\Components\Error  $error
+     * @param  ?\Psr\Http\Message\ResponseInterface  $rawResponse
      * @phpstan-pure
      */
-    public function __construct(Error $error)
+    public function __construct(Components\Error $error, ?\Psr\Http\Message\ResponseInterface $rawResponse = null)
     {
         $this->error = $error;
+        $this->rawResponse = $rawResponse;
     }
 
     public function toException(): ErrorResponseThrowable

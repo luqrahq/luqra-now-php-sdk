@@ -6,7 +6,7 @@
 
 declare(strict_types=1);
 
-namespace Luqra\Now\Utils\Retry;
+namespace Luqra\LuqraNowPhp\Utils\Retry;
 
 use Brick\DateTime\DateTimeException;
 use Brick\DateTime\LocalDateTime;
@@ -104,9 +104,13 @@ class RetryUtils
 
         $final = false;
         foreach ($statusCodes as $code) {
-            $matches = [];
-            if (! preg_match('/^[0-9]xx$/', $code, $matches)) {
-                return $code === $actual;
+            if (! preg_match('/^[0-9]xx$/', $code)) {
+                $final = $code === $actual;
+                if ($final) {
+                    break;
+                }
+
+                continue;
             }
 
             $expectFamily = mb_substr($code, 0, 1);
@@ -121,6 +125,7 @@ class RetryUtils
 
             if ($actualFamily === $expectFamily) {
                 $final = true;
+                break;
             }
         }
 

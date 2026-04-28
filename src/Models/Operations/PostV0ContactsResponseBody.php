@@ -6,7 +6,7 @@
 
 declare(strict_types=1);
 
-namespace Luqra\Now\Models\Operations;
+namespace Luqra\LuqraNowPhp\Models\Operations;
 
 
 /** PostV0ContactsResponseBody - Default Response */
@@ -17,7 +17,7 @@ class PostV0ContactsResponseBody
      * @var PostV0ContactsData $data
      */
     #[\Speakeasy\Serializer\Annotation\SerializedName('data')]
-    #[\Speakeasy\Serializer\Annotation\Type('\Luqra\Now\Models\Operations\PostV0ContactsData')]
+    #[\Speakeasy\Serializer\Annotation\Type('\Luqra\LuqraNowPhp\Models\Operations\PostV0ContactsData')]
     public PostV0ContactsData $data;
 
     /**
@@ -25,7 +25,7 @@ class PostV0ContactsResponseBody
      * @var PostV0ContactsMeta $meta
      */
     #[\Speakeasy\Serializer\Annotation\SerializedName('meta')]
-    #[\Speakeasy\Serializer\Annotation\Type('\Luqra\Now\Models\Operations\PostV0ContactsMeta')]
+    #[\Speakeasy\Serializer\Annotation\Type('\Luqra\LuqraNowPhp\Models\Operations\PostV0ContactsMeta')]
     public PostV0ContactsMeta $meta;
 
     /**

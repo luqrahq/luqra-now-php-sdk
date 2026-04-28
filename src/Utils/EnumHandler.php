@@ -6,7 +6,7 @@
 
 declare(strict_types=1);
 
-namespace Luqra\Now\Utils;
+namespace Luqra\LuqraNowPhp\Utils;
 
 use Speakeasy\Serializer\Context;
 use Speakeasy\Serializer\Exception\NotAcceptableException;

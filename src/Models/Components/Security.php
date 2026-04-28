@@ -6,9 +6,9 @@
 
 declare(strict_types=1);
 
-namespace Luqra\Now\Models\Components;
+namespace Luqra\LuqraNowPhp\Models\Components;
 
-use Luqra\Now\Utils\SpeakeasyMetadata;
+use Luqra\LuqraNowPhp\Utils\SpeakeasyMetadata;
 class Security
 {
     /**

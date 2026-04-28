@@ -1,5 +1,4 @@
 # Originators
-(*originators*)
 
 ## Overview
 
@@ -15,14 +14,15 @@ List originators
 
 ### Example Usage
 
+<!-- UsageSnippet language="php" operationID="listOriginators" method="get" path="/v0/originators/" -->
 ```php
 declare(strict_types=1);
 
 require 'vendor/autoload.php';
 
-use Luqra\Now;
+use Luqra\LuqraNowPhp;
 
-$sdk = Now\LuqraNow::builder()
+$sdk = LuqraNowPhp\LuqraNow::builder()
     ->setSecurity(
         '<YOUR_BEARER_TOKEN_HERE>'
     )

@@ -7,35 +7,41 @@ actions:
     update:
       "x-codeSamples":
         - "lang": "php"
-          "label": "listContacts"
-          "source": "declare(strict_types=1);\n\nrequire 'vendor/autoload.php';\n\nuse Luqra\\Now;\n\n$sdk = Now\\LuqraNow::builder()\n    ->setSecurity(\n        '<YOUR_BEARER_TOKEN_HERE>'\n    )\n    ->build();\n\n\n\n$response = $sdk->contacts->list(\n    originatorId: '1d7999d2-66f8-428f-af77-7a969541638f'\n);\n\nif ($response->object !== null) {\n    // handle response\n}"
+          "label": "Php (SDK)"
+          "source": "declare(strict_types=1);\n\nrequire 'vendor/autoload.php';\n\nuse Luqra\\LuqraNowPhp;\n\n$sdk = LuqraNowPhp\\LuqraNow::builder()\n    ->setSecurity(\n        '<YOUR_BEARER_TOKEN_HERE>'\n    )\n    ->build();\n\n\n\n$response = $sdk->contacts->list(\n    originatorId: '1d7999d2-66f8-428f-af77-7a969541638f'\n);\n\nif ($response->object !== null) {\n    // handle response\n}"
   - target: $["paths"]["/v0/contacts/"]["post"]
     update:
       "x-codeSamples":
         - "lang": "php"
-          "label": "createContact"
-          "source": "declare(strict_types=1);\n\nrequire 'vendor/autoload.php';\n\nuse Luqra\\Now;\nuse Luqra\\Now\\Models\\Operations;\n\n$sdk = Now\\LuqraNow::builder()\n    ->setSecurity(\n        '<YOUR_BEARER_TOKEN_HERE>'\n    )\n    ->build();\n\n$request = new Operations\\CreateContactRequestBody(\n    bankAccount: new Operations\\BankAccount(\n        achAccountNumber: '<value>',\n        achRoutingNumber: '<value>',\n        subType: Operations\\SubType::Checking,\n    ),\n    email: 'Hyman_Krajcik-OHara@yahoo.com',\n    entityType: Operations\\EntityType::Business,\n    firstName: 'Lila',\n    lastName: 'Halvorson',\n    legalAddress: new Operations\\LegalAddress(\n        addressLine1: '624 Turner View',\n        city: 'Delray Beach',\n        countryCode: 'GT',\n        postalCode: '09260',\n        state: 'Maryland',\n    ),\n    originatorId: '0a3f3b5a-5a52-41c3-b54f-8e133700579f',\n);\n\n$response = $sdk->contacts->create(\n    request: $request\n);\n\nif ($response->object !== null) {\n    // handle response\n}"
+          "label": "Php (SDK)"
+          "source": "declare(strict_types=1);\n\nrequire 'vendor/autoload.php';\n\nuse Luqra\\LuqraNowPhp;\nuse Luqra\\LuqraNowPhp\\Models\\Operations;\n\n$sdk = LuqraNowPhp\\LuqraNow::builder()\n    ->setSecurity(\n        '<YOUR_BEARER_TOKEN_HERE>'\n    )\n    ->build();\n\n$request = new Operations\\CreateContactRequest(\n    bankAccount: new Operations\\CreateContactBankAccount(\n        achAccountNumber: '<value>',\n        achRoutingNumber: '<value>',\n        subType: Operations\\CreateContactSubType::Checking,\n    ),\n    email: 'Hyman_Krajcik-OHara@yahoo.com',\n    entityType: Operations\\CreateContactEntityType::Business,\n    firstName: 'Lila',\n    lastName: 'Halvorson',\n    legalAddress: new Operations\\CreateContactLegalAddress(\n        addressLine1: '624 Turner View',\n        city: 'Delray Beach',\n        countryCode: 'GT',\n        postalCode: '09260',\n        state: 'Maryland',\n    ),\n    originatorId: '0a3f3b5a-5a52-41c3-b54f-8e133700579f',\n);\n\n$response = $sdk->contacts->create(\n    request: $request\n);\n\nif ($response->object !== null) {\n    // handle response\n}"
   - target: $["paths"]["/v0/contacts/{id}"]["patch"]
     update:
       "x-codeSamples":
         - "lang": "php"
-          "label": "updateContact"
-          "source": "declare(strict_types=1);\n\nrequire 'vendor/autoload.php';\n\nuse Luqra\\Now;\nuse Luqra\\Now\\Models\\Operations;\n\n$sdk = Now\\LuqraNow::builder()\n    ->setSecurity(\n        '<YOUR_BEARER_TOKEN_HERE>'\n    )\n    ->build();\n\n$requestBody = new Operations\\UpdateContactRequestBody();\n\n$response = $sdk->contacts->update(\n    id: '<id>',\n    requestBody: $requestBody\n\n);\n\nif ($response->object !== null) {\n    // handle response\n}"
+          "label": "Php (SDK)"
+          "source": "declare(strict_types=1);\n\nrequire 'vendor/autoload.php';\n\nuse Luqra\\LuqraNowPhp;\nuse Luqra\\LuqraNowPhp\\Models\\Operations;\n\n$sdk = LuqraNowPhp\\LuqraNow::builder()\n    ->setSecurity(\n        '<YOUR_BEARER_TOKEN_HERE>'\n    )\n    ->build();\n\n$body = new Operations\\UpdateContactRequestBody();\n\n$response = $sdk->contacts->update(\n    id: '<id>',\n    body: $body\n\n);\n\nif ($response->object !== null) {\n    // handle response\n}"
   - target: $["paths"]["/v0/originators/"]["get"]
     update:
       "x-codeSamples":
         - "lang": "php"
-          "label": "listOriginators"
-          "source": "declare(strict_types=1);\n\nrequire 'vendor/autoload.php';\n\nuse Luqra\\Now;\n\n$sdk = Now\\LuqraNow::builder()\n    ->setSecurity(\n        '<YOUR_BEARER_TOKEN_HERE>'\n    )\n    ->build();\n\n\n\n$response = $sdk->originators->list(\n\n);\n\nif ($response->object !== null) {\n    // handle response\n}"
+          "label": "Php (SDK)"
+          "source": "declare(strict_types=1);\n\nrequire 'vendor/autoload.php';\n\nuse Luqra\\LuqraNowPhp;\n\n$sdk = LuqraNowPhp\\LuqraNow::builder()\n    ->setSecurity(\n        '<YOUR_BEARER_TOKEN_HERE>'\n    )\n    ->build();\n\n\n\n$response = $sdk->originators->list(\n\n);\n\nif ($response->object !== null) {\n    // handle response\n}"
   - target: $["paths"]["/v0/payments/"]["get"]
     update:
       "x-codeSamples":
         - "lang": "php"
-          "label": "listPayments"
-          "source": "declare(strict_types=1);\n\nrequire 'vendor/autoload.php';\n\nuse Luqra\\Now;\nuse Luqra\\Now\\Models\\Operations;\n\n$sdk = Now\\LuqraNow::builder()\n    ->setSecurity(\n        '<YOUR_BEARER_TOKEN_HERE>'\n    )\n    ->build();\n\n$request = new Operations\\ListPaymentsRequest();\n\n$response = $sdk->payments->list(\n    request: $request\n);\n\nif ($response->object !== null) {\n    // handle response\n}"
+          "label": "Php (SDK)"
+          "source": "declare(strict_types=1);\n\nrequire 'vendor/autoload.php';\n\nuse Luqra\\LuqraNowPhp;\nuse Luqra\\LuqraNowPhp\\Models\\Operations;\n\n$sdk = LuqraNowPhp\\LuqraNow::builder()\n    ->setSecurity(\n        '<YOUR_BEARER_TOKEN_HERE>'\n    )\n    ->build();\n\n$request = new Operations\\ListPaymentsRequest();\n\n$response = $sdk->payments->list(\n    request: $request\n);\n\nif ($response->object !== null) {\n    // handle response\n}"
   - target: $["paths"]["/v0/payments/"]["post"]
     update:
       "x-codeSamples":
         - "lang": "php"
-          "label": "createPayment"
-          "source": "declare(strict_types=1);\n\nrequire 'vendor/autoload.php';\n\nuse Luqra\\Now;\nuse Luqra\\Now\\Models\\Operations;\n\n$sdk = Now\\LuqraNow::builder()\n    ->setSecurity(\n        '<YOUR_BEARER_TOKEN_HERE>'\n    )\n    ->build();\n\n$request = new Operations\\CreatePaymentRequestBody(\n    contactId: '<id>',\n    direction: Operations\\Direction::Outbound,\n    originatorId: '<id>',\n    paymentAmount: 960074,\n);\n\n$response = $sdk->payments->create(\n    request: $request\n);\n\nif ($response->object !== null) {\n    // handle response\n}"
+          "label": "Php (SDK)"
+          "source": "declare(strict_types=1);\n\nrequire 'vendor/autoload.php';\n\nuse Luqra\\LuqraNowPhp;\nuse Luqra\\LuqraNowPhp\\Models\\Operations;\n\n$sdk = LuqraNowPhp\\LuqraNow::builder()\n    ->setSecurity(\n        '<YOUR_BEARER_TOKEN_HERE>'\n    )\n    ->build();\n\n$request = new Operations\\CreatePaymentRequest(\n    contactId: '<id>',\n    direction: Operations\\CreatePaymentDirection::Outbound,\n    originatorId: '<id>',\n    paymentAmount: 960074,\n    paymentNote: '<value>',\n);\n\n$response = $sdk->payments->create(\n    request: $request\n);\n\nif ($response->object !== null) {\n    // handle response\n}"
+  - target: $["paths"]["/v0/payments/{id}"]["get"]
+    update:
+      "x-codeSamples":
+        - "lang": "php"
+          "label": "Php (SDK)"
+          "source": "declare(strict_types=1);\n\nrequire 'vendor/autoload.php';\n\nuse Luqra\\LuqraNowPhp;\n\n$sdk = LuqraNowPhp\\LuqraNow::builder()\n    ->setSecurity(\n        '<YOUR_BEARER_TOKEN_HERE>'\n    )\n    ->build();\n\n\n\n$response = $sdk->payments->get(\n    id: '<id>'\n);\n\nif ($response->object !== null) {\n    // handle response\n}"

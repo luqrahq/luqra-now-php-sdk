@@ -6,7 +6,7 @@
 
 declare(strict_types=1);
 
-namespace Luqra\Now\Models\Operations;
+namespace Luqra\LuqraNowPhp\Models\Operations;
 
 
 class ListPaymentsData
@@ -27,11 +27,11 @@ class ListPaymentsData
 
     /**
      *
-     * @var ListPaymentsDirection $direction
+     * @var \Luqra\LuqraNowPhp\Models\Operations\ListPaymentsDirectionResponse $direction
      */
     #[\Speakeasy\Serializer\Annotation\SerializedName('direction')]
-    #[\Speakeasy\Serializer\Annotation\Type('\Luqra\Now\Models\Operations\ListPaymentsDirection')]
-    public ListPaymentsDirection $direction;
+    #[\Speakeasy\Serializer\Annotation\Type('\Luqra\LuqraNowPhp\Models\Operations\ListPaymentsDirectionResponse')]
+    public ListPaymentsDirectionResponse $direction;
 
     /**
      * In minor units (cents)
@@ -43,11 +43,11 @@ class ListPaymentsData
 
     /**
      *
-     * @var Originator $originator
+     * @var \Luqra\LuqraNowPhp\Models\Operations\ListPaymentsOriginator $originator
      */
     #[\Speakeasy\Serializer\Annotation\SerializedName('originator')]
-    #[\Speakeasy\Serializer\Annotation\Type('\Luqra\Now\Models\Operations\Originator')]
-    public Originator $originator;
+    #[\Speakeasy\Serializer\Annotation\Type('\Luqra\LuqraNowPhp\Models\Operations\ListPaymentsOriginator')]
+    public ListPaymentsOriginator $originator;
 
     /**
      * In minor units (cents)
@@ -66,27 +66,34 @@ class ListPaymentsData
 
     /**
      *
-     * @var PaymentRail $paymentRail
+     * @var \Luqra\LuqraNowPhp\Models\Operations\ListPaymentsPaymentRail $paymentRail
      */
     #[\Speakeasy\Serializer\Annotation\SerializedName('paymentRail')]
-    #[\Speakeasy\Serializer\Annotation\Type('\Luqra\Now\Models\Operations\PaymentRail')]
-    public PaymentRail $paymentRail;
+    #[\Speakeasy\Serializer\Annotation\Type('\Luqra\LuqraNowPhp\Models\Operations\ListPaymentsPaymentRail')]
+    public ListPaymentsPaymentRail $paymentRail;
 
     /**
      *
-     * @var ListPaymentsStatus $status
+     * @var \Luqra\LuqraNowPhp\Models\Operations\ListPaymentsStatusResponse $status
      */
     #[\Speakeasy\Serializer\Annotation\SerializedName('status')]
-    #[\Speakeasy\Serializer\Annotation\Type('\Luqra\Now\Models\Operations\ListPaymentsStatus')]
-    public ListPaymentsStatus $status;
+    #[\Speakeasy\Serializer\Annotation\Type('\Luqra\LuqraNowPhp\Models\Operations\ListPaymentsStatusResponse')]
+    public ListPaymentsStatusResponse $status;
 
     /**
      *
-     * @var ?Contact $contact
+     * @var ?\DateTime $completedAt
+     */
+    #[\Speakeasy\Serializer\Annotation\SerializedName('completedAt')]
+    public ?\DateTime $completedAt;
+
+    /**
+     *
+     * @var ?\Luqra\LuqraNowPhp\Models\Operations\ListPaymentsContact $contact
      */
     #[\Speakeasy\Serializer\Annotation\SerializedName('contact')]
-    #[\Speakeasy\Serializer\Annotation\Type('\Luqra\Now\Models\Operations\Contact|null')]
-    public ?Contact $contact;
+    #[\Speakeasy\Serializer\Annotation\Type('\Luqra\LuqraNowPhp\Models\Operations\ListPaymentsContact|null')]
+    public ?ListPaymentsContact $contact;
 
     /**
      *
@@ -96,20 +103,45 @@ class ListPaymentsData
     public ?string $externalPaymentId;
 
     /**
+     *
+     * @var ?\DateTime $failedAt
+     */
+    #[\Speakeasy\Serializer\Annotation\SerializedName('failedAt')]
+    public ?\DateTime $failedAt;
+
+    /**
+     *
+     * @var ?string $paymentNote
+     */
+    #[\Speakeasy\Serializer\Annotation\SerializedName('paymentNote')]
+    public ?string $paymentNote;
+
+    /**
+     *
+     * @var ?\DateTime $returnedAt
+     */
+    #[\Speakeasy\Serializer\Annotation\SerializedName('returnedAt')]
+    public ?\DateTime $returnedAt;
+
+    /**
      * @param  \DateTime  $createdAt
      * @param  string  $currencyCode
-     * @param  ListPaymentsDirection  $direction
+     * @param  \Luqra\LuqraNowPhp\Models\Operations\ListPaymentsDirectionResponse  $direction
      * @param  int  $feeAmount
-     * @param  Originator  $originator
+     * @param  \Luqra\LuqraNowPhp\Models\Operations\ListPaymentsOriginator  $originator
      * @param  int  $paymentAmount
      * @param  string  $paymentId
-     * @param  PaymentRail  $paymentRail
-     * @param  ListPaymentsStatus  $status
-     * @param  ?Contact  $contact
+     * @param  \Luqra\LuqraNowPhp\Models\Operations\ListPaymentsPaymentRail  $paymentRail
+     * @param  \Luqra\LuqraNowPhp\Models\Operations\ListPaymentsStatusResponse  $status
+     * @param  ?\DateTime  $completedAt
+     * @param  ?\Luqra\LuqraNowPhp\Models\Operations\ListPaymentsContact  $contact
      * @param  ?string  $externalPaymentId
+     * @param  ?\DateTime  $failedAt
+     * @param  ?string  $paymentNote
+     * @param  ?\DateTime  $returnedAt
      * @phpstan-pure
      */
-    public function __construct(\DateTime $createdAt, string $currencyCode, ListPaymentsDirection $direction, int $feeAmount, Originator $originator, int $paymentAmount, string $paymentId, PaymentRail $paymentRail, ListPaymentsStatus $status, ?Contact $contact = null, ?string $externalPaymentId = null)
+    public function __construct(\DateTime $createdAt, string $currencyCode, ListPaymentsDirectionResponse $direction, int $feeAmount, ListPaymentsOriginator $originator, int $paymentAmount, string $paymentId, ListPaymentsPaymentRail $paymentRail, ListPaymentsStatusResponse $status, ?\DateTime $completedAt = null, ?ListPaymentsContact $contact = null, ?string $externalPaymentId = null, ?\DateTime $failedAt = null, ?string $paymentNote = null, ?\DateTime $returnedAt = null)
     {
         $this->createdAt = $createdAt;
         $this->currencyCode = $currencyCode;
@@ -120,7 +152,11 @@ class ListPaymentsData
         $this->paymentId = $paymentId;
         $this->paymentRail = $paymentRail;
         $this->status = $status;
+        $this->completedAt = $completedAt;
         $this->contact = $contact;
         $this->externalPaymentId = $externalPaymentId;
+        $this->failedAt = $failedAt;
+        $this->paymentNote = $paymentNote;
+        $this->returnedAt = $returnedAt;
     }
 }

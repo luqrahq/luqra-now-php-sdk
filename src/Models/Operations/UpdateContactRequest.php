@@ -6,9 +6,9 @@
 
 declare(strict_types=1);
 
-namespace Luqra\Now\Models\Operations;
+namespace Luqra\LuqraNowPhp\Models\Operations;
 
-use Luqra\Now\Utils\SpeakeasyMetadata;
+use Luqra\LuqraNowPhp\Utils\SpeakeasyMetadata;
 class UpdateContactRequest
 {
     /**
@@ -20,19 +20,19 @@ class UpdateContactRequest
 
     /**
      *
-     * @var UpdateContactRequestBody $requestBody
+     * @var \Luqra\LuqraNowPhp\Models\Operations\UpdateContactRequestBody $body
      */
     #[SpeakeasyMetadata('request:mediaType=application/json')]
-    public UpdateContactRequestBody $requestBody;
+    public UpdateContactRequestBody $body;
 
     /**
      * @param  string  $id
-     * @param  UpdateContactRequestBody  $requestBody
+     * @param  \Luqra\LuqraNowPhp\Models\Operations\UpdateContactRequestBody  $body
      * @phpstan-pure
      */
-    public function __construct(string $id, UpdateContactRequestBody $requestBody)
+    public function __construct(string $id, UpdateContactRequestBody $body)
     {
         $this->id = $id;
-        $this->requestBody = $requestBody;
+        $this->body = $body;
     }
 }

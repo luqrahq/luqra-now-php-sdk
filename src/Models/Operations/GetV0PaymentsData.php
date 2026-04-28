@@ -6,7 +6,7 @@
 
 declare(strict_types=1);
 
-namespace Luqra\Now\Models\Operations;
+namespace Luqra\LuqraNowPhp\Models\Operations;
 
 
 class GetV0PaymentsData
@@ -30,7 +30,7 @@ class GetV0PaymentsData
      * @var GetV0PaymentsDirection $direction
      */
     #[\Speakeasy\Serializer\Annotation\SerializedName('direction')]
-    #[\Speakeasy\Serializer\Annotation\Type('\Luqra\Now\Models\Operations\GetV0PaymentsDirection')]
+    #[\Speakeasy\Serializer\Annotation\Type('\Luqra\LuqraNowPhp\Models\Operations\GetV0PaymentsDirection')]
     public GetV0PaymentsDirection $direction;
 
     /**
@@ -46,7 +46,7 @@ class GetV0PaymentsData
      * @var Originator $originator
      */
     #[\Speakeasy\Serializer\Annotation\SerializedName('originator')]
-    #[\Speakeasy\Serializer\Annotation\Type('\Luqra\Now\Models\Operations\Originator')]
+    #[\Speakeasy\Serializer\Annotation\Type('\Luqra\LuqraNowPhp\Models\Operations\Originator')]
     public Originator $originator;
 
     /**
@@ -69,7 +69,7 @@ class GetV0PaymentsData
      * @var PaymentRail $paymentRail
      */
     #[\Speakeasy\Serializer\Annotation\SerializedName('paymentRail')]
-    #[\Speakeasy\Serializer\Annotation\Type('\Luqra\Now\Models\Operations\PaymentRail')]
+    #[\Speakeasy\Serializer\Annotation\Type('\Luqra\LuqraNowPhp\Models\Operations\PaymentRail')]
     public PaymentRail $paymentRail;
 
     /**
@@ -77,7 +77,7 @@ class GetV0PaymentsData
      * @var GetV0PaymentsStatus $status
      */
     #[\Speakeasy\Serializer\Annotation\SerializedName('status')]
-    #[\Speakeasy\Serializer\Annotation\Type('\Luqra\Now\Models\Operations\GetV0PaymentsStatus')]
+    #[\Speakeasy\Serializer\Annotation\Type('\Luqra\LuqraNowPhp\Models\Operations\GetV0PaymentsStatus')]
     public GetV0PaymentsStatus $status;
 
     /**
@@ -85,7 +85,7 @@ class GetV0PaymentsData
      * @var ?Contact $contact
      */
     #[\Speakeasy\Serializer\Annotation\SerializedName('contact')]
-    #[\Speakeasy\Serializer\Annotation\Type('\Luqra\Now\Models\Operations\Contact|null')]
+    #[\Speakeasy\Serializer\Annotation\Type('\Luqra\LuqraNowPhp\Models\Operations\Contact|null')]
     public ?Contact $contact;
 
     /**

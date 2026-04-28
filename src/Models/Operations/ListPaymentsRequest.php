@@ -6,9 +6,9 @@
 
 declare(strict_types=1);
 
-namespace Luqra\Now\Models\Operations;
+namespace Luqra\LuqraNowPhp\Models\Operations;
 
-use Luqra\Now\Utils\SpeakeasyMetadata;
+use Luqra\LuqraNowPhp\Utils\SpeakeasyMetadata;
 class ListPaymentsRequest
 {
     /**
@@ -27,7 +27,7 @@ class ListPaymentsRequest
 
     /**
      *
-     * @var ?QueryParamDirection $direction
+     * @var ?\Luqra\LuqraNowPhp\Models\Operations\QueryParamDirection $direction
      */
     #[SpeakeasyMetadata('queryParam:style=form,explode=true,name=direction')]
     public ?QueryParamDirection $direction = null;
@@ -41,10 +41,10 @@ class ListPaymentsRequest
 
     /**
      *
-     * @var ?Status $status
+     * @var ?\Luqra\LuqraNowPhp\Models\Operations\QueryParamStatus $status
      */
     #[SpeakeasyMetadata('queryParam:style=form,explode=true,name=status')]
-    public ?Status $status = null;
+    public ?QueryParamStatus $status = null;
 
     /**
      *
@@ -63,14 +63,14 @@ class ListPaymentsRequest
     /**
      * @param  ?\DateTime  $createdFrom
      * @param  ?\DateTime  $createdTo
-     * @param  ?QueryParamDirection  $direction
+     * @param  ?\Luqra\LuqraNowPhp\Models\Operations\QueryParamDirection  $direction
      * @param  ?int  $limit
      * @param  ?string  $originatorId
      * @param  ?int  $page
-     * @param  ?Status  $status
+     * @param  ?\Luqra\LuqraNowPhp\Models\Operations\QueryParamStatus  $status
      * @phpstan-pure
      */
-    public function __construct(?\DateTime $createdFrom = null, ?\DateTime $createdTo = null, ?QueryParamDirection $direction = null, ?string $originatorId = null, ?Status $status = null, ?int $limit = 20, ?int $page = 1)
+    public function __construct(?\DateTime $createdFrom = null, ?\DateTime $createdTo = null, ?QueryParamDirection $direction = null, ?string $originatorId = null, ?QueryParamStatus $status = null, ?int $limit = 20, ?int $page = 1)
     {
         $this->createdFrom = $createdFrom;
         $this->createdTo = $createdTo;

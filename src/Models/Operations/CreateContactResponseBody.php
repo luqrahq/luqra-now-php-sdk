@@ -6,7 +6,7 @@
 
 declare(strict_types=1);
 
-namespace Luqra\Now\Models\Operations;
+namespace Luqra\LuqraNowPhp\Models\Operations;
 
 
 /** CreateContactResponseBody - Default Response */
@@ -14,23 +14,23 @@ class CreateContactResponseBody
 {
     /**
      *
-     * @var CreateContactData $data
+     * @var \Luqra\LuqraNowPhp\Models\Operations\CreateContactData $data
      */
     #[\Speakeasy\Serializer\Annotation\SerializedName('data')]
-    #[\Speakeasy\Serializer\Annotation\Type('\Luqra\Now\Models\Operations\CreateContactData')]
+    #[\Speakeasy\Serializer\Annotation\Type('\Luqra\LuqraNowPhp\Models\Operations\CreateContactData')]
     public CreateContactData $data;
 
     /**
      *
-     * @var CreateContactMeta $meta
+     * @var \Luqra\LuqraNowPhp\Models\Operations\CreateContactMeta $meta
      */
     #[\Speakeasy\Serializer\Annotation\SerializedName('meta')]
-    #[\Speakeasy\Serializer\Annotation\Type('\Luqra\Now\Models\Operations\CreateContactMeta')]
+    #[\Speakeasy\Serializer\Annotation\Type('\Luqra\LuqraNowPhp\Models\Operations\CreateContactMeta')]
     public CreateContactMeta $meta;
 
     /**
-     * @param  CreateContactData  $data
-     * @param  CreateContactMeta  $meta
+     * @param  \Luqra\LuqraNowPhp\Models\Operations\CreateContactData  $data
+     * @param  \Luqra\LuqraNowPhp\Models\Operations\CreateContactMeta  $meta
      * @phpstan-pure
      */
     public function __construct(CreateContactData $data, CreateContactMeta $meta)

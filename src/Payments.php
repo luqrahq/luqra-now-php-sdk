@@ -6,11 +6,11 @@
 
 declare(strict_types=1);
 
-namespace Luqra\Now;
+namespace Luqra\LuqraNowPhp;
 
-use Luqra\Now\Hooks\HookContext;
-use Luqra\Now\Models\Operations;
-use Luqra\Now\Utils\Options;
+use Luqra\LuqraNowPhp\Hooks\HookContext;
+use Luqra\LuqraNowPhp\Models\Operations;
+use Luqra\LuqraNowPhp\Utils\Options;
 use Speakeasy\Serializer\DeserializationContext;
 
 class Payments
@@ -47,11 +47,11 @@ class Payments
     /**
      * Create payment
      *
-     * @param  Operations\CreatePaymentRequestBody  $request
-     * @return Operations\CreatePaymentResponse
-     * @throws \Luqra\Now\Models\Errors\APIException
+     * @param  \Luqra\LuqraNowPhp\Models\Operations\CreatePaymentRequest  $request
+     * @return \Luqra\LuqraNowPhp\Models\Operations\CreatePaymentResponse
+     * @throws \Luqra\LuqraNowPhp\Models\Errors\APIException
      */
-    public function create(Operations\CreatePaymentRequestBody $request, ?Options $options = null): Operations\CreatePaymentResponse
+    public function create(Operations\CreatePaymentRequest $request, ?Options $options = null): Operations\CreatePaymentResponse
     {
         $baseUrl = $this->sdkConfiguration->getTemplatedServerUrl();
         $url = Utils\Utils::generateUrl($baseUrl, '/v0/payments/');
@@ -65,7 +65,7 @@ class Payments
         $httpOptions['headers']['Accept'] = 'application/json';
         $httpOptions['headers']['user-agent'] = $this->sdkConfiguration->userAgent;
         $httpRequest = new \GuzzleHttp\Psr7\Request('POST', $url);
-        $hookContext = new HookContext($this->sdkConfiguration, $baseUrl, 'createPayment', [], $this->sdkConfiguration->securitySource);
+        $hookContext = new HookContext($this->sdkConfiguration, $baseUrl, 'createPayment', null, $this->sdkConfiguration->securitySource);
         $httpRequest = $this->sdkConfiguration->hooks->beforeRequest(new Hooks\BeforeRequestContext($hookContext), $httpRequest);
         $httpOptions = Utils\Utils::convertHeadersToOptions($httpRequest, $httpOptions);
         $httpRequest = Utils\Utils::removeHeaders($httpRequest);
@@ -77,18 +77,19 @@ class Payments
         }
         $contentType = $httpResponse->getHeader('Content-Type')[0] ?? '';
 
-        $statusCode = $httpResponse->getStatusCode();
-        if (Utils\Utils::matchStatusCodes($statusCode, ['400', '404', '409', '4XX', '500', '5XX'])) {
+        if (Utils\Utils::matchStatusCodes($httpResponse->getStatusCode(), ['4XX', '5XX'])) {
             $res = $this->sdkConfiguration->hooks->afterError(new Hooks\AfterErrorContext($hookContext), $httpResponse, null);
             $httpResponse = $res;
         }
+
+        $statusCode = $httpResponse->getStatusCode();
         if (Utils\Utils::matchStatusCodes($statusCode, ['201'])) {
             if (Utils\Utils::matchContentType($contentType, 'application/json')) {
                 $httpResponse = $this->sdkConfiguration->hooks->afterSuccess(new Hooks\AfterSuccessContext($hookContext), $httpResponse);
 
                 $serializer = Utils\JSON::createSerializer();
                 $responseData = (string) $httpResponse->getBody();
-                $obj = $serializer->deserialize($responseData, '\Luqra\Now\Models\Operations\CreatePaymentResponseBody', 'json', DeserializationContext::create()->setRequireAllRequiredProperties(true));
+                $obj = $serializer->deserialize($responseData, '\Luqra\LuqraNowPhp\Models\Operations\CreatePaymentResponseBody', 'json', DeserializationContext::create()->setRequireAllRequiredProperties(true));
                 $response = new Operations\CreatePaymentResponse(
                     statusCode: $statusCode,
                     contentType: $contentType,
@@ -97,7 +98,7 @@ class Payments
 
                 return $response;
             } else {
-                throw new \Luqra\Now\Models\Errors\APIException('Unknown content type received', $statusCode, $httpResponse->getBody()->getContents(), $httpResponse);
+                throw new \Luqra\LuqraNowPhp\Models\Errors\APIException('Unknown content type received', $statusCode, $httpResponse->getBody()->getContents(), $httpResponse);
             }
         } elseif (Utils\Utils::matchStatusCodes($statusCode, ['400', '404', '409'])) {
             if (Utils\Utils::matchContentType($contentType, 'application/json')) {
@@ -105,10 +106,11 @@ class Payments
 
                 $serializer = Utils\JSON::createSerializer();
                 $responseData = (string) $httpResponse->getBody();
-                $obj = $serializer->deserialize($responseData, '\Luqra\Now\Models\Errors\ErrorResponse', 'json', DeserializationContext::create()->setRequireAllRequiredProperties(true));
+                $obj = $serializer->deserialize($responseData, '\Luqra\LuqraNowPhp\Models\Errors\ErrorResponse', 'json', DeserializationContext::create()->setRequireAllRequiredProperties(true));
+                $obj->rawResponse = $httpResponse;
                 throw $obj->toException();
             } else {
-                throw new \Luqra\Now\Models\Errors\APIException('Unknown content type received', $statusCode, $httpResponse->getBody()->getContents(), $httpResponse);
+                throw new \Luqra\LuqraNowPhp\Models\Errors\APIException('Unknown content type received', $statusCode, $httpResponse->getBody()->getContents(), $httpResponse);
             }
         } elseif (Utils\Utils::matchStatusCodes($statusCode, ['500'])) {
             if (Utils\Utils::matchContentType($contentType, 'application/json')) {
@@ -116,26 +118,114 @@ class Payments
 
                 $serializer = Utils\JSON::createSerializer();
                 $responseData = (string) $httpResponse->getBody();
-                $obj = $serializer->deserialize($responseData, '\Luqra\Now\Models\Errors\ErrorResponse', 'json', DeserializationContext::create()->setRequireAllRequiredProperties(true));
+                $obj = $serializer->deserialize($responseData, '\Luqra\LuqraNowPhp\Models\Errors\ErrorResponse', 'json', DeserializationContext::create()->setRequireAllRequiredProperties(true));
+                $obj->rawResponse = $httpResponse;
                 throw $obj->toException();
             } else {
-                throw new \Luqra\Now\Models\Errors\APIException('Unknown content type received', $statusCode, $httpResponse->getBody()->getContents(), $httpResponse);
+                throw new \Luqra\LuqraNowPhp\Models\Errors\APIException('Unknown content type received', $statusCode, $httpResponse->getBody()->getContents(), $httpResponse);
             }
         } elseif (Utils\Utils::matchStatusCodes($statusCode, ['4XX'])) {
-            throw new \Luqra\Now\Models\Errors\APIException('API error occurred', $statusCode, $httpResponse->getBody()->getContents(), $httpResponse);
+            throw new \Luqra\LuqraNowPhp\Models\Errors\APIException('API error occurred', $statusCode, $httpResponse->getBody()->getContents(), $httpResponse);
         } elseif (Utils\Utils::matchStatusCodes($statusCode, ['5XX'])) {
-            throw new \Luqra\Now\Models\Errors\APIException('API error occurred', $statusCode, $httpResponse->getBody()->getContents(), $httpResponse);
+            throw new \Luqra\LuqraNowPhp\Models\Errors\APIException('API error occurred', $statusCode, $httpResponse->getBody()->getContents(), $httpResponse);
         } else {
-            throw new \Luqra\Now\Models\Errors\APIException('Unknown status code received', $statusCode, $httpResponse->getBody()->getContents(), $httpResponse);
+            throw new \Luqra\LuqraNowPhp\Models\Errors\APIException('Unknown status code received', $statusCode, $httpResponse->getBody()->getContents(), $httpResponse);
+        }
+    }
+
+    /**
+     * Get payment
+     *
+     * @param  string  $id
+     * @return \Luqra\LuqraNowPhp\Models\Operations\GetPaymentResponse
+     * @throws \Luqra\LuqraNowPhp\Models\Errors\APIException
+     */
+    public function get(string $id, ?Options $options = null): Operations\GetPaymentResponse
+    {
+        $request = new Operations\GetPaymentRequest(
+            id: $id,
+        );
+        $baseUrl = $this->sdkConfiguration->getTemplatedServerUrl();
+        $url = Utils\Utils::generateUrl($baseUrl, '/v0/payments/{id}', Operations\GetPaymentRequest::class, $request);
+        $urlOverride = null;
+        $httpOptions = ['http_errors' => false];
+        $httpOptions['headers']['Accept'] = 'application/json';
+        $httpOptions['headers']['user-agent'] = $this->sdkConfiguration->userAgent;
+        $httpRequest = new \GuzzleHttp\Psr7\Request('GET', $url);
+        $hookContext = new HookContext($this->sdkConfiguration, $baseUrl, 'getPayment', null, $this->sdkConfiguration->securitySource);
+        $httpRequest = $this->sdkConfiguration->hooks->beforeRequest(new Hooks\BeforeRequestContext($hookContext), $httpRequest);
+        $httpOptions = Utils\Utils::convertHeadersToOptions($httpRequest, $httpOptions);
+        $httpRequest = Utils\Utils::removeHeaders($httpRequest);
+        try {
+            $httpResponse = $this->sdkConfiguration->client->send($httpRequest, $httpOptions);
+        } catch (\GuzzleHttp\Exception\GuzzleException $error) {
+            $res = $this->sdkConfiguration->hooks->afterError(new Hooks\AfterErrorContext($hookContext), null, $error);
+            $httpResponse = $res;
+        }
+        $contentType = $httpResponse->getHeader('Content-Type')[0] ?? '';
+
+        if (Utils\Utils::matchStatusCodes($httpResponse->getStatusCode(), ['4XX', '5XX'])) {
+            $res = $this->sdkConfiguration->hooks->afterError(new Hooks\AfterErrorContext($hookContext), $httpResponse, null);
+            $httpResponse = $res;
+        }
+
+        $statusCode = $httpResponse->getStatusCode();
+        if (Utils\Utils::matchStatusCodes($statusCode, ['200'])) {
+            if (Utils\Utils::matchContentType($contentType, 'application/json')) {
+                $httpResponse = $this->sdkConfiguration->hooks->afterSuccess(new Hooks\AfterSuccessContext($hookContext), $httpResponse);
+
+                $serializer = Utils\JSON::createSerializer();
+                $responseData = (string) $httpResponse->getBody();
+                $obj = $serializer->deserialize($responseData, '\Luqra\LuqraNowPhp\Models\Operations\GetPaymentResponseBody', 'json', DeserializationContext::create()->setRequireAllRequiredProperties(true));
+                $response = new Operations\GetPaymentResponse(
+                    statusCode: $statusCode,
+                    contentType: $contentType,
+                    rawResponse: $httpResponse,
+                    object: $obj);
+
+                return $response;
+            } else {
+                throw new \Luqra\LuqraNowPhp\Models\Errors\APIException('Unknown content type received', $statusCode, $httpResponse->getBody()->getContents(), $httpResponse);
+            }
+        } elseif (Utils\Utils::matchStatusCodes($statusCode, ['400', '401', '404'])) {
+            if (Utils\Utils::matchContentType($contentType, 'application/json')) {
+                $httpResponse = $this->sdkConfiguration->hooks->afterSuccess(new Hooks\AfterSuccessContext($hookContext), $httpResponse);
+
+                $serializer = Utils\JSON::createSerializer();
+                $responseData = (string) $httpResponse->getBody();
+                $obj = $serializer->deserialize($responseData, '\Luqra\LuqraNowPhp\Models\Errors\ErrorResponse', 'json', DeserializationContext::create()->setRequireAllRequiredProperties(true));
+                $obj->rawResponse = $httpResponse;
+                throw $obj->toException();
+            } else {
+                throw new \Luqra\LuqraNowPhp\Models\Errors\APIException('Unknown content type received', $statusCode, $httpResponse->getBody()->getContents(), $httpResponse);
+            }
+        } elseif (Utils\Utils::matchStatusCodes($statusCode, ['500'])) {
+            if (Utils\Utils::matchContentType($contentType, 'application/json')) {
+                $httpResponse = $this->sdkConfiguration->hooks->afterSuccess(new Hooks\AfterSuccessContext($hookContext), $httpResponse);
+
+                $serializer = Utils\JSON::createSerializer();
+                $responseData = (string) $httpResponse->getBody();
+                $obj = $serializer->deserialize($responseData, '\Luqra\LuqraNowPhp\Models\Errors\ErrorResponse', 'json', DeserializationContext::create()->setRequireAllRequiredProperties(true));
+                $obj->rawResponse = $httpResponse;
+                throw $obj->toException();
+            } else {
+                throw new \Luqra\LuqraNowPhp\Models\Errors\APIException('Unknown content type received', $statusCode, $httpResponse->getBody()->getContents(), $httpResponse);
+            }
+        } elseif (Utils\Utils::matchStatusCodes($statusCode, ['4XX'])) {
+            throw new \Luqra\LuqraNowPhp\Models\Errors\APIException('API error occurred', $statusCode, $httpResponse->getBody()->getContents(), $httpResponse);
+        } elseif (Utils\Utils::matchStatusCodes($statusCode, ['5XX'])) {
+            throw new \Luqra\LuqraNowPhp\Models\Errors\APIException('API error occurred', $statusCode, $httpResponse->getBody()->getContents(), $httpResponse);
+        } else {
+            throw new \Luqra\LuqraNowPhp\Models\Errors\APIException('Unknown status code received', $statusCode, $httpResponse->getBody()->getContents(), $httpResponse);
         }
     }
 
     /**
      * List payments
      *
-     * @param  ?Operations\ListPaymentsRequest  $request
-     * @return Operations\ListPaymentsResponse
-     * @throws \Luqra\Now\Models\Errors\APIException
+     * @param  ?\Luqra\LuqraNowPhp\Models\Operations\ListPaymentsRequest  $request
+     * @return \Luqra\LuqraNowPhp\Models\Operations\ListPaymentsResponse
+     * @throws \Luqra\LuqraNowPhp\Models\Errors\APIException
      */
     public function list(?Operations\ListPaymentsRequest $request = null, ?Options $options = null): Operations\ListPaymentsResponse
     {
@@ -148,7 +238,7 @@ class Payments
         $httpOptions['headers']['Accept'] = 'application/json';
         $httpOptions['headers']['user-agent'] = $this->sdkConfiguration->userAgent;
         $httpRequest = new \GuzzleHttp\Psr7\Request('GET', $url);
-        $hookContext = new HookContext($this->sdkConfiguration, $baseUrl, 'listPayments', [], $this->sdkConfiguration->securitySource);
+        $hookContext = new HookContext($this->sdkConfiguration, $baseUrl, 'listPayments', null, $this->sdkConfiguration->securitySource);
         $httpRequest = $this->sdkConfiguration->hooks->beforeRequest(new Hooks\BeforeRequestContext($hookContext), $httpRequest);
         $httpOptions['query'] = Utils\QueryParameters::standardizeQueryParams($httpRequest, $qp);
         $httpOptions = Utils\Utils::convertHeadersToOptions($httpRequest, $httpOptions);
@@ -161,18 +251,19 @@ class Payments
         }
         $contentType = $httpResponse->getHeader('Content-Type')[0] ?? '';
 
-        $statusCode = $httpResponse->getStatusCode();
-        if (Utils\Utils::matchStatusCodes($statusCode, ['400', '401', '4XX', '500', '5XX'])) {
+        if (Utils\Utils::matchStatusCodes($httpResponse->getStatusCode(), ['4XX', '5XX'])) {
             $res = $this->sdkConfiguration->hooks->afterError(new Hooks\AfterErrorContext($hookContext), $httpResponse, null);
             $httpResponse = $res;
         }
+
+        $statusCode = $httpResponse->getStatusCode();
         if (Utils\Utils::matchStatusCodes($statusCode, ['200'])) {
             if (Utils\Utils::matchContentType($contentType, 'application/json')) {
                 $httpResponse = $this->sdkConfiguration->hooks->afterSuccess(new Hooks\AfterSuccessContext($hookContext), $httpResponse);
 
                 $serializer = Utils\JSON::createSerializer();
                 $responseData = (string) $httpResponse->getBody();
-                $obj = $serializer->deserialize($responseData, '\Luqra\Now\Models\Operations\ListPaymentsResponseBody', 'json', DeserializationContext::create()->setRequireAllRequiredProperties(true));
+                $obj = $serializer->deserialize($responseData, '\Luqra\LuqraNowPhp\Models\Operations\ListPaymentsResponseBody', 'json', DeserializationContext::create()->setRequireAllRequiredProperties(true));
                 $response = new Operations\ListPaymentsResponse(
                     statusCode: $statusCode,
                     contentType: $contentType,
@@ -181,7 +272,7 @@ class Payments
 
                 return $response;
             } else {
-                throw new \Luqra\Now\Models\Errors\APIException('Unknown content type received', $statusCode, $httpResponse->getBody()->getContents(), $httpResponse);
+                throw new \Luqra\LuqraNowPhp\Models\Errors\APIException('Unknown content type received', $statusCode, $httpResponse->getBody()->getContents(), $httpResponse);
             }
         } elseif (Utils\Utils::matchStatusCodes($statusCode, ['400', '401'])) {
             if (Utils\Utils::matchContentType($contentType, 'application/json')) {
@@ -189,10 +280,11 @@ class Payments
 
                 $serializer = Utils\JSON::createSerializer();
                 $responseData = (string) $httpResponse->getBody();
-                $obj = $serializer->deserialize($responseData, '\Luqra\Now\Models\Errors\ErrorResponse', 'json', DeserializationContext::create()->setRequireAllRequiredProperties(true));
+                $obj = $serializer->deserialize($responseData, '\Luqra\LuqraNowPhp\Models\Errors\ErrorResponse', 'json', DeserializationContext::create()->setRequireAllRequiredProperties(true));
+                $obj->rawResponse = $httpResponse;
                 throw $obj->toException();
             } else {
-                throw new \Luqra\Now\Models\Errors\APIException('Unknown content type received', $statusCode, $httpResponse->getBody()->getContents(), $httpResponse);
+                throw new \Luqra\LuqraNowPhp\Models\Errors\APIException('Unknown content type received', $statusCode, $httpResponse->getBody()->getContents(), $httpResponse);
             }
         } elseif (Utils\Utils::matchStatusCodes($statusCode, ['500'])) {
             if (Utils\Utils::matchContentType($contentType, 'application/json')) {
@@ -200,17 +292,18 @@ class Payments
 
                 $serializer = Utils\JSON::createSerializer();
                 $responseData = (string) $httpResponse->getBody();
-                $obj = $serializer->deserialize($responseData, '\Luqra\Now\Models\Errors\ErrorResponse', 'json', DeserializationContext::create()->setRequireAllRequiredProperties(true));
+                $obj = $serializer->deserialize($responseData, '\Luqra\LuqraNowPhp\Models\Errors\ErrorResponse', 'json', DeserializationContext::create()->setRequireAllRequiredProperties(true));
+                $obj->rawResponse = $httpResponse;
                 throw $obj->toException();
             } else {
-                throw new \Luqra\Now\Models\Errors\APIException('Unknown content type received', $statusCode, $httpResponse->getBody()->getContents(), $httpResponse);
+                throw new \Luqra\LuqraNowPhp\Models\Errors\APIException('Unknown content type received', $statusCode, $httpResponse->getBody()->getContents(), $httpResponse);
             }
         } elseif (Utils\Utils::matchStatusCodes($statusCode, ['4XX'])) {
-            throw new \Luqra\Now\Models\Errors\APIException('API error occurred', $statusCode, $httpResponse->getBody()->getContents(), $httpResponse);
+            throw new \Luqra\LuqraNowPhp\Models\Errors\APIException('API error occurred', $statusCode, $httpResponse->getBody()->getContents(), $httpResponse);
         } elseif (Utils\Utils::matchStatusCodes($statusCode, ['5XX'])) {
-            throw new \Luqra\Now\Models\Errors\APIException('API error occurred', $statusCode, $httpResponse->getBody()->getContents(), $httpResponse);
+            throw new \Luqra\LuqraNowPhp\Models\Errors\APIException('API error occurred', $statusCode, $httpResponse->getBody()->getContents(), $httpResponse);
         } else {
-            throw new \Luqra\Now\Models\Errors\APIException('Unknown status code received', $statusCode, $httpResponse->getBody()->getContents(), $httpResponse);
+            throw new \Luqra\LuqraNowPhp\Models\Errors\APIException('Unknown status code received', $statusCode, $httpResponse->getBody()->getContents(), $httpResponse);
         }
     }
 

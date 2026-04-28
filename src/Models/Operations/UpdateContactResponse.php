@@ -6,7 +6,7 @@
 
 declare(strict_types=1);
 
-namespace Luqra\Now\Models\Operations;
+namespace Luqra\LuqraNowPhp\Models\Operations;
 
 
 class UpdateContactResponse
@@ -35,7 +35,7 @@ class UpdateContactResponse
     /**
      * Default Response
      *
-     * @var ?UpdateContactResponseBody $object
+     * @var ?\Luqra\LuqraNowPhp\Models\Operations\UpdateContactResponseBody $object
      */
     public ?UpdateContactResponseBody $object = null;
 
@@ -43,7 +43,7 @@ class UpdateContactResponse
      * @param  string  $contentType
      * @param  int  $statusCode
      * @param  \Psr\Http\Message\ResponseInterface  $rawResponse
-     * @param  ?UpdateContactResponseBody  $object
+     * @param  ?\Luqra\LuqraNowPhp\Models\Operations\UpdateContactResponseBody  $object
      * @phpstan-pure
      */
     public function __construct(string $contentType, int $statusCode, \Psr\Http\Message\ResponseInterface $rawResponse, ?UpdateContactResponseBody $object = null)

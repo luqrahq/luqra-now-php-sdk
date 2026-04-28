@@ -6,7 +6,7 @@
 
 declare(strict_types=1);
 
-namespace Luqra\Now\Models\Operations;
+namespace Luqra\LuqraNowPhp\Models\Operations;
 
 
 class UpdateContactData
@@ -20,19 +20,19 @@ class UpdateContactData
 
     /**
      *
-     * @var UpdateContactContactsEntityType $entityType
+     * @var \Luqra\LuqraNowPhp\Models\Operations\UpdateContactEntityTypeResponse $entityType
      */
     #[\Speakeasy\Serializer\Annotation\SerializedName('entityType')]
-    #[\Speakeasy\Serializer\Annotation\Type('\Luqra\Now\Models\Operations\UpdateContactContactsEntityType')]
-    public UpdateContactContactsEntityType $entityType;
+    #[\Speakeasy\Serializer\Annotation\Type('\Luqra\LuqraNowPhp\Models\Operations\UpdateContactEntityTypeResponse')]
+    public UpdateContactEntityTypeResponse $entityType;
 
     /**
      *
-     * @var UpdateContactContactsLegalAddress $legalAddress
+     * @var \Luqra\LuqraNowPhp\Models\Operations\UpdateContactLegalAddressResponse $legalAddress
      */
     #[\Speakeasy\Serializer\Annotation\SerializedName('legalAddress')]
-    #[\Speakeasy\Serializer\Annotation\Type('\Luqra\Now\Models\Operations\UpdateContactContactsLegalAddress')]
-    public UpdateContactContactsLegalAddress $legalAddress;
+    #[\Speakeasy\Serializer\Annotation\Type('\Luqra\LuqraNowPhp\Models\Operations\UpdateContactLegalAddressResponse')]
+    public UpdateContactLegalAddressResponse $legalAddress;
 
     /**
      *
@@ -43,11 +43,11 @@ class UpdateContactData
 
     /**
      *
-     * @var ?UpdateContactContactsBankAccount $bankAccount
+     * @var ?\Luqra\LuqraNowPhp\Models\Operations\UpdateContactBankAccountResponse $bankAccount
      */
     #[\Speakeasy\Serializer\Annotation\SerializedName('bankAccount')]
-    #[\Speakeasy\Serializer\Annotation\Type('\Luqra\Now\Models\Operations\UpdateContactContactsBankAccount|null')]
-    public ?UpdateContactContactsBankAccount $bankAccount;
+    #[\Speakeasy\Serializer\Annotation\Type('\Luqra\LuqraNowPhp\Models\Operations\UpdateContactBankAccountResponse|null')]
+    public ?UpdateContactBankAccountResponse $bankAccount;
 
     /**
      *
@@ -86,10 +86,10 @@ class UpdateContactData
 
     /**
      * @param  string  $contactId
-     * @param  UpdateContactContactsEntityType  $entityType
-     * @param  UpdateContactContactsLegalAddress  $legalAddress
+     * @param  \Luqra\LuqraNowPhp\Models\Operations\UpdateContactEntityTypeResponse  $entityType
+     * @param  \Luqra\LuqraNowPhp\Models\Operations\UpdateContactLegalAddressResponse  $legalAddress
      * @param  \DateTime  $updatedAt
-     * @param  ?UpdateContactContactsBankAccount  $bankAccount
+     * @param  ?\Luqra\LuqraNowPhp\Models\Operations\UpdateContactBankAccountResponse  $bankAccount
      * @param  ?string  $companyName
      * @param  ?string  $email
      * @param  ?string  $firstName
@@ -97,7 +97,7 @@ class UpdateContactData
      * @param  ?string  $phoneNumber
      * @phpstan-pure
      */
-    public function __construct(string $contactId, UpdateContactContactsEntityType $entityType, UpdateContactContactsLegalAddress $legalAddress, \DateTime $updatedAt, ?UpdateContactContactsBankAccount $bankAccount = null, ?string $companyName = null, ?string $email = null, ?string $firstName = null, ?string $lastName = null, ?string $phoneNumber = null)
+    public function __construct(string $contactId, UpdateContactEntityTypeResponse $entityType, UpdateContactLegalAddressResponse $legalAddress, \DateTime $updatedAt, ?UpdateContactBankAccountResponse $bankAccount = null, ?string $companyName = null, ?string $email = null, ?string $firstName = null, ?string $lastName = null, ?string $phoneNumber = null)
     {
         $this->contactId = $contactId;
         $this->entityType = $entityType;

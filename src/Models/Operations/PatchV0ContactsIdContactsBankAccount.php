@@ -6,7 +6,7 @@
 
 declare(strict_types=1);
 
-namespace Luqra\Now\Models\Operations;
+namespace Luqra\LuqraNowPhp\Models\Operations;
 
 
 class PatchV0ContactsIdContactsBankAccount
@@ -30,7 +30,7 @@ class PatchV0ContactsIdContactsBankAccount
      * @var PatchV0ContactsIdContactsSubType $subType
      */
     #[\Speakeasy\Serializer\Annotation\SerializedName('subType')]
-    #[\Speakeasy\Serializer\Annotation\Type('\Luqra\Now\Models\Operations\PatchV0ContactsIdContactsSubType')]
+    #[\Speakeasy\Serializer\Annotation\Type('\Luqra\LuqraNowPhp\Models\Operations\PatchV0ContactsIdContactsSubType')]
     public PatchV0ContactsIdContactsSubType $subType;
 
     /**

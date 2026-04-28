@@ -7,9 +7,9 @@
 
 declare(strict_types=1);
 
-namespace Luqra\Now\Hooks;
+namespace Luqra\LuqraNowPhp\Hooks;
 
-use Luqra\Now\SDKConfiguration;
+use Luqra\LuqraNowPhp\SDKConfiguration;
 
 class HookContext
 {

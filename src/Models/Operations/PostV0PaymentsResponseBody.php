@@ -6,7 +6,7 @@
 
 declare(strict_types=1);
 
-namespace Luqra\Now\Models\Operations;
+namespace Luqra\LuqraNowPhp\Models\Operations;
 
 
 /** PostV0PaymentsResponseBody - Default Response */
@@ -17,7 +17,7 @@ class PostV0PaymentsResponseBody
      * @var PostV0PaymentsData $data
      */
     #[\Speakeasy\Serializer\Annotation\SerializedName('data')]
-    #[\Speakeasy\Serializer\Annotation\Type('\Luqra\Now\Models\Operations\PostV0PaymentsData')]
+    #[\Speakeasy\Serializer\Annotation\Type('\Luqra\LuqraNowPhp\Models\Operations\PostV0PaymentsData')]
     public PostV0PaymentsData $data;
 
     /**
@@ -25,7 +25,7 @@ class PostV0PaymentsResponseBody
      * @var PostV0PaymentsMeta $meta
      */
     #[\Speakeasy\Serializer\Annotation\SerializedName('meta')]
-    #[\Speakeasy\Serializer\Annotation\Type('\Luqra\Now\Models\Operations\PostV0PaymentsMeta')]
+    #[\Speakeasy\Serializer\Annotation\Type('\Luqra\LuqraNowPhp\Models\Operations\PostV0PaymentsMeta')]
     public PostV0PaymentsMeta $meta;
 
     /**

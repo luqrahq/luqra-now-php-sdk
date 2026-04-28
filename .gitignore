@@ -1,3 +1,6 @@
+.env
+.env.local
+openapi.json
 composer.lock
 vendor
 .DS_Store

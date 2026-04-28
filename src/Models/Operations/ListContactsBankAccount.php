@@ -6,7 +6,7 @@
 
 declare(strict_types=1);
 
-namespace Luqra\Now\Models\Operations;
+namespace Luqra\LuqraNowPhp\Models\Operations;
 
 
 class ListContactsBankAccount
@@ -27,10 +27,10 @@ class ListContactsBankAccount
 
     /**
      *
-     * @var ListContactsSubType $subType
+     * @var \Luqra\LuqraNowPhp\Models\Operations\ListContactsSubType $subType
      */
     #[\Speakeasy\Serializer\Annotation\SerializedName('subType')]
-    #[\Speakeasy\Serializer\Annotation\Type('\Luqra\Now\Models\Operations\ListContactsSubType')]
+    #[\Speakeasy\Serializer\Annotation\Type('\Luqra\LuqraNowPhp\Models\Operations\ListContactsSubType')]
     public ListContactsSubType $subType;
 
     /**
@@ -50,7 +50,7 @@ class ListContactsBankAccount
     /**
      * @param  string  $achAccountNumber
      * @param  string  $achRoutingNumber
-     * @param  ListContactsSubType  $subType
+     * @param  \Luqra\LuqraNowPhp\Models\Operations\ListContactsSubType  $subType
      * @param  ?string  $bankName
      * @param  ?string  $swiftCode
      * @phpstan-pure

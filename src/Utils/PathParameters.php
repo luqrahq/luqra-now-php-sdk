@@ -6,14 +6,14 @@
 
 declare(strict_types=1);
 
-namespace Luqra\Now\Utils;
+namespace Luqra\LuqraNowPhp\Utils;
 
 use ReflectionProperty;
 
 class PathParameters
 {
     /**
-     * @param  string  $type
+     * @param  class-string  $type
      * @param  mixed  $pathParams
      * @param  array<string,array<string,array<string,string>>>|null  $globals
      * @return array<string,string>

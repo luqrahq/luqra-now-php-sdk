@@ -7,7 +7,7 @@
 
 declare(strict_types=1);
 
-namespace Luqra\Now\Utils\Retry;
+namespace Luqra\LuqraNowPhp\Utils\Retry;
 
 class RetryConfigNone extends RetryConfig
 {

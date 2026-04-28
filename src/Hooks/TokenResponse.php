@@ -7,11 +7,11 @@
 
 declare(strict_types=1);
 
-namespace Luqra\Now\Hooks;
+namespace Luqra\LuqraNowPhp\Hooks;
 
 class TokenResponse
 {
     public ?string $accessToken;
     public ?string $tokenType;
-    public ?float $expiresIn;
+    public ?int $expiresIn;
 }

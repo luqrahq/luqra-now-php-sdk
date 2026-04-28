@@ -6,7 +6,7 @@
 
 declare(strict_types=1);
 
-namespace Luqra\Now\Models\Operations;
+namespace Luqra\LuqraNowPhp\Models\Operations;
 
 
 /** PatchV0ContactsIdResponseBody - Default Response */
@@ -17,7 +17,7 @@ class PatchV0ContactsIdResponseBody
      * @var PatchV0ContactsIdData $data
      */
     #[\Speakeasy\Serializer\Annotation\SerializedName('data')]
-    #[\Speakeasy\Serializer\Annotation\Type('\Luqra\Now\Models\Operations\PatchV0ContactsIdData')]
+    #[\Speakeasy\Serializer\Annotation\Type('\Luqra\LuqraNowPhp\Models\Operations\PatchV0ContactsIdData')]
     public PatchV0ContactsIdData $data;
 
     /**
@@ -25,7 +25,7 @@ class PatchV0ContactsIdResponseBody
      * @var PatchV0ContactsIdMeta $meta
      */
     #[\Speakeasy\Serializer\Annotation\SerializedName('meta')]
-    #[\Speakeasy\Serializer\Annotation\Type('\Luqra\Now\Models\Operations\PatchV0ContactsIdMeta')]
+    #[\Speakeasy\Serializer\Annotation\Type('\Luqra\LuqraNowPhp\Models\Operations\PatchV0ContactsIdMeta')]
     public PatchV0ContactsIdMeta $meta;
 
     /**

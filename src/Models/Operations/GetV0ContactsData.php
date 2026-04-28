@@ -6,7 +6,7 @@
 
 declare(strict_types=1);
 
-namespace Luqra\Now\Models\Operations;
+namespace Luqra\LuqraNowPhp\Models\Operations;
 
 
 class GetV0ContactsData
@@ -30,7 +30,7 @@ class GetV0ContactsData
      * @var GetV0ContactsEntityType $entityType
      */
     #[\Speakeasy\Serializer\Annotation\SerializedName('entityType')]
-    #[\Speakeasy\Serializer\Annotation\Type('\Luqra\Now\Models\Operations\GetV0ContactsEntityType')]
+    #[\Speakeasy\Serializer\Annotation\Type('\Luqra\LuqraNowPhp\Models\Operations\GetV0ContactsEntityType')]
     public GetV0ContactsEntityType $entityType;
 
     /**
@@ -52,7 +52,7 @@ class GetV0ContactsData
      * @var GetV0ContactsLegalAddress $legalAddress
      */
     #[\Speakeasy\Serializer\Annotation\SerializedName('legalAddress')]
-    #[\Speakeasy\Serializer\Annotation\Type('\Luqra\Now\Models\Operations\GetV0ContactsLegalAddress')]
+    #[\Speakeasy\Serializer\Annotation\Type('\Luqra\LuqraNowPhp\Models\Operations\GetV0ContactsLegalAddress')]
     public GetV0ContactsLegalAddress $legalAddress;
 
     /**
@@ -60,7 +60,7 @@ class GetV0ContactsData
      * @var ?GetV0ContactsBankAccount $bankAccount
      */
     #[\Speakeasy\Serializer\Annotation\SerializedName('bankAccount')]
-    #[\Speakeasy\Serializer\Annotation\Type('\Luqra\Now\Models\Operations\GetV0ContactsBankAccount|null')]
+    #[\Speakeasy\Serializer\Annotation\Type('\Luqra\LuqraNowPhp\Models\Operations\GetV0ContactsBankAccount|null')]
     public ?GetV0ContactsBankAccount $bankAccount;
 
     /**

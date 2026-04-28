@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 require 'vendor/autoload.php';
 
-use Luqra\Now;
+use Luqra\LuqraNowPhp;
 
-$sdk = Now\LuqraNow::builder()
+$sdk = LuqraNowPhp\LuqraNow::builder()
     ->setSecurity(
         '<YOUR_BEARER_TOKEN_HERE>'
     )

@@ -6,7 +6,7 @@
 
 declare(strict_types=1);
 
-namespace Luqra\Now\Models\Operations;
+namespace Luqra\LuqraNowPhp\Models\Operations;
 
 
 /** GetV0PaymentsResponseBody - Default Response */
@@ -18,7 +18,7 @@ class GetV0PaymentsResponseBody
      * @var array<GetV0PaymentsData> $data
      */
     #[\Speakeasy\Serializer\Annotation\SerializedName('data')]
-    #[\Speakeasy\Serializer\Annotation\Type('array<\Luqra\Now\Models\Operations\GetV0PaymentsData>')]
+    #[\Speakeasy\Serializer\Annotation\Type('array<\Luqra\LuqraNowPhp\Models\Operations\GetV0PaymentsData>')]
     public array $data;
 
     /**
@@ -26,7 +26,7 @@ class GetV0PaymentsResponseBody
      * @var GetV0PaymentsMeta $meta
      */
     #[\Speakeasy\Serializer\Annotation\SerializedName('meta')]
-    #[\Speakeasy\Serializer\Annotation\Type('\Luqra\Now\Models\Operations\GetV0PaymentsMeta')]
+    #[\Speakeasy\Serializer\Annotation\Type('\Luqra\LuqraNowPhp\Models\Operations\GetV0PaymentsMeta')]
     public GetV0PaymentsMeta $meta;
 
     /**

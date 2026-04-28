@@ -6,7 +6,7 @@
 
 declare(strict_types=1);
 
-namespace Luqra\Now\Models\Operations;
+namespace Luqra\LuqraNowPhp\Models\Operations;
 
 
 /** ListOriginatorsResponseBody - Default Response */
@@ -15,23 +15,23 @@ class ListOriginatorsResponseBody
     /**
      * $data
      *
-     * @var array<ListOriginatorsData> $data
+     * @var array<\Luqra\LuqraNowPhp\Models\Operations\ListOriginatorsData> $data
      */
     #[\Speakeasy\Serializer\Annotation\SerializedName('data')]
-    #[\Speakeasy\Serializer\Annotation\Type('array<\Luqra\Now\Models\Operations\ListOriginatorsData>')]
+    #[\Speakeasy\Serializer\Annotation\Type('array<\Luqra\LuqraNowPhp\Models\Operations\ListOriginatorsData>')]
     public array $data;
 
     /**
      *
-     * @var ListOriginatorsMeta $meta
+     * @var \Luqra\LuqraNowPhp\Models\Operations\ListOriginatorsMeta $meta
      */
     #[\Speakeasy\Serializer\Annotation\SerializedName('meta')]
-    #[\Speakeasy\Serializer\Annotation\Type('\Luqra\Now\Models\Operations\ListOriginatorsMeta')]
+    #[\Speakeasy\Serializer\Annotation\Type('\Luqra\LuqraNowPhp\Models\Operations\ListOriginatorsMeta')]
     public ListOriginatorsMeta $meta;
 
     /**
-     * @param  array<ListOriginatorsData>  $data
-     * @param  ListOriginatorsMeta  $meta
+     * @param  array<\Luqra\LuqraNowPhp\Models\Operations\ListOriginatorsData>  $data
+     * @param  \Luqra\LuqraNowPhp\Models\Operations\ListOriginatorsMeta  $meta
      * @phpstan-pure
      */
     public function __construct(array $data, ListOriginatorsMeta $meta)

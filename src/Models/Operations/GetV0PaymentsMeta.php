@@ -6,7 +6,7 @@
 
 declare(strict_types=1);
 
-namespace Luqra\Now\Models\Operations;
+namespace Luqra\LuqraNowPhp\Models\Operations;
 
 
 class GetV0PaymentsMeta
@@ -16,7 +16,7 @@ class GetV0PaymentsMeta
      * @var Pagination $pagination
      */
     #[\Speakeasy\Serializer\Annotation\SerializedName('pagination')]
-    #[\Speakeasy\Serializer\Annotation\Type('\Luqra\Now\Models\Operations\Pagination')]
+    #[\Speakeasy\Serializer\Annotation\Type('\Luqra\LuqraNowPhp\Models\Operations\Pagination')]
     public Pagination $pagination;
 
     /**

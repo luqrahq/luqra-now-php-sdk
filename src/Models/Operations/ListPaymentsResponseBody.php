@@ -6,7 +6,7 @@
 
 declare(strict_types=1);
 
-namespace Luqra\Now\Models\Operations;
+namespace Luqra\LuqraNowPhp\Models\Operations;
 
 
 /** ListPaymentsResponseBody - Default Response */
@@ -15,23 +15,23 @@ class ListPaymentsResponseBody
     /**
      * $data
      *
-     * @var array<ListPaymentsData> $data
+     * @var array<\Luqra\LuqraNowPhp\Models\Operations\ListPaymentsData> $data
      */
     #[\Speakeasy\Serializer\Annotation\SerializedName('data')]
-    #[\Speakeasy\Serializer\Annotation\Type('array<\Luqra\Now\Models\Operations\ListPaymentsData>')]
+    #[\Speakeasy\Serializer\Annotation\Type('array<\Luqra\LuqraNowPhp\Models\Operations\ListPaymentsData>')]
     public array $data;
 
     /**
      *
-     * @var ListPaymentsMeta $meta
+     * @var \Luqra\LuqraNowPhp\Models\Operations\ListPaymentsMeta $meta
      */
     #[\Speakeasy\Serializer\Annotation\SerializedName('meta')]
-    #[\Speakeasy\Serializer\Annotation\Type('\Luqra\Now\Models\Operations\ListPaymentsMeta')]
+    #[\Speakeasy\Serializer\Annotation\Type('\Luqra\LuqraNowPhp\Models\Operations\ListPaymentsMeta')]
     public ListPaymentsMeta $meta;
 
     /**
-     * @param  array<ListPaymentsData>  $data
-     * @param  ListPaymentsMeta  $meta
+     * @param  array<\Luqra\LuqraNowPhp\Models\Operations\ListPaymentsData>  $data
+     * @param  \Luqra\LuqraNowPhp\Models\Operations\ListPaymentsMeta  $meta
      * @phpstan-pure
      */
     public function __construct(array $data, ListPaymentsMeta $meta)

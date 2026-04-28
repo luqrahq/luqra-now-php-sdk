@@ -7,7 +7,7 @@
 
 declare(strict_types=1);
 
-namespace Luqra\Now\Hooks;
+namespace Luqra\LuqraNowPhp\Hooks;
 
 interface Hooks
 {
@@ -16,5 +16,3 @@ interface Hooks
     public function registerAfterSuccessHook(AfterSuccessHook $hook): void;
     public function registerAfterErrorHook(AfterErrorHook $hook): void;
 }
-
-

@@ -7,7 +7,7 @@
 
 declare(strict_types=1);
 
-namespace Luqra\Now\Hooks;
+namespace Luqra\LuqraNowPhp\Hooks;
 
 class BeforeRequestContext extends HookContext
 {
