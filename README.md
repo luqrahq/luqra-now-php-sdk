@@ -31,8 +31,8 @@ To install the SDK first add the below to your `composer.json` file:
 {
     "repositories": [
         {
-            "type": "github",
-            "url": "<UNSET>.git"
+            "type": "vcs",
+            "url": "https://github.com/luqrahq/luqra-now-php-sdk"
         }
     ],
     "require": {
