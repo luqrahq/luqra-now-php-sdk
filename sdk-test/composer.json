@@ -1,0 +1,22 @@
+{
+    "name": "luqra/sdk-test",
+    "description": "Integration test project for luqra/now-php SDK",
+    "require": {
+        "php": ">=8.2",
+        "luqra/now-php": "*",
+        "vlucas/phpdotenv": "^5.6"
+    },
+    "repositories": [
+        {
+            "type": "github",
+            "url": "https://github.com/luqrahq/luqra-now-php-sdk"
+        }
+    ],
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "autoload": {
+        "psr-4": {
+            "LuqraTest\\": "src/"
+        }
+    }
+}
