@@ -14,11 +14,15 @@ use Luqra\LuqraNowPhp\Models\Errors;
 // WARNING: run this script only with the dedicated SDK-test org API key.
 // The org is baked into the key (luqra-now.org.{env}.*), so running with a
 // customer's key will create real contacts and payments under their data.
+//
+// Locally we load API_KEY/BASE_URL from sdk-test/.env; in CI the workflow
+// injects them via the `env:` block. safeLoad() tolerates a missing file
+// so the same script works in both environments.
 
-Dotenv::createImmutable(__DIR__)->load();
+Dotenv::createImmutable(__DIR__)->safeLoad();
 
-$apiKey  = $_ENV['API_KEY']  ?? throw new \RuntimeException('API_KEY missing in .env');
-$baseUrl = $_ENV['BASE_URL'] ?? 'https://staging.api.now.luqra.com';
+$apiKey  = $_ENV['API_KEY']  ?? getenv('API_KEY')  ?: throw new \RuntimeException('API_KEY not set (sdk-test/.env locally, env var in CI)');
+$baseUrl = $_ENV['BASE_URL'] ?? getenv('BASE_URL') ?: 'https://staging.api.now.luqra.com';
 
 $builder = LuqraNow::builder()->setSecurity($apiKey);
 if ($baseUrl !== 'https://staging.api.now.luqra.com') {
