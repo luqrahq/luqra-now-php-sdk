@@ -25,26 +25,10 @@ Luqra Now API: External API for Luqra Now
 
 The SDK relies on [Composer](https://getcomposer.org/) to manage its dependencies.
 
-To install the SDK first add the below to your `composer.json` file:
-
-```json
-{
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "https://github.com/luqrahq/luqra-now-php-sdk"
-        }
-    ],
-    "require": {
-        "luqra/now-php": "*"
-    }
-}
-```
-
-Then run the following command:
+To install the SDK run the following command:
 
 ```bash
-composer update
+composer require luqra/now-php
 ```
 <!-- End SDK Installation [installation] -->
 

@@ -50,7 +50,53 @@ speakeasy run
 
 The command validates the spec, regenerates all source files, and runs PHPStan to verify the output.
 
-## 5. Branch, PR, and merge
+## 5. Test the new SDK version
+
+Before opening a PR, verify the regenerated SDK works end-to-end against the staging API using the integration test in `sdk-test/`.
+
+### Setup (first time only)
+
+```bash
+cd sdk-test
+cp .env.example .env   # then fill in API_KEY
+composer install
+```
+
+`.env` accepts two variables:
+
+| Variable   | Required | Description |
+|------------|----------|-------------|
+| `API_KEY`  | Yes      | Bearer token — Organization API key (`luqra-now.org.<env>.*`) |
+| `BASE_URL` | No       | Override server URL. Defaults to `https://staging.api.now.luqra.com` |
+
+> **Warning:** always use the dedicated SDK-test org API key — never a customer's key. The org is baked into the key (`luqra-now.org.{env}.*`), so running with a customer's key creates real contacts and payments under their data.
+
+### Running the tests
+
+After regenerating the SDK, reinstall the package from the local source and run the test script:
+
+```bash
+cd sdk-test
+rm composer.lock && rm -rf vendor
+composer install
+php test.php
+```
+
+The script runs 7 scenarios (list originators, list/create/update contacts, list/create/get payments) and prints a pass/fail summary. All checks must pass before proceeding.
+
+### Testing a specific Packagist version
+
+After a release is tagged and Packagist has synced (step 7), you can verify the published package directly:
+
+```bash
+cd sdk-test
+composer require luqra/now-php:<version>
+php test.php
+```
+
+---
+
+## 6. Branch, PR, and merge
 
 Create a release branch, open a PR, and get it reviewed before merging:
 
@@ -64,7 +110,7 @@ No strict requirements for branch name/ commit message. Release branch name shou
 
 Open a PR targeting `main`. Once approved, merge it.
 
-## 6. Tag and create a GitHub release
+## 7. Tag and create a GitHub release
 
 After the PR is merged, tag the release on `main`:
 
@@ -82,7 +128,7 @@ gh release create v0.4.0 --title "v0.4.0" --generate-notes
 
 `--generate-notes` auto-populates the release body from merged PR titles since the last tag.
 
-## 7. Packagist sync
+## 8. Packagist sync
 
 Packagist is notified automatically via a GitHub webhook whenever a new tag is pushed. It pulls the new tag and makes the version available to `composer require luqra/now-php`.
 

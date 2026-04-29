@@ -10,6 +10,10 @@ use Luqra\LuqraNowPhp\Models\Operations;
 use Luqra\LuqraNowPhp\Models\Errors;
 
 // ── bootstrap ────────────────────────────────────────────────────────────────
+//
+// WARNING: run this script only with the dedicated SDK-test org API key.
+// The org is baked into the key (luqra-now.org.{env}.*), so running with a
+// customer's key will create real contacts and payments under their data.
 
 Dotenv::createImmutable(__DIR__)->load();
 
@@ -42,6 +46,26 @@ function check(string $label, bool $condition, string $detail = ''): void
 function section(string $title): void
 {
     echo "\n\033[1m$title\033[0m\n";
+}
+
+// ── 0. Server selection ───────────────────────────────────────────────────────
+
+section('0. Server selection');
+
+try {
+    $sdkByIndex = LuqraNow::builder()->setServerIndex(0)->setSecurity($apiKey)->build();
+    $response   = $sdkByIndex->originators->list();
+    check('setServerIndex(0) produces a working client', $response->statusCode === 200);
+} catch (Errors\APIException $e) {
+    check('setServerIndex(0) produces a working client', false, "HTTP {$e->statusCode}: {$e->message}");
+}
+
+try {
+    $sdkByUrl = LuqraNow::builder()->setServerURL('https://staging.api.now.luqra.com')->setSecurity($apiKey)->build();
+    $response  = $sdkByUrl->originators->list();
+    check('setServerURL(...) produces a working client', $response->statusCode === 200);
+} catch (Errors\APIException $e) {
+    check('setServerURL(...) produces a working client', false, "HTTP {$e->statusCode}: {$e->message}");
 }
 
 // ── 1. List originators ───────────────────────────────────────────────────────
@@ -180,6 +204,41 @@ try {
     check('List payments succeeded', false, "HTTP {$e->statusCode}: {$e->message}");
 }
 
+// ── 5b. Pagination plumbing ───────────────────────────────────────────────────
+// Verifies SDK query-param names (page, limit), encoding, and
+// meta.pagination deserialization — a regen can silently rename a param.
+
+section('5b. Pagination plumbing');
+
+try {
+    $page1 = $sdk->payments->list(new Operations\ListPaymentsRequest(
+        originatorId: $originatorId, limit: 1, page: 1,
+    ));
+    $page2 = $sdk->payments->list(new Operations\ListPaymentsRequest(
+        originatorId: $originatorId, limit: 1, page: 2,
+    ));
+
+    check('page 1 HTTP 200', $page1->statusCode === 200);
+    check('page 2 HTTP 200', $page2->statusCode === 200);
+    check('limit respected on page 1', count($page1->object?->data ?? []) <= 1);
+    check('limit respected on page 2', count($page2->object?->data ?? []) <= 1);
+    check('meta.pagination.total present', is_numeric($page1->object?->meta?->pagination?->total ?? null));
+    check('meta.pagination.limit present', is_numeric($page1->object?->meta?->pagination?->limit ?? null));
+    check('meta.pagination.page present',  is_numeric($page1->object?->meta?->pagination?->page  ?? null));
+
+    $total   = (int) ($page1->object?->meta?->pagination?->total ?? 0);
+    $id1     = $page1->object?->data[0]?->paymentId ?? null;
+    $id2     = $page2->object?->data[0]?->paymentId ?? null;
+
+    if ($total >= 2 && $id1 !== null && $id2 !== null) {
+        check('page 1 and page 2 return different paymentIds', $id1 !== $id2, "id1=$id1 id2=$id2");
+    } else {
+        echo "  → skipping distinctness check (only $total payment(s) available)\n";
+    }
+} catch (Errors\APIException $e) {
+    check('Pagination plumbing succeeded', false, "HTTP {$e->statusCode}: {$e->message}");
+}
+
 // ── 6. Create payment ─────────────────────────────────────────────────────────
 
 section('6. Create payment');
@@ -234,6 +293,67 @@ if ($paymentId === null) {
     } catch (Errors\APIException $e) {
         check('Get payment succeeded', false, "HTTP {$e->statusCode}: {$e->message}");
     }
+}
+
+// ── 8. Error handling ─────────────────────────────────────────────────────────
+
+section('8. Error handling');
+
+// ErrorResponseThrowable::toException() hardcodes code=-1; the real HTTP
+// status lives on $e->container->rawResponse->getStatusCode().
+
+// 8a. 401 — bad token (verifies setSecurity wiring)
+try {
+    $sdkBadAuth = LuqraNow::builder()->setSecurity('bad-token')->build();
+    $sdkBadAuth->originators->list();
+    check('401 on bad token throws', false, 'expected exception, got success');
+} catch (Errors\ErrorResponseThrowable $e) {
+    $status = $e->container->rawResponse?->getStatusCode();
+    check('401 on bad token throws ErrorResponseThrowable', $status === 401, "got HTTP $status");
+} catch (Errors\APIException $e) {
+    check('401 on bad token throws', $e->statusCode === 401, "got HTTP {$e->statusCode}");
+}
+
+// 8b. 404 — non-existent payment ID
+try {
+    $sdk->payments->get(id: '00000000-0000-0000-0000-000000000000');
+    check('404 on unknown paymentId throws', false, 'expected exception, got success');
+} catch (Errors\ErrorResponseThrowable $e) {
+    $status = $e->container->rawResponse?->getStatusCode();
+    check('404 on unknown paymentId throws ErrorResponseThrowable', $status === 404, "got HTTP $status");
+} catch (Errors\APIException $e) {
+    check('404 on unknown paymentId throws', $e->statusCode === 404, "got HTTP {$e->statusCode}");
+}
+
+// 8c. 400 — invalid input (malformed routing number)
+try {
+    $sdk->contacts->create(
+        new Operations\CreateContactRequest(
+            bankAccount: new Operations\CreateContactBankAccount(
+                achAccountNumber: '123456789',
+                achRoutingNumber: 'not-a-routing-number',
+                subType: Operations\CreateContactSubType::Checking,
+            ),
+            email: 'bad-email',
+            entityType: Operations\CreateContactEntityType::Individual,
+            firstName: 'Test',
+            lastName: 'User',
+            legalAddress: new Operations\CreateContactLegalAddress(
+                addressLine1: '123 Main St',
+                city: 'New York',
+                countryCode: 'US',
+                postalCode: '10001',
+                state: 'NY',
+            ),
+            originatorId: $originatorId,
+        )
+    );
+    check('400 on invalid input throws', false, 'expected exception, got success');
+} catch (Errors\ErrorResponseThrowable $e) {
+    $status = $e->container->rawResponse?->getStatusCode();
+    check('400 on invalid input throws ErrorResponseThrowable', $status === 400, "got HTTP $status");
+} catch (Errors\APIException $e) {
+    check('400 on invalid input throws', $e->statusCode === 400, "got HTTP {$e->statusCode}");
 }
 
 // ── summary ───────────────────────────────────────────────────────────────────
