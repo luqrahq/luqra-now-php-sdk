@@ -6,7 +6,7 @@
 
 declare(strict_types=1);
 
-namespace Luqra\Now\Models\Operations;
+namespace Luqra\LuqraNowPhp\Models\Operations;
 
 
 /** CreatePaymentResponseBody - Default Response */
@@ -14,23 +14,23 @@ class CreatePaymentResponseBody
 {
     /**
      *
-     * @var CreatePaymentData $data
+     * @var \Luqra\LuqraNowPhp\Models\Operations\CreatePaymentData $data
      */
     #[\Speakeasy\Serializer\Annotation\SerializedName('data')]
-    #[\Speakeasy\Serializer\Annotation\Type('\Luqra\Now\Models\Operations\CreatePaymentData')]
+    #[\Speakeasy\Serializer\Annotation\Type('\Luqra\LuqraNowPhp\Models\Operations\CreatePaymentData')]
     public CreatePaymentData $data;
 
     /**
      *
-     * @var CreatePaymentMeta $meta
+     * @var \Luqra\LuqraNowPhp\Models\Operations\CreatePaymentMeta $meta
      */
     #[\Speakeasy\Serializer\Annotation\SerializedName('meta')]
-    #[\Speakeasy\Serializer\Annotation\Type('\Luqra\Now\Models\Operations\CreatePaymentMeta')]
+    #[\Speakeasy\Serializer\Annotation\Type('\Luqra\LuqraNowPhp\Models\Operations\CreatePaymentMeta')]
     public CreatePaymentMeta $meta;
 
     /**
-     * @param  CreatePaymentData  $data
-     * @param  CreatePaymentMeta  $meta
+     * @param  \Luqra\LuqraNowPhp\Models\Operations\CreatePaymentData  $data
+     * @param  \Luqra\LuqraNowPhp\Models\Operations\CreatePaymentMeta  $meta
      * @phpstan-pure
      */
     public function __construct(CreatePaymentData $data, CreatePaymentMeta $meta)

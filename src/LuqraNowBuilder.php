@@ -6,9 +6,9 @@
 
 declare(strict_types=1);
 
-namespace Luqra\Now;
+namespace Luqra\LuqraNowPhp;
 
-use Luqra\Now\Utils\Retry;
+use Luqra\LuqraNowPhp\Utils\Retry;
 
 /**
  * LuqraNowBuilder is used to configure and build an instance of the SDK.
@@ -109,6 +109,8 @@ class LuqraNowBuilder
                 'timeout' => 60,
             ]);
         }
+
+        $this->sdkConfig->defaultClient = $this->sdkConfig->client;
         if ($this->sdkConfig->hasSecurity()) {
             $this->sdkConfig->client = Utils\Utils::configureSecurityClient($this->sdkConfig->client, $this->sdkConfig->getSecurity());
         }

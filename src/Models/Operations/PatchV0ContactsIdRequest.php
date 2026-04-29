@@ -6,9 +6,9 @@
 
 declare(strict_types=1);
 
-namespace Luqra\Now\Models\Operations;
+namespace Luqra\LuqraNowPhp\Models\Operations;
 
-use Luqra\Now\Utils\SpeakeasyMetadata;
+use Luqra\LuqraNowPhp\Utils\SpeakeasyMetadata;
 class PatchV0ContactsIdRequest
 {
     /**

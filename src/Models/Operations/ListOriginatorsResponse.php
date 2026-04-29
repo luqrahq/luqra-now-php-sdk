@@ -6,7 +6,7 @@
 
 declare(strict_types=1);
 
-namespace Luqra\Now\Models\Operations;
+namespace Luqra\LuqraNowPhp\Models\Operations;
 
 
 class ListOriginatorsResponse
@@ -35,7 +35,7 @@ class ListOriginatorsResponse
     /**
      * Default Response
      *
-     * @var ?ListOriginatorsResponseBody $object
+     * @var ?\Luqra\LuqraNowPhp\Models\Operations\ListOriginatorsResponseBody $object
      */
     public ?ListOriginatorsResponseBody $object = null;
 
@@ -43,7 +43,7 @@ class ListOriginatorsResponse
      * @param  string  $contentType
      * @param  int  $statusCode
      * @param  \Psr\Http\Message\ResponseInterface  $rawResponse
-     * @param  ?ListOriginatorsResponseBody  $object
+     * @param  ?\Luqra\LuqraNowPhp\Models\Operations\ListOriginatorsResponseBody  $object
      * @phpstan-pure
      */
     public function __construct(string $contentType, int $statusCode, \Psr\Http\Message\ResponseInterface $rawResponse, ?ListOriginatorsResponseBody $object = null)

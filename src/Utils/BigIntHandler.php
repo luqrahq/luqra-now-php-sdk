@@ -6,7 +6,7 @@
 
 declare(strict_types=1);
 
-namespace Luqra\Now\Utils;
+namespace Luqra\LuqraNowPhp\Utils;
 
 use Speakeasy\Serializer\Context;
 use Speakeasy\Serializer\GraphNavigator;
@@ -58,8 +58,8 @@ class BigIntHandler implements SubscribingHandlerInterface
     }
 
     /** @phpstan-ignore-next-line */
-    public function deserialize(JsonDeserializationVisitor $visitor, mixed $data, array $type, Context $context): mixed
+    public function deserialize(JsonDeserializationVisitor $visitor, string|int $data, array $type, Context $context): mixed
     {
-        return \Brick\Math\BigInteger::of($data);
+        return \Brick\Math\BigInteger::of((string) $data);
     }
 }

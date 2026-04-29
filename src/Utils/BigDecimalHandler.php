@@ -6,7 +6,7 @@
 
 declare(strict_types=1);
 
-namespace Luqra\Now\Utils;
+namespace Luqra\LuqraNowPhp\Utils;
 
 use Speakeasy\Serializer\Context;
 use Speakeasy\Serializer\GraphNavigator;
@@ -60,6 +60,6 @@ class BigDecimalHandler implements SubscribingHandlerInterface
     /** @phpstan-ignore-next-line */
     public function deserialize(JsonDeserializationVisitor $visitor, string|float $data, array $type, Context $context): mixed
     {
-        return \Brick\Math\BigDecimal::of($data);
+        return \Brick\Math\BigDecimal::of(is_float($data) ? (string) $data : $data);
     }
 }

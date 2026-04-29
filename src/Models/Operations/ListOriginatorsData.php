@@ -6,7 +6,7 @@
 
 declare(strict_types=1);
 
-namespace Luqra\Now\Models\Operations;
+namespace Luqra\LuqraNowPhp\Models\Operations;
 
 
 class ListOriginatorsData
@@ -20,18 +20,18 @@ class ListOriginatorsData
 
     /**
      *
-     * @var ListOriginatorsEntityType $entityType
+     * @var \Luqra\LuqraNowPhp\Models\Operations\ListOriginatorsEntityType $entityType
      */
     #[\Speakeasy\Serializer\Annotation\SerializedName('entityType')]
-    #[\Speakeasy\Serializer\Annotation\Type('\Luqra\Now\Models\Operations\ListOriginatorsEntityType')]
+    #[\Speakeasy\Serializer\Annotation\Type('\Luqra\LuqraNowPhp\Models\Operations\ListOriginatorsEntityType')]
     public ListOriginatorsEntityType $entityType;
 
     /**
      *
-     * @var ListOriginatorsLegalAddress $legalAddress
+     * @var \Luqra\LuqraNowPhp\Models\Operations\ListOriginatorsLegalAddress $legalAddress
      */
     #[\Speakeasy\Serializer\Annotation\SerializedName('legalAddress')]
-    #[\Speakeasy\Serializer\Annotation\Type('\Luqra\Now\Models\Operations\ListOriginatorsLegalAddress')]
+    #[\Speakeasy\Serializer\Annotation\Type('\Luqra\LuqraNowPhp\Models\Operations\ListOriginatorsLegalAddress')]
     public ListOriginatorsLegalAddress $legalAddress;
 
     /**
@@ -43,10 +43,10 @@ class ListOriginatorsData
 
     /**
      *
-     * @var ?ListOriginatorsBankAccount $bankAccount
+     * @var ?\Luqra\LuqraNowPhp\Models\Operations\ListOriginatorsBankAccount $bankAccount
      */
     #[\Speakeasy\Serializer\Annotation\SerializedName('bankAccount')]
-    #[\Speakeasy\Serializer\Annotation\Type('\Luqra\Now\Models\Operations\ListOriginatorsBankAccount|null')]
+    #[\Speakeasy\Serializer\Annotation\Type('\Luqra\LuqraNowPhp\Models\Operations\ListOriginatorsBankAccount|null')]
     public ?ListOriginatorsBankAccount $bankAccount;
 
     /**
@@ -86,10 +86,10 @@ class ListOriginatorsData
 
     /**
      * @param  \DateTime  $createdAt
-     * @param  ListOriginatorsEntityType  $entityType
-     * @param  ListOriginatorsLegalAddress  $legalAddress
+     * @param  \Luqra\LuqraNowPhp\Models\Operations\ListOriginatorsEntityType  $entityType
+     * @param  \Luqra\LuqraNowPhp\Models\Operations\ListOriginatorsLegalAddress  $legalAddress
      * @param  string  $originatorId
-     * @param  ?ListOriginatorsBankAccount  $bankAccount
+     * @param  ?\Luqra\LuqraNowPhp\Models\Operations\ListOriginatorsBankAccount  $bankAccount
      * @param  ?string  $companyName
      * @param  ?string  $email
      * @param  ?string  $firstName

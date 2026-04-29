@@ -6,7 +6,7 @@
 
 declare(strict_types=1);
 
-namespace Luqra\Now\Models\Operations;
+namespace Luqra\LuqraNowPhp\Models\Operations;
 
 
 /** GetV0OriginatorsResponseBody - Default Response */
@@ -18,7 +18,7 @@ class GetV0OriginatorsResponseBody
      * @var array<GetV0OriginatorsData> $data
      */
     #[\Speakeasy\Serializer\Annotation\SerializedName('data')]
-    #[\Speakeasy\Serializer\Annotation\Type('array<\Luqra\Now\Models\Operations\GetV0OriginatorsData>')]
+    #[\Speakeasy\Serializer\Annotation\Type('array<\Luqra\LuqraNowPhp\Models\Operations\GetV0OriginatorsData>')]
     public array $data;
 
     /**
@@ -26,7 +26,7 @@ class GetV0OriginatorsResponseBody
      * @var GetV0OriginatorsMeta $meta
      */
     #[\Speakeasy\Serializer\Annotation\SerializedName('meta')]
-    #[\Speakeasy\Serializer\Annotation\Type('\Luqra\Now\Models\Operations\GetV0OriginatorsMeta')]
+    #[\Speakeasy\Serializer\Annotation\Type('\Luqra\LuqraNowPhp\Models\Operations\GetV0OriginatorsMeta')]
     public GetV0OriginatorsMeta $meta;
 
     /**

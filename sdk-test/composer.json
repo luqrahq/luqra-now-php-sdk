@@ -1,0 +1,9 @@
+{
+    "name": "luqra/sdk-test",
+    "description": "Integration test project for luqra/now-php SDK",
+    "require": {
+        "php": ">=8.2",
+        "luqra/now-php": "^0.3",
+        "vlucas/phpdotenv": "^5.6"
+    }
+}

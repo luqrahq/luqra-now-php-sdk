@@ -1,0 +1,35 @@
+name: SDK Integration Test
+
+on:
+  pull_request:
+  release:
+    types: [published]
+
+jobs:
+  sdk-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.2"
+
+      - name: Verify TEST_ORG_API_KEY is set
+        env:
+          API_KEY: ${{ secrets.TEST_ORG_API_KEY }}
+        run: |
+          if [ -z "$API_KEY" ]; then
+            echo "::error::TEST_ORG_API_KEY repository secret is not set. Add it under Settings → Secrets and variables → Actions."
+            exit 1
+          fi
+
+      - name: Install sdk-test dependencies
+        working-directory: sdk-test
+        run: composer install --no-dev --prefer-dist
+
+      - name: Run integration tests
+        working-directory: sdk-test
+        env:
+          API_KEY: ${{ secrets.TEST_ORG_API_KEY }}
+        run: php test.php

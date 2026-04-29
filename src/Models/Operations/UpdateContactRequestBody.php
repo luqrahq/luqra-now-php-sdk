@@ -6,19 +6,19 @@
 
 declare(strict_types=1);
 
-namespace Luqra\Now\Models\Operations;
+namespace Luqra\LuqraNowPhp\Models\Operations;
 
 
 class UpdateContactRequestBody
 {
     /**
      *
-     * @var ?UpdateContactBankAccount $bankAccount
+     * @var ?\Luqra\LuqraNowPhp\Models\Operations\UpdateContactBankAccountRequest $bankAccount
      */
     #[\Speakeasy\Serializer\Annotation\SerializedName('bankAccount')]
-    #[\Speakeasy\Serializer\Annotation\Type('\Luqra\Now\Models\Operations\UpdateContactBankAccount|null')]
+    #[\Speakeasy\Serializer\Annotation\Type('\Luqra\LuqraNowPhp\Models\Operations\UpdateContactBankAccountRequest|null')]
     #[\Speakeasy\Serializer\Annotation\SkipWhenNull]
-    public ?UpdateContactBankAccount $bankAccount = null;
+    public ?UpdateContactBankAccountRequest $bankAccount = null;
 
     /**
      *
@@ -30,12 +30,12 @@ class UpdateContactRequestBody
 
     /**
      *
-     * @var ?UpdateContactEntityType $entityType
+     * @var ?\Luqra\LuqraNowPhp\Models\Operations\UpdateContactEntityTypeRequest $entityType
      */
     #[\Speakeasy\Serializer\Annotation\SerializedName('entityType')]
-    #[\Speakeasy\Serializer\Annotation\Type('\Luqra\Now\Models\Operations\UpdateContactEntityType|null')]
+    #[\Speakeasy\Serializer\Annotation\Type('\Luqra\LuqraNowPhp\Models\Operations\UpdateContactEntityTypeRequest|null')]
     #[\Speakeasy\Serializer\Annotation\SkipWhenNull]
-    public ?UpdateContactEntityType $entityType = null;
+    public ?UpdateContactEntityTypeRequest $entityType = null;
 
     /**
      *
@@ -55,20 +55,12 @@ class UpdateContactRequestBody
 
     /**
      *
-     * @var ?UpdateContactLegalAddress $legalAddress
+     * @var ?\Luqra\LuqraNowPhp\Models\Operations\UpdateContactLegalAddressRequest $legalAddress
      */
     #[\Speakeasy\Serializer\Annotation\SerializedName('legalAddress')]
-    #[\Speakeasy\Serializer\Annotation\Type('\Luqra\Now\Models\Operations\UpdateContactLegalAddress|null')]
+    #[\Speakeasy\Serializer\Annotation\Type('\Luqra\LuqraNowPhp\Models\Operations\UpdateContactLegalAddressRequest|null')]
     #[\Speakeasy\Serializer\Annotation\SkipWhenNull]
-    public ?UpdateContactLegalAddress $legalAddress = null;
-
-    /**
-     *
-     * @var ?string $phoneNumber
-     */
-    #[\Speakeasy\Serializer\Annotation\SerializedName('phoneNumber')]
-    #[\Speakeasy\Serializer\Annotation\SkipWhenNull]
-    public ?string $phoneNumber = null;
+    public ?UpdateContactLegalAddressRequest $legalAddress = null;
 
     /**
      *
@@ -79,17 +71,25 @@ class UpdateContactRequestBody
     public ?string $companyName = null;
 
     /**
-     * @param  ?UpdateContactBankAccount  $bankAccount
+     *
+     * @var ?string $phoneNumber
+     */
+    #[\Speakeasy\Serializer\Annotation\SerializedName('phoneNumber')]
+    #[\Speakeasy\Serializer\Annotation\SkipWhenNull]
+    public ?string $phoneNumber = null;
+
+    /**
+     * @param  ?\Luqra\LuqraNowPhp\Models\Operations\UpdateContactBankAccountRequest  $bankAccount
      * @param  ?string  $email
-     * @param  ?UpdateContactEntityType  $entityType
+     * @param  ?\Luqra\LuqraNowPhp\Models\Operations\UpdateContactEntityTypeRequest  $entityType
      * @param  ?string  $firstName
      * @param  ?string  $lastName
-     * @param  ?UpdateContactLegalAddress  $legalAddress
-     * @param  ?string  $phoneNumber
+     * @param  ?\Luqra\LuqraNowPhp\Models\Operations\UpdateContactLegalAddressRequest  $legalAddress
      * @param  ?string  $companyName
+     * @param  ?string  $phoneNumber
      * @phpstan-pure
      */
-    public function __construct(?UpdateContactBankAccount $bankAccount = null, ?string $email = null, ?UpdateContactEntityType $entityType = null, ?string $firstName = null, ?string $lastName = null, ?UpdateContactLegalAddress $legalAddress = null, ?string $phoneNumber = null, ?string $companyName = null)
+    public function __construct(?UpdateContactBankAccountRequest $bankAccount = null, ?string $email = null, ?UpdateContactEntityTypeRequest $entityType = null, ?string $firstName = null, ?string $lastName = null, ?UpdateContactLegalAddressRequest $legalAddress = null, ?string $companyName = null, ?string $phoneNumber = null)
     {
         $this->bankAccount = $bankAccount;
         $this->email = $email;
@@ -97,7 +97,7 @@ class UpdateContactRequestBody
         $this->firstName = $firstName;
         $this->lastName = $lastName;
         $this->legalAddress = $legalAddress;
-        $this->phoneNumber = $phoneNumber;
         $this->companyName = $companyName;
+        $this->phoneNumber = $phoneNumber;
     }
 }

@@ -6,7 +6,7 @@
 
 declare(strict_types=1);
 
-namespace Luqra\Now\Models\Operations;
+namespace Luqra\LuqraNowPhp\Models\Operations;
 
 
 class Data
@@ -30,7 +30,7 @@ class Data
      * @var ListContactsEntityType $entityType
      */
     #[\Speakeasy\Serializer\Annotation\SerializedName('entityType')]
-    #[\Speakeasy\Serializer\Annotation\Type('\Luqra\Now\Models\Operations\ListContactsEntityType')]
+    #[\Speakeasy\Serializer\Annotation\Type('\Luqra\LuqraNowPhp\Models\Operations\ListContactsEntityType')]
     public ListContactsEntityType $entityType;
 
     /**
@@ -38,7 +38,7 @@ class Data
      * @var ListContactsLegalAddress $legalAddress
      */
     #[\Speakeasy\Serializer\Annotation\SerializedName('legalAddress')]
-    #[\Speakeasy\Serializer\Annotation\Type('\Luqra\Now\Models\Operations\ListContactsLegalAddress')]
+    #[\Speakeasy\Serializer\Annotation\Type('\Luqra\LuqraNowPhp\Models\Operations\ListContactsLegalAddress')]
     public ListContactsLegalAddress $legalAddress;
 
     /**
@@ -46,7 +46,7 @@ class Data
      * @var ?ListContactsBankAccount $bankAccount
      */
     #[\Speakeasy\Serializer\Annotation\SerializedName('bankAccount')]
-    #[\Speakeasy\Serializer\Annotation\Type('\Luqra\Now\Models\Operations\ListContactsBankAccount|null')]
+    #[\Speakeasy\Serializer\Annotation\Type('\Luqra\LuqraNowPhp\Models\Operations\ListContactsBankAccount|null')]
     public ?ListContactsBankAccount $bankAccount;
 
     /**

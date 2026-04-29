@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Luqra\Now\Hooks;
+namespace Luqra\LuqraNowPhp\Hooks;
 
 /*
  * This file is only ever generated once on the first generation and then is free to be modified.

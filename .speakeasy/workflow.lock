@@ -1,0 +1,34 @@
+speakeasyVersion: 1.761.9
+sources:
+    luqra-api:
+        sourceNamespace: luqra-api
+        sourceRevisionDigest: sha256:821b58baa073ce623ce9f5db09922ff6ef913ea5b6efb2b21a5e3d5b75b3b5cc
+        sourceBlobDigest: sha256:52200429e3948dc06cf82d33fbc8294244eb2f7b53d0e14ec484842af35dbd2b
+        tags:
+            - latest
+            - 0.1.0
+targets:
+    php-sdk:
+        source: luqra-api
+        sourceNamespace: luqra-api
+        sourceRevisionDigest: sha256:821b58baa073ce623ce9f5db09922ff6ef913ea5b6efb2b21a5e3d5b75b3b5cc
+        sourceBlobDigest: sha256:52200429e3948dc06cf82d33fbc8294244eb2f7b53d0e14ec484842af35dbd2b
+        codeSamplesNamespace: luqra-api-php-code-samples
+        codeSamplesRevisionDigest: sha256:0bc7af528c0253e205dbb097c7e05889777e9681b2182df11f6ee5339c6bbf9f
+workflow:
+    workflowVersion: 1.0.0
+    speakeasyVersion: latest
+    sources:
+        luqra-api:
+            inputs:
+                - location: ./openapi.json
+    targets:
+        php-sdk:
+            target: php
+            source: luqra-api
+            output: .
+            codeSamples:
+                output: code-samples.yaml
+                labelOverride:
+                    fixedValue: Php (SDK)
+                blocking: false

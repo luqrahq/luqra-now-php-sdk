@@ -6,17 +6,17 @@
 
 declare(strict_types=1);
 
-namespace Luqra\Now\Models\Operations;
+namespace Luqra\LuqraNowPhp\Models\Operations;
 
 
 class ListPaymentsMeta
 {
     /**
      *
-     * @var Pagination $pagination
+     * @var \Luqra\LuqraNowPhp\Models\Operations\Pagination $pagination
      */
     #[\Speakeasy\Serializer\Annotation\SerializedName('pagination')]
-    #[\Speakeasy\Serializer\Annotation\Type('\Luqra\Now\Models\Operations\Pagination')]
+    #[\Speakeasy\Serializer\Annotation\Type('\Luqra\LuqraNowPhp\Models\Operations\Pagination')]
     public Pagination $pagination;
 
     /**
@@ -27,7 +27,7 @@ class ListPaymentsMeta
     public \DateTime $timestamp;
 
     /**
-     * @param  Pagination  $pagination
+     * @param  \Luqra\LuqraNowPhp\Models\Operations\Pagination  $pagination
      * @param  \DateTime  $timestamp
      * @phpstan-pure
      */

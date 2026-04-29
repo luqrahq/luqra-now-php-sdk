@@ -7,9 +7,9 @@
 
 declare(strict_types=1);
 
-namespace Luqra\Now\Hooks;
+namespace Luqra\LuqraNowPhp\Hooks;
 
-use Luqra\Now\SDKConfiguration;
+use Luqra\LuqraNowPhp\SDKConfiguration;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 
@@ -34,7 +34,6 @@ class SDKHooks implements Hooks
 
     public function __construct()
     {
-        HookRegistration::initHooks($this);
     }
 
     public function registerSDKInitHook(SDKInitHook $hook): void

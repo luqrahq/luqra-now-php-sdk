@@ -6,7 +6,7 @@
 
 declare(strict_types=1);
 
-namespace Luqra\Now\Models\Errors;
+namespace Luqra\LuqraNowPhp\Models\Errors;
 
 
 class Error
@@ -31,7 +31,7 @@ class Error
      * @var ?array<Details> $details
      */
     #[\Speakeasy\Serializer\Annotation\SerializedName('details')]
-    #[\Speakeasy\Serializer\Annotation\Type('array<\Luqra\Now\Models\Errors\Details>|null')]
+    #[\Speakeasy\Serializer\Annotation\Type('array<\Luqra\LuqraNowPhp\Models\Errors\Details>|null')]
     #[\Speakeasy\Serializer\Annotation\SkipWhenNull]
     public ?array $details = null;
 

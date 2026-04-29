@@ -6,7 +6,7 @@
 
 declare(strict_types=1);
 
-namespace Luqra\Now\Models\Operations;
+namespace Luqra\LuqraNowPhp\Models\Operations;
 
 
 class GetV0OriginatorsBankAccount
@@ -30,7 +30,7 @@ class GetV0OriginatorsBankAccount
      * @var GetV0OriginatorsSubType $subType
      */
     #[\Speakeasy\Serializer\Annotation\SerializedName('subType')]
-    #[\Speakeasy\Serializer\Annotation\Type('\Luqra\Now\Models\Operations\GetV0OriginatorsSubType')]
+    #[\Speakeasy\Serializer\Annotation\Type('\Luqra\LuqraNowPhp\Models\Operations\GetV0OriginatorsSubType')]
     public GetV0OriginatorsSubType $subType;
 
     /**

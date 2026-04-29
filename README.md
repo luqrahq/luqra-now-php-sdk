@@ -1,15 +1,6 @@
-# luqra-now-php
+# luqra/now-php
 
-Developer-friendly, idiomatic PHP SDK for the *luqra-now-php* API.
-
-<div align="left">
-    <a href="https://www.scalar.com/?utm_source=luqra-now-php&utm_campaign=php"><img src="https://custom-icon-badges.demolab.com/badge/-Built%20By%20scalar+speakeasy-212015?style=for-the-badge&logo=scalar&labelColor=252525" /></a>
-    <a href="https://opensource.org/licenses/MIT">
-        <img src="https://img.shields.io/badge/License-MIT-blue.svg" style="width: 100px; height: 28px;" />
-    </a>
-</div>
-
-<br />
+Developer-friendly, idiomatic PHP SDK for the *luqra/now-php* API.
 
 ## Summary
 
@@ -26,9 +17,6 @@ Luqra Now API: External API for Luqra Now
   * [Available Resources and Operations](#available-resources-and-operations)
   * [Error Handling](#error-handling)
   * [Server Selection](#server-selection)
-* [Development](#development)
-  * [Maturity](#maturity)
-  * [Contributions](#contributions)
 
 <!-- End Table of Contents [toc] -->
 
@@ -37,9 +25,10 @@ Luqra Now API: External API for Luqra Now
 
 The SDK relies on [Composer](https://getcomposer.org/) to manage its dependencies.
 
-To install the SDK and add it as a dependency to an existing `composer.json` file:
+To install the SDK run the following command:
+
 ```bash
-composer require "luqra/now-php"
+composer require luqra/now-php
 ```
 <!-- End SDK Installation [installation] -->
 
@@ -53,9 +42,9 @@ declare(strict_types=1);
 
 require 'vendor/autoload.php';
 
-use Luqra\Now;
+use Luqra\LuqraNowPhp;
 
-$sdk = Now\LuqraNow::builder()
+$sdk = LuqraNowPhp\LuqraNow::builder()
     ->setSecurity(
         '<YOUR_BEARER_TOKEN_HERE>'
     )
@@ -90,9 +79,9 @@ declare(strict_types=1);
 
 require 'vendor/autoload.php';
 
-use Luqra\Now;
+use Luqra\LuqraNowPhp;
 
-$sdk = Now\LuqraNow::builder()
+$sdk = LuqraNowPhp\LuqraNow::builder()
     ->setSecurity(
         '<YOUR_BEARER_TOKEN_HERE>'
     )
@@ -116,21 +105,21 @@ if ($response->object !== null) {
 <details open>
 <summary>Available methods</summary>
 
-### [contacts](docs/sdks/contacts/README.md)
+### [Contacts](docs/sdks/contacts/README.md)
 
 * [list](docs/sdks/contacts/README.md#list) - List contacts
 * [create](docs/sdks/contacts/README.md#create) - Create contact
 * [update](docs/sdks/contacts/README.md#update) - Update contact
 
-
-### [originators](docs/sdks/originators/README.md)
+### [Originators](docs/sdks/originators/README.md)
 
 * [list](docs/sdks/originators/README.md#list) - List originators
 
-### [payments](docs/sdks/payments/README.md)
+### [Payments](docs/sdks/payments/README.md)
 
 * [list](docs/sdks/payments/README.md#list) - List payments
 * [create](docs/sdks/payments/README.md#create) - Create payment
+* [get](docs/sdks/payments/README.md#get) - Get payment
 
 </details>
 <!-- End Available Resources and Operations [operations] -->
@@ -164,10 +153,10 @@ declare(strict_types=1);
 
 require 'vendor/autoload.php';
 
-use Luqra\Now;
-use Luqra\Now\Models\Errors;
+use Luqra\LuqraNowPhp;
+use Luqra\LuqraNowPhp\Models\Errors;
 
-$sdk = Now\LuqraNow::builder()
+$sdk = LuqraNowPhp\LuqraNow::builder()
     ->setSecurity(
         '<YOUR_BEARER_TOKEN_HERE>'
     )
@@ -203,9 +192,8 @@ You can override the default server globally using the `setServerIndex(int $serv
 
 | #   | Server                              | Description |
 | --- | ----------------------------------- | ----------- |
-| 0   | `http://localhost:3005`             | Local       |
-| 1   | `https://staging.api.now.luqra.com` | Test        |
-| 2   | `https://api.now.luqra.com`         | Production  |
+| 0   | `https://staging.api.now.luqra.com` | Sandbox     |
+| 1   | `https://api.now.luqra.com`         | Production  |
 
 #### Example
 
@@ -214,10 +202,10 @@ declare(strict_types=1);
 
 require 'vendor/autoload.php';
 
-use Luqra\Now;
+use Luqra\LuqraNowPhp;
 
-$sdk = Now\LuqraNow::builder()
-    ->setServerIndex(2)
+$sdk = LuqraNowPhp\LuqraNow::builder()
+    ->setServerIndex(0)
     ->setSecurity(
         '<YOUR_BEARER_TOKEN_HERE>'
     )
@@ -242,9 +230,9 @@ declare(strict_types=1);
 
 require 'vendor/autoload.php';
 
-use Luqra\Now;
+use Luqra\LuqraNowPhp;
 
-$sdk = Now\LuqraNow::builder()
+$sdk = LuqraNowPhp\LuqraNow::builder()
     ->setServerURL('https://api.now.luqra.com')
     ->setSecurity(
         '<YOUR_BEARER_TOKEN_HERE>'
@@ -263,9 +251,4 @@ if ($response->object !== null) {
 ```
 <!-- End Server Selection [server] -->
 
-## Contributions
-
-While we value open-source contributions to this SDK, this library is generated programmatically. Any manual changes added to internal files will be overwritten on the next generation. 
-We look forward to hearing your feedback. Feel free to open a PR or an issue with a proof of concept and we'll do our best to include it in a future release.
-
-### SDK Created by [Scalar](https://www.scalar.com/?utm_source=luqra-now-php&utm_campaign=php)
+For information on releasing a new version of this SDK, see [RELEASING.md](RELEASING.md).

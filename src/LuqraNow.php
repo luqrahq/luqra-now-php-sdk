@@ -6,7 +6,7 @@
 
 declare(strict_types=1);
 
-namespace Luqra\Now;
+namespace Luqra\LuqraNowPhp;
 
 
 
@@ -14,9 +14,7 @@ namespace Luqra\Now;
 class LuqraNow
 {
     public const SERVERS = [
-        /** Local */
-        'http://localhost:3005',
-        /** Test */
+        /** Sandbox */
         'https://staging.api.now.luqra.com',
         /** Production */
         'https://api.now.luqra.com',

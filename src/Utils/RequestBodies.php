@@ -6,7 +6,7 @@
 
 declare(strict_types=1);
 
-namespace Luqra\Now\Utils;
+namespace Luqra\LuqraNowPhp\Utils;
 
 use ReflectionProperty;
 
@@ -63,7 +63,7 @@ class RequestBodies
 
         $options = [];
 
-        if (preg_match('/(application|text)\/.*?\+*json.*/', $mediaType)) {
+        if (preg_match('/^(application|text)\/([^+]+\+)*json.*/', $mediaType)) {
             $serializer = JSON::createSerializer();
             $options['body'] = $serializer->serialize($value, 'json');
             $options['headers']['content-type'] = $mediaType;
@@ -107,7 +107,7 @@ class RequestBodies
             if ($metadata->file) {
                 if (gettype($val) === 'array' && array_is_list($val)) {
                     foreach ($val as $item) {
-                        $options['multipart'][] = $this->serializeMultipartFile($metadata->name.'[]', $item);
+                        $options['multipart'][] = $this->serializeMultipartFile($metadata->name, $item);
                     }
                 } else {
                     $options['multipart'][] = $this->serializeMultipartFile($metadata->name, $val);
@@ -125,9 +125,9 @@ class RequestBodies
                 $dateTimeFormat = $metadata->dateTimeFormat;
 
                 if (gettype($val) === 'array' && array_is_list($val)) {
-                    foreach ($value as $item) {
+                    foreach ($val as $item) {
                         $options['multipart'][] = [
-                            'name' => $metadata->name.'[]',
+                            'name' => $metadata->name,
                             'contents' => valToString($item, ['dateTimeFormat' => $dateTimeFormat]),
                         ];
                     }

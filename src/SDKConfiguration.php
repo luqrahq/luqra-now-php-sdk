@@ -6,12 +6,14 @@
 
 declare(strict_types=1);
 
-namespace Luqra\Now;
-use Luqra\Now\Utils\Retry\RetryConfig;
+namespace Luqra\LuqraNowPhp;
+use Luqra\LuqraNowPhp\Utils\Retry\RetryConfig;
 
 class SDKConfiguration
 {
     public ?\GuzzleHttp\ClientInterface $client = null;
+
+    public ?\GuzzleHttp\ClientInterface $defaultClient = null;
 
     public Hooks\SDKHooks $hooks;
     /** @var ?pure-Closure(): Models\Components\Security */
@@ -22,13 +24,13 @@ class SDKConfiguration
 
     public string $language = 'php';
 
-    public string $openapiDocVersion = '0.3.0';
+    public string $openapiDocVersion = '0.1.0';
 
-    public string $sdkVersion = '0.3.0';
+    public string $sdkVersion = '0.0.3';
 
-    public string $genVersion = '2.634.2';
+    public string $genVersion = '2.881.4';
 
-    public string $userAgent = 'speakeasy-sdk/php 0.3.0 2.634.2 0.3.0 luqra/now-php';
+    public string $userAgent = 'speakeasy-sdk/php 0.0.3 2.881.4 0.1.0 luqra/now-php';
 
     public ?RetryConfig $retryConfig = null;
 

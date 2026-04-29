@@ -1,10 +1,9 @@
 {
   "name": "luqra/now-php",
-  "description": "PHP SDK for the Luqra Now API",
   "type": "library",
   "autoload": {
     "psr-4": {
-      "Luqra\\Now\\": "src/"
+      "Luqra\\LuqraNowPhp\\": "src/"
     }
   },
   "license": "MIT",
@@ -18,9 +17,9 @@
     "brick/math": "^0.12.1"
   },
   "require-dev": {
-    "laravel/pint": "^1.21.2",
-    "phpstan/phpstan": "^2.1.0",
-    "phpunit/phpunit": "^10",
+    "laravel/pint": "1.29.0",
+    "phpstan/phpstan": "2.1.44",
+    "phpunit/phpunit": "^11.5.50 || ^12.5.8 || >=13.0.0",
     "roave/security-advisories": "dev-latest"
   },
   "minimum-stability": "stable",
@@ -32,11 +31,11 @@
     "process-timeout": 60
   },
   "scripts": {
-    "test": [
-      "./vendor/bin/phpunit --testdox --display-warnings --colors=always"
-    ],
     "stan": [
       "./vendor/bin/phpstan analyse --memory-limit=2g --error-format=table"
     ]
+  },
+  "script-descriptions": {
+    "stan": "Run PhpStan static analysis."
   }
 }

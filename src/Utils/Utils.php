@@ -6,7 +6,7 @@
 
 declare(strict_types=1);
 
-namespace Luqra\Now\Utils;
+namespace Luqra\LuqraNowPhp\Utils;
 
 use GuzzleHttp\ClientInterface;
 use Psr\Http\Message\RequestInterface;
@@ -34,10 +34,13 @@ class Utils
      * @param  mixed  $security
      * @return ClientInterface
      */
-    public static function configureSecurityClient(ClientInterface $client, mixed $security): ClientInterface
+    /**
+     * @param  ?string[]  $allowedFields
+     */
+    public static function configureSecurityClient(ClientInterface $client, mixed $security, ?array $allowedFields = null): ClientInterface
     {
         $sec = new Security();
-        $clientOptions = $sec->parseSecurity($security);
+        $clientOptions = $sec->parseSecurity($security, $allowedFields);
 
         return new SecurityClient(
             client: $client,
@@ -71,7 +74,7 @@ class Utils
      *
      * @param  string  $url
      * @param  string  $path
-     * @param  string|null  $type
+     * @param  class-string|null  $type
      * @param  mixed|null  $pathParams
      * @param  array<string,array<string,array<string,string>>>|null  $globals
      * @return string
@@ -137,7 +140,7 @@ class Utils
     /**
      * getQueryParams will return serialized query parameters for the given type.
      *
-     * @param  string  $type
+     * @param  class-string  $type
      * @param  mixed  $queryParams
      * @param  array<string,array<string,array<string,string>>>|null  $globals
      * @return array<string,mixed>

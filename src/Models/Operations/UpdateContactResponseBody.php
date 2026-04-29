@@ -6,7 +6,7 @@
 
 declare(strict_types=1);
 
-namespace Luqra\Now\Models\Operations;
+namespace Luqra\LuqraNowPhp\Models\Operations;
 
 
 /** UpdateContactResponseBody - Default Response */
@@ -14,23 +14,23 @@ class UpdateContactResponseBody
 {
     /**
      *
-     * @var UpdateContactData $data
+     * @var \Luqra\LuqraNowPhp\Models\Operations\UpdateContactData $data
      */
     #[\Speakeasy\Serializer\Annotation\SerializedName('data')]
-    #[\Speakeasy\Serializer\Annotation\Type('\Luqra\Now\Models\Operations\UpdateContactData')]
+    #[\Speakeasy\Serializer\Annotation\Type('\Luqra\LuqraNowPhp\Models\Operations\UpdateContactData')]
     public UpdateContactData $data;
 
     /**
      *
-     * @var UpdateContactMeta $meta
+     * @var \Luqra\LuqraNowPhp\Models\Operations\UpdateContactMeta $meta
      */
     #[\Speakeasy\Serializer\Annotation\SerializedName('meta')]
-    #[\Speakeasy\Serializer\Annotation\Type('\Luqra\Now\Models\Operations\UpdateContactMeta')]
+    #[\Speakeasy\Serializer\Annotation\Type('\Luqra\LuqraNowPhp\Models\Operations\UpdateContactMeta')]
     public UpdateContactMeta $meta;
 
     /**
-     * @param  UpdateContactData  $data
-     * @param  UpdateContactMeta  $meta
+     * @param  \Luqra\LuqraNowPhp\Models\Operations\UpdateContactData  $data
+     * @param  \Luqra\LuqraNowPhp\Models\Operations\UpdateContactMeta  $meta
      * @phpstan-pure
      */
     public function __construct(UpdateContactData $data, UpdateContactMeta $meta)

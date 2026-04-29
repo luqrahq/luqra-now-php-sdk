@@ -6,7 +6,7 @@
 
 declare(strict_types=1);
 
-namespace Luqra\Now\Models\Operations;
+namespace Luqra\LuqraNowPhp\Models\Operations;
 
 
 /** ListContactsResponseBody - Default Response */
@@ -15,26 +15,26 @@ class ListContactsResponseBody
     /**
      * $data
      *
-     * @var array<Data> $data
+     * @var array<\Luqra\LuqraNowPhp\Models\Operations\ListContactsData> $data
      */
     #[\Speakeasy\Serializer\Annotation\SerializedName('data')]
-    #[\Speakeasy\Serializer\Annotation\Type('array<\Luqra\Now\Models\Operations\Data>')]
+    #[\Speakeasy\Serializer\Annotation\Type('array<\Luqra\LuqraNowPhp\Models\Operations\ListContactsData>')]
     public array $data;
 
     /**
      *
-     * @var Meta $meta
+     * @var \Luqra\LuqraNowPhp\Models\Operations\ListContactsMeta $meta
      */
     #[\Speakeasy\Serializer\Annotation\SerializedName('meta')]
-    #[\Speakeasy\Serializer\Annotation\Type('\Luqra\Now\Models\Operations\Meta')]
-    public Meta $meta;
+    #[\Speakeasy\Serializer\Annotation\Type('\Luqra\LuqraNowPhp\Models\Operations\ListContactsMeta')]
+    public ListContactsMeta $meta;
 
     /**
-     * @param  array<Data>  $data
-     * @param  Meta  $meta
+     * @param  array<\Luqra\LuqraNowPhp\Models\Operations\ListContactsData>  $data
+     * @param  \Luqra\LuqraNowPhp\Models\Operations\ListContactsMeta  $meta
      * @phpstan-pure
      */
-    public function __construct(array $data, Meta $meta)
+    public function __construct(array $data, ListContactsMeta $meta)
     {
         $this->data = $data;
         $this->meta = $meta;

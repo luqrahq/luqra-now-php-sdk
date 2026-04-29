@@ -6,7 +6,7 @@
 
 declare(strict_types=1);
 
-namespace Luqra\Now\Models\Operations;
+namespace Luqra\LuqraNowPhp\Models\Operations;
 
 
 class PatchV0ContactsIdData
@@ -23,7 +23,7 @@ class PatchV0ContactsIdData
      * @var PatchV0ContactsIdContactsEntityType $entityType
      */
     #[\Speakeasy\Serializer\Annotation\SerializedName('entityType')]
-    #[\Speakeasy\Serializer\Annotation\Type('\Luqra\Now\Models\Operations\PatchV0ContactsIdContactsEntityType')]
+    #[\Speakeasy\Serializer\Annotation\Type('\Luqra\LuqraNowPhp\Models\Operations\PatchV0ContactsIdContactsEntityType')]
     public PatchV0ContactsIdContactsEntityType $entityType;
 
     /**
@@ -45,7 +45,7 @@ class PatchV0ContactsIdData
      * @var PatchV0ContactsIdContactsLegalAddress $legalAddress
      */
     #[\Speakeasy\Serializer\Annotation\SerializedName('legalAddress')]
-    #[\Speakeasy\Serializer\Annotation\Type('\Luqra\Now\Models\Operations\PatchV0ContactsIdContactsLegalAddress')]
+    #[\Speakeasy\Serializer\Annotation\Type('\Luqra\LuqraNowPhp\Models\Operations\PatchV0ContactsIdContactsLegalAddress')]
     public PatchV0ContactsIdContactsLegalAddress $legalAddress;
 
     /**
@@ -60,7 +60,7 @@ class PatchV0ContactsIdData
      * @var ?PatchV0ContactsIdContactsBankAccount $bankAccount
      */
     #[\Speakeasy\Serializer\Annotation\SerializedName('bankAccount')]
-    #[\Speakeasy\Serializer\Annotation\Type('\Luqra\Now\Models\Operations\PatchV0ContactsIdContactsBankAccount|null')]
+    #[\Speakeasy\Serializer\Annotation\Type('\Luqra\LuqraNowPhp\Models\Operations\PatchV0ContactsIdContactsBankAccount|null')]
     public ?PatchV0ContactsIdContactsBankAccount $bankAccount;
 
     /**
