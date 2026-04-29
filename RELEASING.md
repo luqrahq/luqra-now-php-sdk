@@ -86,6 +86,8 @@ composer install
 
 > **Warning:** always use the dedicated SDK-test org API key — never a customer's key. The org is baked into the key (`luqra-now.org.{env}.*`), so running with a customer's key creates real contacts and payments under their data.
 
+If you need to update/rotate the API key - create a new organization on luqra-now side with onboard-staging-org.ts script.
+
 ### Running the tests
 
 After regenerating the SDK, reinstall the package from the local source and run the test script:
