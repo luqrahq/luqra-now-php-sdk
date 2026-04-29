@@ -24,11 +24,26 @@ The `openapi.json` file must be present in the root project folder before regene
 
 ## 2. Bump the version
 
-The SDK version is declared in `.speakeasy/gen.yaml` under `php.version`:
+Two version fields must be bumped together and kept identical:
+
+| File | Field | Effect |
+|------|-------|--------|
+| `.speakeasy/gen.yaml` | `php.version` | Baked into `src/SDKConfiguration.php` as the `sdkVersion` / User-Agent on every API request |
+| `composer.json` | `version` | What consumers install; the git tag Packagist indexes |
+
+If they diverge, API logs will show a different version than what the customer installed, making issue triage unreliable.
+
+Bump both to the same value:
 
 ```yaml
+# .speakeasy/gen.yaml
 php:
-  version: 0.0.3   # <-- bump this
+  version: 0.4.0   # <-- bump this
+```
+
+```json
+// composer.json
+"version": "0.4.0"
 ```
 
 Follow [semantic versioning](https://semver.org/):
