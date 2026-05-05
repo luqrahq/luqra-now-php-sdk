@@ -3,8 +3,7 @@
 
 ## Values
 
-| Name            | Value           |
-| --------------- | --------------- |
-| `Business`      | BUSINESS        |
-| `Individual`    | INDIVIDUAL      |
-| `ProcessingOrg` | PROCESSING_ORG  |
+| Name         | Value        |
+| ------------ | ------------ |
+| `Business`   | BUSINESS     |
+| `Individual` | INDIVIDUAL   |

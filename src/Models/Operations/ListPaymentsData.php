@@ -111,6 +111,21 @@ class ListPaymentsData
 
     /**
      *
+     * @var ?\Luqra\LuqraNowPhp\Models\Operations\ListPaymentsFailureCode $failureCode
+     */
+    #[\Speakeasy\Serializer\Annotation\SerializedName('failureCode')]
+    #[\Speakeasy\Serializer\Annotation\Type('\Luqra\LuqraNowPhp\Models\Operations\ListPaymentsFailureCode|null')]
+    public ?ListPaymentsFailureCode $failureCode;
+
+    /**
+     *
+     * @var ?string $failureMessage
+     */
+    #[\Speakeasy\Serializer\Annotation\SerializedName('failureMessage')]
+    public ?string $failureMessage;
+
+    /**
+     *
      * @var ?string $paymentNote
      */
     #[\Speakeasy\Serializer\Annotation\SerializedName('paymentNote')]
@@ -137,11 +152,13 @@ class ListPaymentsData
      * @param  ?\Luqra\LuqraNowPhp\Models\Operations\ListPaymentsContact  $contact
      * @param  ?string  $externalPaymentId
      * @param  ?\DateTime  $failedAt
+     * @param  ?\Luqra\LuqraNowPhp\Models\Operations\ListPaymentsFailureCode  $failureCode
+     * @param  ?string  $failureMessage
      * @param  ?string  $paymentNote
      * @param  ?\DateTime  $returnedAt
      * @phpstan-pure
      */
-    public function __construct(\DateTime $createdAt, string $currencyCode, ListPaymentsDirectionResponse $direction, int $feeAmount, ListPaymentsOriginator $originator, int $paymentAmount, string $paymentId, ListPaymentsPaymentRail $paymentRail, ListPaymentsStatusResponse $status, ?\DateTime $completedAt = null, ?ListPaymentsContact $contact = null, ?string $externalPaymentId = null, ?\DateTime $failedAt = null, ?string $paymentNote = null, ?\DateTime $returnedAt = null)
+    public function __construct(\DateTime $createdAt, string $currencyCode, ListPaymentsDirectionResponse $direction, int $feeAmount, ListPaymentsOriginator $originator, int $paymentAmount, string $paymentId, ListPaymentsPaymentRail $paymentRail, ListPaymentsStatusResponse $status, ?\DateTime $completedAt = null, ?ListPaymentsContact $contact = null, ?string $externalPaymentId = null, ?\DateTime $failedAt = null, ?ListPaymentsFailureCode $failureCode = null, ?string $failureMessage = null, ?string $paymentNote = null, ?\DateTime $returnedAt = null)
     {
         $this->createdAt = $createdAt;
         $this->currencyCode = $currencyCode;
@@ -156,6 +173,8 @@ class ListPaymentsData
         $this->contact = $contact;
         $this->externalPaymentId = $externalPaymentId;
         $this->failedAt = $failedAt;
+        $this->failureCode = $failureCode;
+        $this->failureMessage = $failureMessage;
         $this->paymentNote = $paymentNote;
         $this->returnedAt = $returnedAt;
     }

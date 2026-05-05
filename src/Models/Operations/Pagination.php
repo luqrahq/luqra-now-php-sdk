@@ -13,13 +13,6 @@ class Pagination
 {
     /**
      *
-     * @var bool $hasMore
-     */
-    #[\Speakeasy\Serializer\Annotation\SerializedName('hasMore')]
-    public bool $hasMore;
-
-    /**
-     *
      * @var float $limit
      */
     #[\Speakeasy\Serializer\Annotation\SerializedName('limit')]
@@ -27,30 +20,19 @@ class Pagination
 
     /**
      *
-     * @var float $page
+     * @var ?string $nextCursor
      */
-    #[\Speakeasy\Serializer\Annotation\SerializedName('page')]
-    public float $page;
+    #[\Speakeasy\Serializer\Annotation\SerializedName('nextCursor')]
+    public ?string $nextCursor;
 
     /**
-     *
-     * @var float $total
-     */
-    #[\Speakeasy\Serializer\Annotation\SerializedName('total')]
-    public float $total;
-
-    /**
-     * @param  bool  $hasMore
      * @param  float  $limit
-     * @param  float  $page
-     * @param  float  $total
+     * @param  ?string  $nextCursor
      * @phpstan-pure
      */
-    public function __construct(bool $hasMore, float $limit, float $page, float $total)
+    public function __construct(float $limit, ?string $nextCursor = null)
     {
-        $this->hasMore = $hasMore;
         $this->limit = $limit;
-        $this->page = $page;
-        $this->total = $total;
+        $this->nextCursor = $nextCursor;
     }
 }
