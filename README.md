@@ -2,6 +2,8 @@
 
 Developer-friendly, idiomatic PHP SDK for the *luqra/now-php* API.
 
+> **Stability notice:** This SDK is in active development (`0.x`). Minor version bumps may introduce breaking changes until `1.0.0` is released. Pin to an exact version in `composer.json` and review the changelog before upgrading.
+
 ## Summary
 
 Luqra Now API: External API for Luqra Now

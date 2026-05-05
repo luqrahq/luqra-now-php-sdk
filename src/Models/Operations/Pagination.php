@@ -23,7 +23,7 @@ class Pagination
      * @var ?string $nextCursor
      */
     #[\Speakeasy\Serializer\Annotation\SerializedName('nextCursor')]
-    public ?string $nextCursor;
+    public ?string $nextCursor = null;
 
     /**
      * @param  float  $limit

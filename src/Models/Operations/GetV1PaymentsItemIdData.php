@@ -118,14 +118,14 @@ class GetV1PaymentsItemIdData
      * @var ?string $description
      */
     #[\Speakeasy\Serializer\Annotation\SerializedName('description')]
-    public ?string $description;
+    public ?string $description = null;
 
     /**
      *
      * @var ?string $externalPaymentId
      */
     #[\Speakeasy\Serializer\Annotation\SerializedName('externalPaymentId')]
-    public ?string $externalPaymentId;
+    public ?string $externalPaymentId = null;
 
     /**
      * @param  string  $id

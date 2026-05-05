@@ -37,7 +37,7 @@ class GetV1ContactsData
      * @var ?string $email
      */
     #[\Speakeasy\Serializer\Annotation\SerializedName('email')]
-    public ?string $email;
+    public ?string $email = null;
 
     /**
      * @param  string  $contactId

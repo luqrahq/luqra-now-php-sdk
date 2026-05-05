@@ -31,21 +31,21 @@ class ListPaymentsOriginator
      * @var ?string $companyName
      */
     #[\Speakeasy\Serializer\Annotation\SerializedName('companyName')]
-    public ?string $companyName;
+    public ?string $companyName = null;
 
     /**
      *
      * @var ?string $firstName
      */
     #[\Speakeasy\Serializer\Annotation\SerializedName('firstName')]
-    public ?string $firstName;
+    public ?string $firstName = null;
 
     /**
      *
      * @var ?string $lastName
      */
     #[\Speakeasy\Serializer\Annotation\SerializedName('lastName')]
-    public ?string $lastName;
+    public ?string $lastName = null;
 
     /**
      * @param  \Luqra\LuqraNowPhp\Models\Operations\ListPaymentsOriginatorEntityType  $entityType

@@ -194,14 +194,13 @@ try {
         new Operations\ListPaymentsRequest(
             originatorId: $originatorId,
             limit: 10,
-            page: 1,
         )
     );
     check('HTTP 200', $response->statusCode === 200);
     check('Response body present', $response->object !== null);
     check('data is array', is_array($response->object?->data));
     check('meta.pagination present', isset($response->object?->meta?->pagination));
-    check('pagination.total is numeric', is_numeric($response->object?->meta?->pagination?->total ?? null));
+    check('pagination.limit is numeric', is_numeric($response->object?->meta?->pagination?->limit ?? null));
     $existingPayments = $response->object?->data ?? [];
     echo '  → ' . count($existingPayments) . " payment(s) found\n";
 } catch (Errors\APIException $e) {
@@ -209,35 +208,39 @@ try {
 }
 
 // ── 5b. Pagination plumbing ───────────────────────────────────────────────────
-// Verifies SDK query-param names (page, limit), encoding, and
+// Verifies SDK query-param names (cursor, limit), encoding, and
 // meta.pagination deserialization — a regen can silently rename a param.
 
 section('5b. Pagination plumbing');
 
 try {
     $page1 = $sdk->payments->list(new Operations\ListPaymentsRequest(
-        originatorId: $originatorId, limit: 1, page: 1,
-    ));
-    $page2 = $sdk->payments->list(new Operations\ListPaymentsRequest(
-        originatorId: $originatorId, limit: 1, page: 2,
+        originatorId: $originatorId, limit: 1,
     ));
 
     check('page 1 HTTP 200', $page1->statusCode === 200);
-    check('page 2 HTTP 200', $page2->statusCode === 200);
     check('limit respected on page 1', count($page1->object?->data ?? []) <= 1);
-    check('limit respected on page 2', count($page2->object?->data ?? []) <= 1);
-    check('meta.pagination.total present', is_numeric($page1->object?->meta?->pagination?->total ?? null));
     check('meta.pagination.limit present', is_numeric($page1->object?->meta?->pagination?->limit ?? null));
-    check('meta.pagination.page present',  is_numeric($page1->object?->meta?->pagination?->page  ?? null));
 
-    $total   = (int) ($page1->object?->meta?->pagination?->total ?? 0);
-    $id1     = $page1->object?->data[0]?->paymentId ?? null;
-    $id2     = $page2->object?->data[0]?->paymentId ?? null;
+    $nextCursor = $page1->object?->meta?->pagination?->nextCursor ?? null;
+    $id1        = $page1->object?->data[0]?->paymentId ?? null;
 
-    if ($total >= 2 && $id1 !== null && $id2 !== null) {
-        check('page 1 and page 2 return different paymentIds', $id1 !== $id2, "id1=$id1 id2=$id2");
+    if ($nextCursor !== null && $id1 !== null) {
+        $page2 = $sdk->payments->list(new Operations\ListPaymentsRequest(
+            originatorId: $originatorId, limit: 1, cursor: $nextCursor,
+        ));
+
+        check('page 2 HTTP 200', $page2->statusCode === 200);
+        check('limit respected on page 2', count($page2->object?->data ?? []) <= 1);
+
+        $id2 = $page2->object?->data[0]?->paymentId ?? null;
+        if ($id2 !== null) {
+            check('page 1 and page 2 return different paymentIds', $id1 !== $id2, "id1=$id1 id2=$id2");
+        } else {
+            echo "  → skipping distinctness check (page 2 returned no payments)\n";
+        }
     } else {
-        echo "  → skipping distinctness check (only $total payment(s) available)\n";
+        echo "  → skipping cursor check (only 1 or 0 payment(s) available)\n";
     }
 } catch (Errors\APIException $e) {
     check('Pagination plumbing succeeded', false, "HTTP {$e->statusCode}: {$e->message}");

@@ -93,21 +93,21 @@ class GetPaymentData
      * @var ?\DateTime $completedAt
      */
     #[\Speakeasy\Serializer\Annotation\SerializedName('completedAt')]
-    public ?\DateTime $completedAt;
+    public ?\DateTime $completedAt = null;
 
     /**
      *
      * @var ?string $externalPaymentId
      */
     #[\Speakeasy\Serializer\Annotation\SerializedName('externalPaymentId')]
-    public ?string $externalPaymentId;
+    public ?string $externalPaymentId = null;
 
     /**
      *
      * @var ?\DateTime $failedAt
      */
     #[\Speakeasy\Serializer\Annotation\SerializedName('failedAt')]
-    public ?\DateTime $failedAt;
+    public ?\DateTime $failedAt = null;
 
     /**
      *
@@ -115,42 +115,42 @@ class GetPaymentData
      */
     #[\Speakeasy\Serializer\Annotation\SerializedName('failureCode')]
     #[\Speakeasy\Serializer\Annotation\Type('\Luqra\LuqraNowPhp\Models\Operations\GetPaymentFailureCode|null')]
-    public ?GetPaymentFailureCode $failureCode;
+    public ?GetPaymentFailureCode $failureCode = null;
 
     /**
      *
      * @var ?string $failureMessage
      */
     #[\Speakeasy\Serializer\Annotation\SerializedName('failureMessage')]
-    public ?string $failureMessage;
+    public ?string $failureMessage = null;
 
     /**
      *
      * @var ?string $failureReason
      */
     #[\Speakeasy\Serializer\Annotation\SerializedName('failureReason')]
-    public ?string $failureReason;
+    public ?string $failureReason = null;
 
     /**
      *
      * @var ?string $paymentNote
      */
     #[\Speakeasy\Serializer\Annotation\SerializedName('paymentNote')]
-    public ?string $paymentNote;
+    public ?string $paymentNote = null;
 
     /**
      *
      * @var ?string $returnReasonCode
      */
     #[\Speakeasy\Serializer\Annotation\SerializedName('returnReasonCode')]
-    public ?string $returnReasonCode;
+    public ?string $returnReasonCode = null;
 
     /**
      *
      * @var ?\DateTime $returnedAt
      */
     #[\Speakeasy\Serializer\Annotation\SerializedName('returnedAt')]
-    public ?\DateTime $returnedAt;
+    public ?\DateTime $returnedAt = null;
 
     /**
      * @param  \Luqra\LuqraNowPhp\Models\Operations\GetPaymentContact  $contact

@@ -85,7 +85,7 @@ class ListPaymentsData
      * @var ?\DateTime $completedAt
      */
     #[\Speakeasy\Serializer\Annotation\SerializedName('completedAt')]
-    public ?\DateTime $completedAt;
+    public ?\DateTime $completedAt = null;
 
     /**
      *
@@ -93,21 +93,21 @@ class ListPaymentsData
      */
     #[\Speakeasy\Serializer\Annotation\SerializedName('contact')]
     #[\Speakeasy\Serializer\Annotation\Type('\Luqra\LuqraNowPhp\Models\Operations\ListPaymentsContact|null')]
-    public ?ListPaymentsContact $contact;
+    public ?ListPaymentsContact $contact = null;
 
     /**
      *
      * @var ?string $externalPaymentId
      */
     #[\Speakeasy\Serializer\Annotation\SerializedName('externalPaymentId')]
-    public ?string $externalPaymentId;
+    public ?string $externalPaymentId = null;
 
     /**
      *
      * @var ?\DateTime $failedAt
      */
     #[\Speakeasy\Serializer\Annotation\SerializedName('failedAt')]
-    public ?\DateTime $failedAt;
+    public ?\DateTime $failedAt = null;
 
     /**
      *
@@ -115,28 +115,28 @@ class ListPaymentsData
      */
     #[\Speakeasy\Serializer\Annotation\SerializedName('failureCode')]
     #[\Speakeasy\Serializer\Annotation\Type('\Luqra\LuqraNowPhp\Models\Operations\ListPaymentsFailureCode|null')]
-    public ?ListPaymentsFailureCode $failureCode;
+    public ?ListPaymentsFailureCode $failureCode = null;
 
     /**
      *
      * @var ?string $failureMessage
      */
     #[\Speakeasy\Serializer\Annotation\SerializedName('failureMessage')]
-    public ?string $failureMessage;
+    public ?string $failureMessage = null;
 
     /**
      *
      * @var ?string $paymentNote
      */
     #[\Speakeasy\Serializer\Annotation\SerializedName('paymentNote')]
-    public ?string $paymentNote;
+    public ?string $paymentNote = null;
 
     /**
      *
      * @var ?\DateTime $returnedAt
      */
     #[\Speakeasy\Serializer\Annotation\SerializedName('returnedAt')]
-    public ?\DateTime $returnedAt;
+    public ?\DateTime $returnedAt = null;
 
     /**
      * @param  \DateTime  $createdAt
