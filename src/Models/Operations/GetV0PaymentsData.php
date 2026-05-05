@@ -86,7 +86,7 @@ class GetV0PaymentsData
      */
     #[\Speakeasy\Serializer\Annotation\SerializedName('contact')]
     #[\Speakeasy\Serializer\Annotation\Type('\Luqra\LuqraNowPhp\Models\Operations\Contact|null')]
-    public ?Contact $contact;
+    public ?Contact $contact = null;
 
     /**
      * @param  \DateTime  $createdAt

@@ -12,7 +12,7 @@ class APIException extends \Exception
 {
     public int $statusCode;
     public string $body;
-    public ?\Psr\Http\Message\ResponseInterface $rawResponse;
+    public ?\Psr\Http\Message\ResponseInterface $rawResponse = null;
 
     public function __construct(string $message, int $statusCode, string $body, ?\Psr\Http\Message\ResponseInterface $rawResponse)
     {

@@ -61,28 +61,28 @@ class GetV0ContactsData
      */
     #[\Speakeasy\Serializer\Annotation\SerializedName('bankAccount')]
     #[\Speakeasy\Serializer\Annotation\Type('\Luqra\LuqraNowPhp\Models\Operations\GetV0ContactsBankAccount|null')]
-    public ?GetV0ContactsBankAccount $bankAccount;
+    public ?GetV0ContactsBankAccount $bankAccount = null;
 
     /**
      *
      * @var ?string $companyName
      */
     #[\Speakeasy\Serializer\Annotation\SerializedName('companyName')]
-    public ?string $companyName;
+    public ?string $companyName = null;
 
     /**
      *
      * @var ?string $email
      */
     #[\Speakeasy\Serializer\Annotation\SerializedName('email')]
-    public ?string $email;
+    public ?string $email = null;
 
     /**
      *
      * @var ?string $phoneNumber
      */
     #[\Speakeasy\Serializer\Annotation\SerializedName('phoneNumber')]
-    public ?string $phoneNumber;
+    public ?string $phoneNumber = null;
 
     /**
      * @param  string  $contactId

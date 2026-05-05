@@ -9,8 +9,8 @@ declare(strict_types=1);
 namespace Luqra\LuqraNowPhp\Models\Operations;
 
 
-enum GetPaymentContactEntityType: string
+enum GetPaymentFailureCode: string
 {
-    case Business = 'BUSINESS';
-    case Individual = 'INDIVIDUAL';
+    case InternalError = 'INTERNAL_ERROR';
+    case InvalidPartyData = 'INVALID_PARTY_DATA';
 }

@@ -38,14 +38,14 @@ class GetV0OriginatorsBankAccount
      * @var ?string $bankName
      */
     #[\Speakeasy\Serializer\Annotation\SerializedName('bankName')]
-    public ?string $bankName;
+    public ?string $bankName = null;
 
     /**
      *
      * @var ?string $swiftCode
      */
     #[\Speakeasy\Serializer\Annotation\SerializedName('swiftCode')]
-    public ?string $swiftCode;
+    public ?string $swiftCode = null;
 
     /**
      * @param  string  $achAccountNumber

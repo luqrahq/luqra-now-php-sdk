@@ -45,7 +45,7 @@ class Originator
      * @var ?string $companyName
      */
     #[\Speakeasy\Serializer\Annotation\SerializedName('companyName')]
-    public ?string $companyName;
+    public ?string $companyName = null;
 
     /**
      * @param  ListPaymentsPaymentsEntityType  $entityType

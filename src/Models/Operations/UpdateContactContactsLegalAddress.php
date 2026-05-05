@@ -51,7 +51,7 @@ class UpdateContactContactsLegalAddress
      * @var ?string $addressLine2
      */
     #[\Speakeasy\Serializer\Annotation\SerializedName('addressLine2')]
-    public ?string $addressLine2;
+    public ?string $addressLine2 = null;
 
     /**
      * @param  string  $addressLine1

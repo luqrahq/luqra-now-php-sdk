@@ -3,7 +3,7 @@
     "description": "Integration test project for luqra/now-php SDK",
     "require": {
         "php": ">=8.2",
-        "luqra/now-php": "^0.3",
+        "luqra/now-php": "^0.4",
         "vlucas/phpdotenv": "^5.6"
     }
 }

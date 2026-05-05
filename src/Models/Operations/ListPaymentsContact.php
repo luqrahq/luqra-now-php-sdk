@@ -21,13 +21,6 @@ class ListPaymentsContact
 
     /**
      *
-     * @var string $firstName
-     */
-    #[\Speakeasy\Serializer\Annotation\SerializedName('firstName')]
-    public string $firstName;
-
-    /**
-     *
      * @var string $id
      */
     #[\Speakeasy\Serializer\Annotation\SerializedName('id')]
@@ -35,32 +28,39 @@ class ListPaymentsContact
 
     /**
      *
-     * @var string $lastName
-     */
-    #[\Speakeasy\Serializer\Annotation\SerializedName('lastName')]
-    public string $lastName;
-
-    /**
-     *
      * @var ?string $companyName
      */
     #[\Speakeasy\Serializer\Annotation\SerializedName('companyName')]
-    public ?string $companyName;
+    public ?string $companyName = null;
+
+    /**
+     *
+     * @var ?string $firstName
+     */
+    #[\Speakeasy\Serializer\Annotation\SerializedName('firstName')]
+    public ?string $firstName = null;
+
+    /**
+     *
+     * @var ?string $lastName
+     */
+    #[\Speakeasy\Serializer\Annotation\SerializedName('lastName')]
+    public ?string $lastName = null;
 
     /**
      * @param  \Luqra\LuqraNowPhp\Models\Operations\ListPaymentsContactEntityType  $entityType
-     * @param  string  $firstName
      * @param  string  $id
-     * @param  string  $lastName
      * @param  ?string  $companyName
+     * @param  ?string  $firstName
+     * @param  ?string  $lastName
      * @phpstan-pure
      */
-    public function __construct(ListPaymentsContactEntityType $entityType, string $firstName, string $id, string $lastName, ?string $companyName = null)
+    public function __construct(ListPaymentsContactEntityType $entityType, string $id, ?string $companyName = null, ?string $firstName = null, ?string $lastName = null)
     {
         $this->entityType = $entityType;
-        $this->firstName = $firstName;
         $this->id = $id;
-        $this->lastName = $lastName;
         $this->companyName = $companyName;
+        $this->firstName = $firstName;
+        $this->lastName = $lastName;
     }
 }

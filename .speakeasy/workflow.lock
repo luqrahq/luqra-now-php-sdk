@@ -2,8 +2,8 @@ speakeasyVersion: 1.761.9
 sources:
     luqra-api:
         sourceNamespace: luqra-api
-        sourceRevisionDigest: sha256:821b58baa073ce623ce9f5db09922ff6ef913ea5b6efb2b21a5e3d5b75b3b5cc
-        sourceBlobDigest: sha256:52200429e3948dc06cf82d33fbc8294244eb2f7b53d0e14ec484842af35dbd2b
+        sourceRevisionDigest: sha256:b72f2af3be6ce170fac227a18f09b8fba12e6b3381f78e322720a458cd5a4ffb
+        sourceBlobDigest: sha256:70da44995c0ce385d45f1b5b5af9dfb47c296a4435566a00bcac5af9671ee005
         tags:
             - latest
             - 0.1.0
@@ -11,10 +11,8 @@ targets:
     php-sdk:
         source: luqra-api
         sourceNamespace: luqra-api
-        sourceRevisionDigest: sha256:821b58baa073ce623ce9f5db09922ff6ef913ea5b6efb2b21a5e3d5b75b3b5cc
-        sourceBlobDigest: sha256:52200429e3948dc06cf82d33fbc8294244eb2f7b53d0e14ec484842af35dbd2b
-        codeSamplesNamespace: luqra-api-php-code-samples
-        codeSamplesRevisionDigest: sha256:0bc7af528c0253e205dbb097c7e05889777e9681b2182df11f6ee5339c6bbf9f
+        sourceRevisionDigest: sha256:b72f2af3be6ce170fac227a18f09b8fba12e6b3381f78e322720a458cd5a4ffb
+        sourceBlobDigest: sha256:70da44995c0ce385d45f1b5b5af9dfb47c296a4435566a00bcac5af9671ee005
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: latest
@@ -22,6 +20,8 @@ workflow:
         luqra-api:
             inputs:
                 - location: ./openapi.json
+            registry:
+                location: registry.speakeasyapi.dev/test-i4z/test-workspace/luqra-api
     targets:
         php-sdk:
             target: php
