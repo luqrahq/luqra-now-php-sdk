@@ -121,6 +121,20 @@ if ($response->object !== null) {
 * [create](docs/sdks/payments/README.md#create) - Create payment
 * [get](docs/sdks/payments/README.md#get) - Get payment
 
+### [Statements](docs/sdks/statements/README.md)
+
+* [list](docs/sdks/statements/README.md#list) - List statements
+* [getDownloadUrl](docs/sdks/statements/README.md#getdownloadurl) - Get a short-lived signed URL for downloading a statement PDF
+
+### [Webhooks](docs/sdks/webhooks/README.md)
+
+* [list](docs/sdks/webhooks/README.md#list) - List webhook endpoints
+* [create](docs/sdks/webhooks/README.md#create) - Create webhook endpoint
+* [delete](docs/sdks/webhooks/README.md#delete) - Delete webhook endpoint
+* [get](docs/sdks/webhooks/README.md#get) - Get webhook endpoint
+* [update](docs/sdks/webhooks/README.md#update) - Update webhook endpoint
+* [test](docs/sdks/webhooks/README.md#test) - Test webhook endpoint
+
 </details>
 <!-- End Available Resources and Operations [operations] -->
 
@@ -252,3 +266,5 @@ if ($response->object !== null) {
 <!-- End Server Selection [server] -->
 
 For information on releasing a new version of this SDK, see [RELEASING.md](RELEASING.md).
+
+<!-- Placeholder for Future Speakeasy SDK Sections -->

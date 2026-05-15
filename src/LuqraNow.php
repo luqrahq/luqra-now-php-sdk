@@ -42,6 +42,20 @@ class LuqraNow
     public Payments $payments;
 
     /**
+     * Monthly statement endpoints
+     *
+     * @var Statements $$statements
+     */
+    public Statements $statements;
+
+    /**
+     * Webhook endpoint management
+     *
+     * @var Webhooks $$webhooks
+     */
+    public Webhooks $webhooks;
+
+    /**
      * Returns a new instance of the SDK builder used to configure and create the SDK instance.
      *
      * @return LuqraNowBuilder
@@ -60,6 +74,8 @@ class LuqraNow
         $this->contacts = new Contacts($this->sdkConfiguration);
         $this->originators = new Originators($this->sdkConfiguration);
         $this->payments = new Payments($this->sdkConfiguration);
+        $this->statements = new Statements($this->sdkConfiguration);
+        $this->webhooks = new Webhooks($this->sdkConfiguration);
         $this->initHooks();
 
     }

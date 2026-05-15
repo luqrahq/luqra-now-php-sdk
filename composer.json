@@ -1,6 +1,7 @@
 {
   "name": "luqra/now-php",
   "type": "library",
+  "version": "0.5.0",
   "autoload": {
     "psr-4": {
       "Luqra\\LuqraNowPhp\\": "src/"
@@ -31,11 +32,15 @@
     "process-timeout": 60
   },
   "scripts": {
+    "test": [
+      "./vendor/bin/phpunit --testdox --display-warnings --colors=always"
+    ],
     "stan": [
       "./vendor/bin/phpstan analyse --memory-limit=2g --error-format=table"
     ]
   },
   "script-descriptions": {
+    "test": "Run PhpUnit test scripts.",
     "stan": "Run PhpStan static analysis."
   }
 }

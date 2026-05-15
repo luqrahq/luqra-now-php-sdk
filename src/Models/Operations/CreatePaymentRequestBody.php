@@ -20,11 +20,11 @@ class CreatePaymentRequestBody
 
     /**
      *
-     * @var Direction $direction
+     * @var \Luqra\LuqraNowPhp\Models\Operations\CreatePaymentDirection $direction
      */
     #[\Speakeasy\Serializer\Annotation\SerializedName('direction')]
-    #[\Speakeasy\Serializer\Annotation\Type('\Luqra\LuqraNowPhp\Models\Operations\Direction')]
-    public Direction $direction;
+    #[\Speakeasy\Serializer\Annotation\Type('\Luqra\LuqraNowPhp\Models\Operations\CreatePaymentDirection')]
+    public CreatePaymentDirection $direction;
 
     /**
      *
@@ -42,6 +42,14 @@ class CreatePaymentRequestBody
     public int $paymentAmount;
 
     /**
+     * A note from the originator that is transmitted along with the payment. How this note surfaces to the contact depends on the receiving bank's implementation. The payment network may truncate the note based on the rail used: ACH supports up to 10 characters, Fedwire up to 35, and RTP, FedNow, and SWIFT up to 140. For best results, put the most important information at the beginning of the note.
+     *
+     * @var string $paymentNote
+     */
+    #[\Speakeasy\Serializer\Annotation\SerializedName('paymentNote')]
+    public string $paymentNote;
+
+    /**
      *
      * @var ?string $externalPaymentId
      */
@@ -50,29 +58,21 @@ class CreatePaymentRequestBody
     public ?string $externalPaymentId = null;
 
     /**
-     *
-     * @var ?string $paymentNote
-     */
-    #[\Speakeasy\Serializer\Annotation\SerializedName('paymentNote')]
-    #[\Speakeasy\Serializer\Annotation\SkipWhenNull]
-    public ?string $paymentNote = null;
-
-    /**
      * @param  string  $contactId
-     * @param  Direction  $direction
+     * @param  \Luqra\LuqraNowPhp\Models\Operations\CreatePaymentDirection  $direction
      * @param  string  $originatorId
      * @param  int  $paymentAmount
+     * @param  string  $paymentNote
      * @param  ?string  $externalPaymentId
-     * @param  ?string  $paymentNote
      * @phpstan-pure
      */
-    public function __construct(string $contactId, Direction $direction, string $originatorId, int $paymentAmount, ?string $externalPaymentId = null, ?string $paymentNote = null)
+    public function __construct(string $contactId, CreatePaymentDirection $direction, string $originatorId, int $paymentAmount, string $paymentNote, ?string $externalPaymentId = null)
     {
         $this->contactId = $contactId;
         $this->direction = $direction;
         $this->originatorId = $originatorId;
         $this->paymentAmount = $paymentAmount;
-        $this->externalPaymentId = $externalPaymentId;
         $this->paymentNote = $paymentNote;
+        $this->externalPaymentId = $externalPaymentId;
     }
 }
