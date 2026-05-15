@@ -27,6 +27,13 @@ class ListPaymentsRequest
 
     /**
      *
+     * @var ?string $cursor
+     */
+    #[SpeakeasyMetadata('queryParam:style=form,explode=true,name=cursor')]
+    public ?string $cursor = null;
+
+    /**
+     *
      * @var ?\Luqra\LuqraNowPhp\Models\Operations\QueryParamDirection $direction
      */
     #[SpeakeasyMetadata('queryParam:style=form,explode=true,name=direction')]
@@ -54,30 +61,23 @@ class ListPaymentsRequest
     public ?int $limit = null;
 
     /**
-     *
-     * @var ?int $page
-     */
-    #[SpeakeasyMetadata('queryParam:style=form,explode=true,name=page')]
-    public ?int $page = null;
-
-    /**
      * @param  ?\DateTime  $createdFrom
      * @param  ?\DateTime  $createdTo
+     * @param  ?string  $cursor
      * @param  ?\Luqra\LuqraNowPhp\Models\Operations\QueryParamDirection  $direction
      * @param  ?int  $limit
      * @param  ?string  $originatorId
-     * @param  ?int  $page
      * @param  ?\Luqra\LuqraNowPhp\Models\Operations\QueryParamStatus  $status
      * @phpstan-pure
      */
-    public function __construct(?\DateTime $createdFrom = null, ?\DateTime $createdTo = null, ?QueryParamDirection $direction = null, ?string $originatorId = null, ?QueryParamStatus $status = null, ?int $limit = 20, ?int $page = 1)
+    public function __construct(?\DateTime $createdFrom = null, ?\DateTime $createdTo = null, ?string $cursor = null, ?QueryParamDirection $direction = null, ?string $originatorId = null, ?QueryParamStatus $status = null, ?int $limit = 20)
     {
         $this->createdFrom = $createdFrom;
         $this->createdTo = $createdTo;
+        $this->cursor = $cursor;
         $this->direction = $direction;
         $this->originatorId = $originatorId;
         $this->status = $status;
         $this->limit = $limit;
-        $this->page = $page;
     }
 }

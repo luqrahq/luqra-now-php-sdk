@@ -1,0 +1,24 @@
+# ListStatementsData
+
+
+## Fields
+
+| Field                                                         | Type                                                          | Required                                                      | Description                                                   |
+| ------------------------------------------------------------- | ------------------------------------------------------------- | ------------------------------------------------------------- | ------------------------------------------------------------- |
+| `generatedAt`                                                 | [\DateTime](https://www.php.net/manual/en/class.datetime.php) | :heavy_check_mark:                                            | N/A                                                           |
+| `id`                                                          | *string*                                                      | :heavy_check_mark:                                            | N/A                                                           |
+| `originatorId`                                                | *string*                                                      | :heavy_check_mark:                                            | N/A                                                           |
+| `pdfReady`                                                    | *bool*                                                        | :heavy_check_mark:                                            | N/A                                                           |
+| `periodMonth`                                                 | *int*                                                         | :heavy_check_mark:                                            | N/A                                                           |
+| `periodYear`                                                  | *int*                                                         | :heavy_check_mark:                                            | N/A                                                           |
+| `sizeBytes`                                                   | *int*                                                         | :heavy_check_mark:                                            | N/A                                                           |
+| `timezone`                                                    | *string*                                                      | :heavy_check_mark:                                            | N/A                                                           |
+| `totalDiscountRateMinorUnits`                                 | *float*                                                       | :heavy_check_mark:                                            | N/A                                                           |
+| `totalFeeCount`                                               | *int*                                                         | :heavy_check_mark:                                            | N/A                                                           |
+| `totalPaymentCount`                                           | *int*                                                         | :heavy_check_mark:                                            | N/A                                                           |
+| `totalProcessingVolumeMinorUnits`                             | *float*                                                       | :heavy_check_mark:                                            | N/A                                                           |
+| `totalReturnCount`                                            | *int*                                                         | :heavy_check_mark:                                            | N/A                                                           |
+| `totalReturnFeesMinorUnits`                                   | *float*                                                       | :heavy_check_mark:                                            | N/A                                                           |
+| `totalReturnVolumeMinorUnits`                                 | *float*                                                       | :heavy_check_mark:                                            | N/A                                                           |
+| `totalServiceFeesMinorUnits`                                  | *float*                                                       | :heavy_check_mark:                                            | N/A                                                           |
+| `totalTransactionFeesMinorUnits`                              | *float*                                                       | :heavy_check_mark:                                            | N/A                                                           |

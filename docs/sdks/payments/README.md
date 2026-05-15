@@ -81,7 +81,7 @@ $sdk = LuqraNowPhp\LuqraNow::builder()
     )
     ->build();
 
-$request = new Operations\CreatePaymentRequest(
+$body = new Operations\CreatePaymentRequestBody(
     contactId: '<id>',
     direction: Operations\CreatePaymentDirection::Outbound,
     originatorId: '<id>',
@@ -90,7 +90,9 @@ $request = new Operations\CreatePaymentRequest(
 );
 
 $response = $sdk->payments->create(
-    request: $request
+    idempotencyKey: '<value>',
+    body: $body
+
 );
 
 if ($response->object !== null) {
@@ -100,9 +102,10 @@ if ($response->object !== null) {
 
 ### Parameters
 
-| Parameter                                                                          | Type                                                                               | Required                                                                           | Description                                                                        |
-| ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
-| `$request`                                                                         | [Operations\CreatePaymentRequest](../../Models/Operations/CreatePaymentRequest.md) | :heavy_check_mark:                                                                 | The request object to use for the request.                                         |
+| Parameter                                                                                  | Type                                                                                       | Required                                                                                   | Description                                                                                |
+| ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ |
+| `idempotencyKey`                                                                           | *string*                                                                                   | :heavy_check_mark:                                                                         | N/A                                                                                        |
+| `body`                                                                                     | [Operations\CreatePaymentRequestBody](../../Models/Operations/CreatePaymentRequestBody.md) | :heavy_check_mark:                                                                         | N/A                                                                                        |
 
 ### Response
 

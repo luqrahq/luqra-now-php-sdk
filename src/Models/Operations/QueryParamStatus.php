@@ -18,7 +18,6 @@ enum QueryParamStatus: string
     case Completed = 'COMPLETED';
     case Failed = 'FAILED';
     case FailedInFlight = 'FAILED_IN_FLIGHT';
-    case PendingCustomerRetry = 'PENDING_CUSTOMER_RETRY';
     case Processing = 'PROCESSING';
     case Queued = 'QUEUED';
     case Returned = 'RETURNED';

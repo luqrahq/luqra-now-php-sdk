@@ -61,7 +61,7 @@ try {
     $response   = $sdkByIndex->originators->list();
     check('setServerIndex(0) produces a working client', $response->statusCode === 200);
 } catch (Errors\APIException $e) {
-    check('setServerIndex(0) produces a working client', false, "HTTP {$e->statusCode}: {$e->message}");
+    check('setServerIndex(0) produces a working client', false, "HTTP " . $e->statusCode . ": " . $e->getMessage());
 }
 
 try {
@@ -69,7 +69,7 @@ try {
     $response  = $sdkByUrl->originators->list();
     check('setServerURL(...) produces a working client', $response->statusCode === 200);
 } catch (Errors\APIException $e) {
-    check('setServerURL(...) produces a working client', false, "HTTP {$e->statusCode}: {$e->message}");
+    check('setServerURL(...) produces a working client', false, "HTTP " . $e->statusCode . ": " . $e->getMessage());
 }
 
 // ── 1. List originators ───────────────────────────────────────────────────────
@@ -95,7 +95,7 @@ try {
     check('originatorId is a non-empty string', is_string($originatorId) && $originatorId !== '');
     echo "  → using originatorId: $originatorId\n";
 } catch (Errors\APIException $e) {
-    check('List originators succeeded', false, "HTTP {$e->statusCode}: {$e->message}");
+    check('List originators succeeded', false, "HTTP " . $e->statusCode . ": " . $e->getMessage());
     exit(1);
 }
 
@@ -112,20 +112,21 @@ try {
     $existingContacts = $response->object?->data ?? [];
     echo '  → ' . count($existingContacts) . " contact(s) found\n";
 } catch (Errors\APIException $e) {
-    check('List contacts succeeded', false, "HTTP {$e->statusCode}: {$e->message}");
+    check('List contacts succeeded', false, "HTTP " . $e->statusCode . ": " . $e->getMessage());
 }
 
 // ── 3. Create contact ─────────────────────────────────────────────────────────
 
 section('3. Create contact');
 
-$testEmail = 'sdk-test-' . uniqid() . '@example.com';
+$testEmail      = 'sdk-test-' . uniqid() . '@example.com';
+$testAccountNum = (string) rand(100000000, 999999999);
 
 try {
     $response = $sdk->contacts->create(
         new Operations\CreateContactRequest(
             bankAccount: new Operations\CreateContactBankAccount(
-                achAccountNumber: '123456789',
+                achAccountNumber: $testAccountNum,
                 achRoutingNumber: '021000021',
                 subType: Operations\CreateContactSubType::Checking,
             ),
@@ -154,7 +155,7 @@ try {
     check('Create contact succeeded', false, $e->getMessage());
     $contactId = null;
 } catch (Errors\APIException $e) {
-    check('Create contact succeeded', false, "HTTP {$e->statusCode}: {$e->message}");
+    check('Create contact succeeded', false, "HTTP " . $e->statusCode . ": " . $e->getMessage());
     $contactId = null;
 }
 
@@ -181,7 +182,7 @@ if ($contactId === null) {
     } catch (Errors\ErrorResponseThrowable $e) {
         check('Update contact succeeded', false, $e->getMessage());
     } catch (Errors\APIException $e) {
-        check('Update contact succeeded', false, "HTTP {$e->statusCode}: {$e->message}");
+        check('Update contact succeeded', false, "HTTP " . $e->statusCode . ": " . $e->getMessage());
     }
 }
 
@@ -194,53 +195,56 @@ try {
         new Operations\ListPaymentsRequest(
             originatorId: $originatorId,
             limit: 10,
-            page: 1,
         )
     );
     check('HTTP 200', $response->statusCode === 200);
     check('Response body present', $response->object !== null);
     check('data is array', is_array($response->object?->data));
     check('meta.pagination present', isset($response->object?->meta?->pagination));
-    check('pagination.total is numeric', is_numeric($response->object?->meta?->pagination?->total ?? null));
+    check('pagination.limit is numeric', is_numeric($response->object?->meta?->pagination?->limit ?? null));
     $existingPayments = $response->object?->data ?? [];
     echo '  → ' . count($existingPayments) . " payment(s) found\n";
 } catch (Errors\APIException $e) {
-    check('List payments succeeded', false, "HTTP {$e->statusCode}: {$e->message}");
+    check('List payments succeeded', false, "HTTP " . $e->statusCode . ": " . $e->getMessage());
 }
 
-// ── 5b. Pagination plumbing ───────────────────────────────────────────────────
-// Verifies SDK query-param names (page, limit), encoding, and
-// meta.pagination deserialization — a regen can silently rename a param.
+// ── 5b. Cursor pagination plumbing ────────────────────────────────────────────
+// Verifies cursor-based pagination: limit param, nextCursor deserialization,
+// and that following a cursor yields a different page. A regen can silently
+// rename a param or break cursor encoding.
 
-section('5b. Pagination plumbing');
+section('5b. Cursor pagination plumbing');
 
 try {
     $page1 = $sdk->payments->list(new Operations\ListPaymentsRequest(
-        originatorId: $originatorId, limit: 1, page: 1,
-    ));
-    $page2 = $sdk->payments->list(new Operations\ListPaymentsRequest(
-        originatorId: $originatorId, limit: 1, page: 2,
+        originatorId: $originatorId, limit: 1,
     ));
 
     check('page 1 HTTP 200', $page1->statusCode === 200);
-    check('page 2 HTTP 200', $page2->statusCode === 200);
     check('limit respected on page 1', count($page1->object?->data ?? []) <= 1);
-    check('limit respected on page 2', count($page2->object?->data ?? []) <= 1);
-    check('meta.pagination.total present', is_numeric($page1->object?->meta?->pagination?->total ?? null));
     check('meta.pagination.limit present', is_numeric($page1->object?->meta?->pagination?->limit ?? null));
-    check('meta.pagination.page present',  is_numeric($page1->object?->meta?->pagination?->page  ?? null));
 
-    $total   = (int) ($page1->object?->meta?->pagination?->total ?? 0);
-    $id1     = $page1->object?->data[0]?->paymentId ?? null;
-    $id2     = $page2->object?->data[0]?->paymentId ?? null;
+    $nextCursor = $page1->object?->meta?->pagination?->nextCursor ?? null;
+    $id1        = $page1->object?->data[0]?->paymentId ?? null;
 
-    if ($total >= 2 && $id1 !== null && $id2 !== null) {
-        check('page 1 and page 2 return different paymentIds', $id1 !== $id2, "id1=$id1 id2=$id2");
+    if ($nextCursor !== null && $id1 !== null) {
+        $page2 = $sdk->payments->list(new Operations\ListPaymentsRequest(
+            originatorId: $originatorId, limit: 1, cursor: $nextCursor,
+        ));
+        check('cursor page HTTP 200', $page2->statusCode === 200);
+        check('cursor page limit respected', count($page2->object?->data ?? []) <= 1);
+
+        $id2 = $page2->object?->data[0]?->paymentId ?? null;
+        if ($id2 !== null) {
+            check('cursor page returns different paymentId', $id1 !== $id2, "id1=$id1 id2=$id2");
+        } else {
+            echo "  → cursor page returned no items\n";
+        }
     } else {
-        echo "  → skipping distinctness check (only $total payment(s) available)\n";
+        echo "  → skipping cursor follow (fewer than 2 payments or no nextCursor)\n";
     }
 } catch (Errors\APIException $e) {
-    check('Pagination plumbing succeeded', false, "HTTP {$e->statusCode}: {$e->message}");
+    check('Cursor pagination plumbing succeeded', false, "HTTP " . $e->statusCode . ": " . $e->getMessage());
 }
 
 // ── 6. Create payment ─────────────────────────────────────────────────────────
@@ -252,14 +256,16 @@ if ($contactId === null) {
     $paymentId = null;
 } else {
     try {
+        $idempotencyKey = 'sdk-test-' . uniqid();
         $response = $sdk->payments->create(
-            new Operations\CreatePaymentRequest(
+            body: new Operations\CreatePaymentRequestBody(
                 contactId: $contactId,
                 direction: Operations\CreatePaymentDirection::Outbound,
                 originatorId: $originatorId,
                 paymentAmount: 100,
                 paymentNote: 'SDK test',
-            )
+            ),
+            idempotencyKey: $idempotencyKey,
         );
         check('HTTP 201', $response->statusCode === 201);
         check('Response body present', $response->object !== null);
@@ -271,8 +277,37 @@ if ($contactId === null) {
         check('Create payment succeeded', false, $e->getMessage());
         $paymentId = null;
     } catch (Errors\APIException $e) {
-        check('Create payment succeeded', false, "HTTP {$e->statusCode}: {$e->message}");
+        check('Create payment succeeded', false, "HTTP " . $e->statusCode . ": " . $e->getMessage());
         $paymentId = null;
+    }
+}
+
+// ── 6b. Idempotency key deduplication ─────────────────────────────────────────
+// Submitting the same idempotencyKey twice must return the same paymentId.
+
+section('6b. Idempotency key deduplication');
+
+if ($contactId === null || $paymentId === null) {
+    echo "  Skipped — no contactId/paymentId from earlier steps\n";
+} else {
+    try {
+        $response2 = $sdk->payments->create(
+            body: new Operations\CreatePaymentRequestBody(
+                contactId: $contactId,
+                direction: Operations\CreatePaymentDirection::Outbound,
+                originatorId: $originatorId,
+                paymentAmount: 100,
+                paymentNote: 'SDK test',
+            ),
+            idempotencyKey: $idempotencyKey,
+        );
+        check('Duplicate idempotencyKey returns 2xx', in_array($response2->statusCode, [200, 201]));
+        $dupePaymentId = $response2->object?->data?->paymentId ?? null;
+        check('Duplicate idempotencyKey returns same paymentId', $dupePaymentId === $paymentId, "got $dupePaymentId expected $paymentId");
+    } catch (Errors\ErrorResponseThrowable $e) {
+        check('Duplicate idempotencyKey succeeded', false, $e->getMessage());
+    } catch (Errors\APIException $e) {
+        check('Duplicate idempotencyKey succeeded', false, "HTTP " . $e->statusCode . ": " . $e->getMessage());
     }
 }
 
@@ -291,20 +326,23 @@ if ($paymentId === null) {
         check('status present', isset($response->object?->data?->status));
         check('paymentAmount matches', $response->object?->data?->paymentAmount === 100);
         check('direction is OUTBOUND', $response->object?->data?->direction->value === 'OUTBOUND');
+        check('paymentRail present', isset($response->object?->data?->paymentRail));
+        check('currencyCode present', isset($response->object?->data?->currencyCode));
+        check('discountFee is int', is_int($response->object?->data?->discountFee));
+        check('flatFee is int', is_int($response->object?->data?->flatFee));
+        check('returnFee is int', is_int($response->object?->data?->returnFee));
         echo "  → status: " . ($response->object?->data?->status?->value ?? 'n/a') . "\n";
+        echo "  → paymentRail: " . ($response->object?->data?->paymentRail?->value ?? 'n/a') . "\n";
     } catch (Errors\ErrorResponseThrowable $e) {
         check('Get payment succeeded', false, $e->getMessage());
     } catch (Errors\APIException $e) {
-        check('Get payment succeeded', false, "HTTP {$e->statusCode}: {$e->message}");
+        check('Get payment succeeded', false, "HTTP " . $e->statusCode . ": " . $e->getMessage());
     }
 }
 
 // ── 8. Error handling ─────────────────────────────────────────────────────────
 
 section('8. Error handling');
-
-// ErrorResponseThrowable::toException() hardcodes code=-1; the real HTTP
-// status lives on $e->container->rawResponse->getStatusCode().
 
 // 8a. 401 — bad token (verifies setSecurity wiring)
 try {
@@ -358,6 +396,209 @@ try {
     check('400 on invalid input throws ErrorResponseThrowable', $status === 400, "got HTTP $status");
 } catch (Errors\APIException $e) {
     check('400 on invalid input throws', $e->statusCode === 400, "got HTTP {$e->statusCode}");
+}
+
+// ── 9. Webhooks CRUD ──────────────────────────────────────────────────────────
+
+section('9. Webhooks — create');
+
+$webhookId = null;
+$webhookUrl = 'https://httpbin.org/post';
+
+try {
+    $response = $sdk->webhooks->create(
+        new Operations\CreateWebhookRequest(
+            subscribedEvents: [Operations\CreateWebhookSubscribedEventRequest::StatementGenerated],
+            url: $webhookUrl,
+        )
+    );
+    check('HTTP 201', $response->statusCode === 201);
+    check('Response body present', $response->object !== null);
+    $webhookId = $response->object?->data?->id ?? null;
+    check('webhook id returned', $webhookId !== null && $webhookId !== '');
+    check('url matches', $response->object?->data?->url === $webhookUrl);
+    check('enabled is true by default', $response->object?->data?->enabled === true);
+    check('subscribedEvents present', is_array($response->object?->data?->subscribedEvents));
+    echo "  → created webhookId: $webhookId\n";
+} catch (Errors\ErrorResponseThrowable $e) {
+    check('Create webhook succeeded', false, $e->getMessage());
+} catch (Errors\APIException $e) {
+    check('Create webhook succeeded', false, "HTTP " . $e->statusCode . ": " . $e->getMessage());
+}
+
+section('9b. Webhooks — get');
+
+if ($webhookId === null) {
+    echo "  Skipped — no webhookId from create step\n";
+} else {
+    try {
+        $response = $sdk->webhooks->get(id: $webhookId);
+        check('HTTP 200', $response->statusCode === 200);
+        check('Response body present', $response->object !== null);
+        check('id matches', $response->object?->data?->id === $webhookId);
+        check('url present', isset($response->object?->data?->url));
+        check('enabled present', isset($response->object?->data?->enabled));
+        check('createdAt present', isset($response->object?->data?->createdAt));
+        check('updatedAt present', isset($response->object?->data?->updatedAt));
+    } catch (Errors\ErrorResponseThrowable $e) {
+        check('Get webhook succeeded', false, $e->getMessage());
+    } catch (Errors\APIException $e) {
+        check('Get webhook succeeded', false, "HTTP " . $e->statusCode . ": " . $e->getMessage());
+    }
+}
+
+section('9c. Webhooks — list');
+
+try {
+    $response = $sdk->webhooks->list();
+    check('HTTP 200', $response->statusCode === 200);
+    check('Response body present', $response->object !== null);
+    check('data is array', is_array($response->object?->data));
+    if ($webhookId !== null) {
+        $ids = array_map(fn($w) => $w->id, $response->object?->data ?? []);
+        check('created webhook appears in list', in_array($webhookId, $ids));
+    }
+    echo '  → ' . count($response->object?->data ?? []) . " webhook(s) found\n";
+} catch (Errors\ErrorResponseThrowable $e) {
+    check('List webhooks succeeded', false, $e->getMessage());
+} catch (Errors\APIException $e) {
+    check('List webhooks succeeded', false, "HTTP " . $e->statusCode . ": " . $e->getMessage());
+}
+
+section('9d. Webhooks — update');
+
+if ($webhookId === null) {
+    echo "  Skipped — no webhookId\n";
+} else {
+    try {
+        $newUrl = 'https://httpbin.org/post?updated=1';
+        $response = $sdk->webhooks->update(
+            body: new Operations\UpdateWebhookRequestBody(
+                url: $newUrl,
+                enabled: false,
+            ),
+            id: $webhookId,
+        );
+        check('HTTP 200', $response->statusCode === 200);
+        check('Response body present', $response->object !== null);
+        check('id matches', $response->object?->data?->id === $webhookId);
+        check('url updated', $response->object?->data?->url === $newUrl);
+        check('enabled updated to false', $response->object?->data?->enabled === false);
+    } catch (Errors\ErrorResponseThrowable $e) {
+        check('Update webhook succeeded', false, $e->getMessage());
+    } catch (Errors\APIException $e) {
+        check('Update webhook succeeded', false, "HTTP " . $e->statusCode . ": " . $e->getMessage());
+    }
+}
+
+section('9e. Webhooks — test');
+
+if ($webhookId === null) {
+    echo "  Skipped — no webhookId\n";
+} else {
+    try {
+        $response = $sdk->webhooks->test(id: $webhookId);
+        check('HTTP 200', $response->statusCode === 200);
+        check('Response body present', $response->object !== null);
+        check('durationMs present', isset($response->object?->data?->durationMs));
+        check('success field present', isset($response->object?->data?->success));
+        echo "  → test success: " . ($response->object?->data?->success ? 'true' : 'false') . "\n";
+        echo "  → durationMs: " . ($response->object?->data?->durationMs ?? 'n/a') . "\n";
+    } catch (Errors\ErrorResponseThrowable $e) {
+        check('Test webhook succeeded', false, $e->getMessage());
+    } catch (Errors\APIException $e) {
+        check('Test webhook succeeded', false, "HTTP " . $e->statusCode . ": " . $e->getMessage());
+    }
+}
+
+section('9f. Webhooks — delete');
+
+if ($webhookId === null) {
+    echo "  Skipped — no webhookId\n";
+} else {
+    try {
+        $response = $sdk->webhooks->delete(id: $webhookId);
+        check('HTTP 2xx on delete', $response->statusCode >= 200 && $response->statusCode < 300);
+
+        // Verify it's gone
+        try {
+            $sdk->webhooks->get(id: $webhookId);
+            check('Deleted webhook is no longer accessible', false, 'expected 404, got success');
+        } catch (Errors\ErrorResponseThrowable $e) {
+            $status = $e->container->rawResponse?->getStatusCode();
+            check('Deleted webhook returns 404', $status === 404, "got HTTP $status");
+        } catch (Errors\APIException $e) {
+            check('Deleted webhook returns 404', $e->statusCode === 404, "got HTTP {$e->statusCode}");
+        }
+    } catch (Errors\ErrorResponseThrowable $e) {
+        check('Delete webhook succeeded', false, $e->getMessage());
+    } catch (Errors\APIException $e) {
+        check('Delete webhook succeeded', false, "HTTP " . $e->statusCode . ": " . $e->getMessage());
+    }
+}
+
+// ── 10. Statements ────────────────────────────────────────────────────────────
+
+section('10. Statements — list');
+
+$statementId = null;
+
+try {
+    $response = $sdk->statements->list(
+        new Operations\ListStatementsRequest(
+            originatorId: $originatorId,
+            limit: 5,
+        )
+    );
+    check('HTTP 200', $response->statusCode === 200);
+    check('Response body present', $response->object !== null);
+    check('data is array', is_array($response->object?->data));
+    check('meta.pagination present', isset($response->object?->meta?->pagination));
+    check('pagination.limit is numeric', is_numeric($response->object?->meta?->pagination?->limit ?? null));
+    $statements = $response->object?->data ?? [];
+    echo '  → ' . count($statements) . " statement(s) found\n";
+
+    if (count($statements) > 0) {
+        $stmt = $statements[0];
+        check('statement id present', isset($stmt->id) && $stmt->id !== '');
+        check('statement originatorId present', isset($stmt->originatorId));
+        check('statement periodMonth present', isset($stmt->periodMonth));
+        check('statement periodYear present', isset($stmt->periodYear));
+        check('statement pdfReady present', isset($stmt->pdfReady));
+        $statementId = $stmt->id;
+
+        // find a pdfReady statement if available
+        foreach ($statements as $s) {
+            if ($s->pdfReady) {
+                $statementId = $s->id;
+                break;
+            }
+        }
+        echo "  → using statementId: $statementId (pdfReady: " . ($stmt->pdfReady ? 'true' : 'false') . ")\n";
+    }
+} catch (Errors\ErrorResponseThrowable $e) {
+    check('List statements succeeded', false, $e->getMessage());
+} catch (Errors\APIException $e) {
+    check('List statements succeeded', false, "HTTP " . $e->statusCode . ": " . $e->getMessage());
+}
+
+section('10b. Statements — get download URL');
+
+if ($statementId === null) {
+    echo "  Skipped — no statements found\n";
+} else {
+    try {
+        $response = $sdk->statements->getDownloadUrl(id: $statementId);
+        check('HTTP 200', $response->statusCode === 200);
+        check('Response body present', $response->object !== null);
+        check('download url present', isset($response->object?->data?->url) && $response->object?->data?->url !== '');
+        check('expiresAt present', isset($response->object?->data?->expiresAt));
+        echo "  → download url obtained (expires: " . ($response->object?->data?->expiresAt?->format('c') ?? 'n/a') . ")\n";
+    } catch (Errors\ErrorResponseThrowable $e) {
+        check('Get statement download URL succeeded', false, $e->getMessage());
+    } catch (Errors\APIException $e) {
+        check('Get statement download URL succeeded', false, "HTTP " . $e->statusCode . ": " . $e->getMessage());
+    }
 }
 
 // ── summary ───────────────────────────────────────────────────────────────────
