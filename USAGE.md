@@ -15,7 +15,9 @@ $sdk = LuqraNowPhp\LuqraNow::builder()
 
 
 $response = $sdk->contacts->list(
-    originatorId: '1d7999d2-66f8-428f-af77-7a969541638f'
+    originatorId: '1d7999d2-66f8-428f-af77-7a969541638f',
+    limit: 20
+
 );
 
 if ($response->object !== null) {

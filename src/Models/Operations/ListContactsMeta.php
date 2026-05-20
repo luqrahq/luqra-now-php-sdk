@@ -13,17 +13,27 @@ class ListContactsMeta
 {
     /**
      *
+     * @var \Luqra\LuqraNowPhp\Models\Operations\ListContactsPagination $pagination
+     */
+    #[\Speakeasy\Serializer\Annotation\SerializedName('pagination')]
+    #[\Speakeasy\Serializer\Annotation\Type('\Luqra\LuqraNowPhp\Models\Operations\ListContactsPagination')]
+    public ListContactsPagination $pagination;
+
+    /**
+     *
      * @var \DateTime $timestamp
      */
     #[\Speakeasy\Serializer\Annotation\SerializedName('timestamp')]
     public \DateTime $timestamp;
 
     /**
+     * @param  \Luqra\LuqraNowPhp\Models\Operations\ListContactsPagination  $pagination
      * @param  \DateTime  $timestamp
      * @phpstan-pure
      */
-    public function __construct(\DateTime $timestamp)
+    public function __construct(ListContactsPagination $pagination, \DateTime $timestamp)
     {
+        $this->pagination = $pagination;
         $this->timestamp = $timestamp;
     }
 }

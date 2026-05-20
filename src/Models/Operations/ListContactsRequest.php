@@ -20,19 +20,37 @@ class ListContactsRequest
 
     /**
      *
+     * @var ?string $cursor
+     */
+    #[SpeakeasyMetadata('queryParam:style=form,explode=true,name=cursor')]
+    public ?string $cursor = null;
+
+    /**
+     *
      * @var ?string $search
      */
     #[SpeakeasyMetadata('queryParam:style=form,explode=true,name=search')]
     public ?string $search = null;
 
     /**
+     *
+     * @var ?int $limit
+     */
+    #[SpeakeasyMetadata('queryParam:style=form,explode=true,name=limit')]
+    public ?int $limit = null;
+
+    /**
      * @param  string  $originatorId
+     * @param  ?string  $cursor
+     * @param  ?int  $limit
      * @param  ?string  $search
      * @phpstan-pure
      */
-    public function __construct(string $originatorId, ?string $search = null)
+    public function __construct(string $originatorId, ?string $cursor = null, ?string $search = null, ?int $limit = 20)
     {
         $this->originatorId = $originatorId;
+        $this->cursor = $cursor;
         $this->search = $search;
+        $this->limit = $limit;
     }
 }
