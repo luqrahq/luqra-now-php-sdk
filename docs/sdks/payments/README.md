@@ -16,7 +16,7 @@ List payments
 
 ### Example Usage
 
-<!-- UsageSnippet language="php" operationID="listPayments" method="get" path="/v0/payments/" -->
+<!-- UsageSnippet language="php" operationID="listPayments" method="get" path="/v1/payments/" -->
 ```php
 declare(strict_types=1);
 
@@ -66,7 +66,7 @@ Create payment
 
 ### Example Usage
 
-<!-- UsageSnippet language="php" operationID="createPayment" method="post" path="/v0/payments/" -->
+<!-- UsageSnippet language="php" operationID="createPayment" method="post" path="/v1/payments/" -->
 ```php
 declare(strict_types=1);
 
@@ -81,7 +81,7 @@ $sdk = LuqraNowPhp\LuqraNow::builder()
     )
     ->build();
 
-$request = new Operations\CreatePaymentRequest(
+$body = new Operations\CreatePaymentRequestBody(
     contactId: '<id>',
     direction: Operations\CreatePaymentDirection::Outbound,
     originatorId: '<id>',
@@ -90,7 +90,9 @@ $request = new Operations\CreatePaymentRequest(
 );
 
 $response = $sdk->payments->create(
-    request: $request
+    idempotencyKey: '<value>',
+    body: $body
+
 );
 
 if ($response->object !== null) {
@@ -100,9 +102,10 @@ if ($response->object !== null) {
 
 ### Parameters
 
-| Parameter                                                                          | Type                                                                               | Required                                                                           | Description                                                                        |
-| ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
-| `$request`                                                                         | [Operations\CreatePaymentRequest](../../Models/Operations/CreatePaymentRequest.md) | :heavy_check_mark:                                                                 | The request object to use for the request.                                         |
+| Parameter                                                                                  | Type                                                                                       | Required                                                                                   | Description                                                                                |
+| ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ |
+| `idempotencyKey`                                                                           | *string*                                                                                   | :heavy_check_mark:                                                                         | N/A                                                                                        |
+| `body`                                                                                     | [Operations\CreatePaymentRequestBody](../../Models/Operations/CreatePaymentRequestBody.md) | :heavy_check_mark:                                                                         | N/A                                                                                        |
 
 ### Response
 
@@ -122,7 +125,7 @@ Get payment
 
 ### Example Usage
 
-<!-- UsageSnippet language="php" operationID="getPayment" method="get" path="/v0/payments/{id}" -->
+<!-- UsageSnippet language="php" operationID="getPayment" method="get" path="/v1/payments/{id}" -->
 ```php
 declare(strict_types=1);
 

@@ -35,14 +35,6 @@ class UpdateContactBankAccountRequest
 
     /**
      *
-     * @var ?string $bankName
-     */
-    #[\Speakeasy\Serializer\Annotation\SerializedName('bankName')]
-    #[\Speakeasy\Serializer\Annotation\SkipWhenNull]
-    public ?string $bankName = null;
-
-    /**
-     *
      * @var ?string $swiftCode
      */
     #[\Speakeasy\Serializer\Annotation\SerializedName('swiftCode')]
@@ -53,16 +45,14 @@ class UpdateContactBankAccountRequest
      * @param  string  $achAccountNumber
      * @param  string  $achRoutingNumber
      * @param  \Luqra\LuqraNowPhp\Models\Operations\UpdateContactSubTypeRequest  $subType
-     * @param  ?string  $bankName
      * @param  ?string  $swiftCode
      * @phpstan-pure
      */
-    public function __construct(string $achAccountNumber, string $achRoutingNumber, UpdateContactSubTypeRequest $subType, ?string $bankName = null, ?string $swiftCode = null)
+    public function __construct(string $achAccountNumber, string $achRoutingNumber, UpdateContactSubTypeRequest $subType, ?string $swiftCode = null)
     {
         $this->achAccountNumber = $achAccountNumber;
         $this->achRoutingNumber = $achRoutingNumber;
         $this->subType = $subType;
-        $this->bankName = $bankName;
         $this->swiftCode = $swiftCode;
     }
 }

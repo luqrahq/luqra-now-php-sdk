@@ -14,7 +14,7 @@ List originators
 
 ### Example Usage
 
-<!-- UsageSnippet language="php" operationID="listOriginators" method="get" path="/v0/originators/" -->
+<!-- UsageSnippet language="php" operationID="listOriginators" method="get" path="/v1/originators/" -->
 ```php
 declare(strict_types=1);
 
@@ -31,7 +31,7 @@ $sdk = LuqraNowPhp\LuqraNow::builder()
 
 
 $response = $sdk->originators->list(
-
+    limit: 20
 );
 
 if ($response->object !== null) {
@@ -43,6 +43,8 @@ if ($response->object !== null) {
 
 | Parameter          | Type               | Required           | Description        |
 | ------------------ | ------------------ | ------------------ | ------------------ |
+| `cursor`           | *?string*          | :heavy_minus_sign: | N/A                |
+| `limit`            | *?int*             | :heavy_minus_sign: | N/A                |
 | `search`           | *?string*          | :heavy_minus_sign: | N/A                |
 
 ### Response

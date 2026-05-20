@@ -8,71 +8,31 @@ declare(strict_types=1);
 
 namespace Luqra\LuqraNowPhp\Models\Operations;
 
-
+use Luqra\LuqraNowPhp\Utils\SpeakeasyMetadata;
 class CreatePaymentRequest
 {
     /**
      *
-     * @var string $contactId
+     * @var string $idempotencyKey
      */
-    #[\Speakeasy\Serializer\Annotation\SerializedName('contactId')]
-    public string $contactId;
+    #[SpeakeasyMetadata('header:style=simple,explode=false,name=idempotency-key')]
+    public string $idempotencyKey;
 
     /**
      *
-     * @var \Luqra\LuqraNowPhp\Models\Operations\CreatePaymentDirection $direction
+     * @var \Luqra\LuqraNowPhp\Models\Operations\CreatePaymentRequestBody $body
      */
-    #[\Speakeasy\Serializer\Annotation\SerializedName('direction')]
-    #[\Speakeasy\Serializer\Annotation\Type('\Luqra\LuqraNowPhp\Models\Operations\CreatePaymentDirection')]
-    public CreatePaymentDirection $direction;
+    #[SpeakeasyMetadata('request:mediaType=application/json')]
+    public CreatePaymentRequestBody $body;
 
     /**
-     *
-     * @var string $originatorId
-     */
-    #[\Speakeasy\Serializer\Annotation\SerializedName('originatorId')]
-    public string $originatorId;
-
-    /**
-     * In minor units (cents)
-     *
-     * @var int $paymentAmount
-     */
-    #[\Speakeasy\Serializer\Annotation\SerializedName('paymentAmount')]
-    public int $paymentAmount;
-
-    /**
-     * A note from the originator that is transmitted along with the payment. How this note surfaces to the contact depends on the receiving bank's implementation. The payment network may truncate the note based on the rail used: ACH supports up to 10 characters, Fedwire up to 35, and RTP, FedNow, and SWIFT up to 140. For best results, put the most important information at the beginning of the note.
-     *
-     * @var string $paymentNote
-     */
-    #[\Speakeasy\Serializer\Annotation\SerializedName('paymentNote')]
-    public string $paymentNote;
-
-    /**
-     *
-     * @var ?string $externalPaymentId
-     */
-    #[\Speakeasy\Serializer\Annotation\SerializedName('externalPaymentId')]
-    #[\Speakeasy\Serializer\Annotation\SkipWhenNull]
-    public ?string $externalPaymentId = null;
-
-    /**
-     * @param  string  $contactId
-     * @param  \Luqra\LuqraNowPhp\Models\Operations\CreatePaymentDirection  $direction
-     * @param  string  $originatorId
-     * @param  int  $paymentAmount
-     * @param  string  $paymentNote
-     * @param  ?string  $externalPaymentId
+     * @param  string  $idempotencyKey
+     * @param  \Luqra\LuqraNowPhp\Models\Operations\CreatePaymentRequestBody  $body
      * @phpstan-pure
      */
-    public function __construct(string $contactId, CreatePaymentDirection $direction, string $originatorId, int $paymentAmount, string $paymentNote, ?string $externalPaymentId = null)
+    public function __construct(string $idempotencyKey, CreatePaymentRequestBody $body)
     {
-        $this->contactId = $contactId;
-        $this->direction = $direction;
-        $this->originatorId = $originatorId;
-        $this->paymentAmount = $paymentAmount;
-        $this->paymentNote = $paymentNote;
-        $this->externalPaymentId = $externalPaymentId;
+        $this->idempotencyKey = $idempotencyKey;
+        $this->body = $body;
     }
 }

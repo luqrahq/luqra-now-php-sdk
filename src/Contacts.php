@@ -56,7 +56,7 @@ class Contacts
     public function create(Operations\CreateContactRequest $request, ?Options $options = null): Operations\CreateContactResponse
     {
         $baseUrl = $this->sdkConfiguration->getTemplatedServerUrl();
-        $url = Utils\Utils::generateUrl($baseUrl, '/v0/contacts/');
+        $url = Utils\Utils::generateUrl($baseUrl, '/v1/contacts/');
         $urlOverride = null;
         $httpOptions = ['http_errors' => false];
         $body = Utils\Utils::serializeRequestBody($request, 'request', 'json');
@@ -139,18 +139,22 @@ class Contacts
      * List contacts
      *
      * @param  string  $originatorId
+     * @param  ?string  $cursor
+     * @param  ?int  $limit
      * @param  ?string  $search
      * @return \Luqra\LuqraNowPhp\Models\Operations\ListContactsResponse
      * @throws \Luqra\LuqraNowPhp\Models\Errors\APIException
      */
-    public function list(string $originatorId, ?string $search = null, ?Options $options = null): Operations\ListContactsResponse
+    public function list(string $originatorId, ?string $cursor = null, ?int $limit = null, ?string $search = null, ?Options $options = null): Operations\ListContactsResponse
     {
         $request = new Operations\ListContactsRequest(
             originatorId: $originatorId,
+            cursor: $cursor,
+            limit: $limit,
             search: $search,
         );
         $baseUrl = $this->sdkConfiguration->getTemplatedServerUrl();
-        $url = Utils\Utils::generateUrl($baseUrl, '/v0/contacts/');
+        $url = Utils\Utils::generateUrl($baseUrl, '/v1/contacts/');
         $urlOverride = null;
         $httpOptions = ['http_errors' => false];
 
@@ -242,7 +246,7 @@ class Contacts
             body: $body,
         );
         $baseUrl = $this->sdkConfiguration->getTemplatedServerUrl();
-        $url = Utils\Utils::generateUrl($baseUrl, '/v0/contacts/{id}', Operations\UpdateContactRequest::class, $request);
+        $url = Utils\Utils::generateUrl($baseUrl, '/v1/contacts/{id}', Operations\UpdateContactRequest::class, $request);
         $urlOverride = null;
         $httpOptions = ['http_errors' => false];
         $body = Utils\Utils::serializeRequestBody($request, 'body', 'json');

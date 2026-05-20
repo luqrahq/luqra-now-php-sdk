@@ -47,21 +47,30 @@ class Payments
     /**
      * Create payment
      *
-     * @param  \Luqra\LuqraNowPhp\Models\Operations\CreatePaymentRequest  $request
+     * @param  \Luqra\LuqraNowPhp\Models\Operations\CreatePaymentRequestBody  $body
+     * @param  string  $idempotencyKey
      * @return \Luqra\LuqraNowPhp\Models\Operations\CreatePaymentResponse
      * @throws \Luqra\LuqraNowPhp\Models\Errors\APIException
      */
-    public function create(Operations\CreatePaymentRequest $request, ?Options $options = null): Operations\CreatePaymentResponse
+    public function create(Operations\CreatePaymentRequestBody $body, string $idempotencyKey, ?Options $options = null): Operations\CreatePaymentResponse
     {
+        $request = new Operations\CreatePaymentRequest(
+            idempotencyKey: $idempotencyKey,
+            body: $body,
+        );
         $baseUrl = $this->sdkConfiguration->getTemplatedServerUrl();
-        $url = Utils\Utils::generateUrl($baseUrl, '/v0/payments/');
+        $url = Utils\Utils::generateUrl($baseUrl, '/v1/payments/');
         $urlOverride = null;
         $httpOptions = ['http_errors' => false];
-        $body = Utils\Utils::serializeRequestBody($request, 'request', 'json');
+        $body = Utils\Utils::serializeRequestBody($request, 'body', 'json');
         if ($body === null) {
             throw new \Exception('Request body is required');
         }
         $httpOptions = array_merge_recursive($httpOptions, $body);
+        $httpOptions = array_merge_recursive($httpOptions, Utils\Utils::getHeaders($request));
+        if (! array_key_exists('headers', $httpOptions)) {
+            $httpOptions['headers'] = [];
+        }
         $httpOptions['headers']['Accept'] = 'application/json';
         $httpOptions['headers']['user-agent'] = $this->sdkConfiguration->userAgent;
         $httpRequest = new \GuzzleHttp\Psr7\Request('POST', $url);
@@ -146,7 +155,7 @@ class Payments
             id: $id,
         );
         $baseUrl = $this->sdkConfiguration->getTemplatedServerUrl();
-        $url = Utils\Utils::generateUrl($baseUrl, '/v0/payments/{id}', Operations\GetPaymentRequest::class, $request);
+        $url = Utils\Utils::generateUrl($baseUrl, '/v1/payments/{id}', Operations\GetPaymentRequest::class, $request);
         $urlOverride = null;
         $httpOptions = ['http_errors' => false];
         $httpOptions['headers']['Accept'] = 'application/json';
@@ -230,7 +239,7 @@ class Payments
     public function list(?Operations\ListPaymentsRequest $request = null, ?Options $options = null): Operations\ListPaymentsResponse
     {
         $baseUrl = $this->sdkConfiguration->getTemplatedServerUrl();
-        $url = Utils\Utils::generateUrl($baseUrl, '/v0/payments/');
+        $url = Utils\Utils::generateUrl($baseUrl, '/v1/payments/');
         $urlOverride = null;
         $httpOptions = ['http_errors' => false];
 

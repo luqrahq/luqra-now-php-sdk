@@ -16,7 +16,7 @@ List contacts
 
 ### Example Usage
 
-<!-- UsageSnippet language="php" operationID="listContacts" method="get" path="/v0/contacts/" -->
+<!-- UsageSnippet language="php" operationID="listContacts" method="get" path="/v1/contacts/" -->
 ```php
 declare(strict_types=1);
 
@@ -33,7 +33,9 @@ $sdk = LuqraNowPhp\LuqraNow::builder()
 
 
 $response = $sdk->contacts->list(
-    originatorId: '1d7999d2-66f8-428f-af77-7a969541638f'
+    originatorId: '1d7999d2-66f8-428f-af77-7a969541638f',
+    limit: 20
+
 );
 
 if ($response->object !== null) {
@@ -46,6 +48,8 @@ if ($response->object !== null) {
 | Parameter          | Type               | Required           | Description        |
 | ------------------ | ------------------ | ------------------ | ------------------ |
 | `originatorId`     | *string*           | :heavy_check_mark: | N/A                |
+| `cursor`           | *?string*          | :heavy_minus_sign: | N/A                |
+| `limit`            | *?int*             | :heavy_minus_sign: | N/A                |
 | `search`           | *?string*          | :heavy_minus_sign: | N/A                |
 
 ### Response
@@ -66,7 +70,7 @@ Creates a contact with address and bank account. Validates ACH routing number ag
 
 ### Example Usage
 
-<!-- UsageSnippet language="php" operationID="createContact" method="post" path="/v0/contacts/" -->
+<!-- UsageSnippet language="php" operationID="createContact" method="post" path="/v1/contacts/" -->
 ```php
 declare(strict_types=1);
 
@@ -134,7 +138,7 @@ Update contact
 
 ### Example Usage
 
-<!-- UsageSnippet language="php" operationID="updateContact" method="patch" path="/v0/contacts/{id}" -->
+<!-- UsageSnippet language="php" operationID="updateContact" method="patch" path="/v1/contacts/{id}" -->
 ```php
 declare(strict_types=1);
 
