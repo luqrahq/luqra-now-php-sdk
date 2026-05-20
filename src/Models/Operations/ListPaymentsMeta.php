@@ -13,11 +13,11 @@ class ListPaymentsMeta
 {
     /**
      *
-     * @var \Luqra\LuqraNowPhp\Models\Operations\Pagination $pagination
+     * @var \Luqra\LuqraNowPhp\Models\Operations\ListPaymentsPagination $pagination
      */
     #[\Speakeasy\Serializer\Annotation\SerializedName('pagination')]
-    #[\Speakeasy\Serializer\Annotation\Type('\Luqra\LuqraNowPhp\Models\Operations\Pagination')]
-    public Pagination $pagination;
+    #[\Speakeasy\Serializer\Annotation\Type('\Luqra\LuqraNowPhp\Models\Operations\ListPaymentsPagination')]
+    public ListPaymentsPagination $pagination;
 
     /**
      *
@@ -27,11 +27,11 @@ class ListPaymentsMeta
     public \DateTime $timestamp;
 
     /**
-     * @param  \Luqra\LuqraNowPhp\Models\Operations\Pagination  $pagination
+     * @param  \Luqra\LuqraNowPhp\Models\Operations\ListPaymentsPagination  $pagination
      * @param  \DateTime  $timestamp
      * @phpstan-pure
      */
-    public function __construct(Pagination $pagination, \DateTime $timestamp)
+    public function __construct(ListPaymentsPagination $pagination, \DateTime $timestamp)
     {
         $this->pagination = $pagination;
         $this->timestamp = $timestamp;

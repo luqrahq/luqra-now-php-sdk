@@ -47,17 +47,21 @@ class Originators
     /**
      * List originators
      *
+     * @param  ?string  $cursor
+     * @param  ?int  $limit
      * @param  ?string  $search
      * @return \Luqra\LuqraNowPhp\Models\Operations\ListOriginatorsResponse
      * @throws \Luqra\LuqraNowPhp\Models\Errors\APIException
      */
-    public function list(?string $search = null, ?Options $options = null): Operations\ListOriginatorsResponse
+    public function list(?string $cursor = null, ?int $limit = null, ?string $search = null, ?Options $options = null): Operations\ListOriginatorsResponse
     {
         $request = new Operations\ListOriginatorsRequest(
+            cursor: $cursor,
+            limit: $limit,
             search: $search,
         );
         $baseUrl = $this->sdkConfiguration->getTemplatedServerUrl();
-        $url = Utils\Utils::generateUrl($baseUrl, '/v0/originators/');
+        $url = Utils\Utils::generateUrl($baseUrl, '/v1/originators/');
         $urlOverride = null;
         $httpOptions = ['http_errors' => false];
 
