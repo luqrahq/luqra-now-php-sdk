@@ -3,45 +3,93 @@ info:
   title: CodeSamples overlay for php target
   version: 0.0.0
 actions:
-  - target: $["paths"]["/v0/contacts/"]["get"]
+  - target: $["paths"]["/v1/contacts/"]["get"]
     update:
       "x-codeSamples":
         - "lang": "php"
           "label": "Php (SDK)"
-          "source": "declare(strict_types=1);\n\nrequire 'vendor/autoload.php';\n\nuse Luqra\\LuqraNowPhp;\n\n$sdk = LuqraNowPhp\\LuqraNow::builder()\n    ->setSecurity(\n        '<YOUR_BEARER_TOKEN_HERE>'\n    )\n    ->build();\n\n\n\n$response = $sdk->contacts->list(\n    originatorId: '1d7999d2-66f8-428f-af77-7a969541638f'\n);\n\nif ($response->object !== null) {\n    // handle response\n}"
-  - target: $["paths"]["/v0/contacts/"]["post"]
+          "source": "declare(strict_types=1);\n\nrequire 'vendor/autoload.php';\n\nuse Luqra\\LuqraNowPhp;\n\n$sdk = LuqraNowPhp\\LuqraNow::builder()\n    ->setSecurity(\n        '<YOUR_BEARER_TOKEN_HERE>'\n    )\n    ->build();\n\n\n\n$response = $sdk->contacts->list(\n    originatorId: '1d7999d2-66f8-428f-af77-7a969541638f',\n    limit: 20\n\n);\n\nif ($response->object !== null) {\n    // handle response\n}"
+  - target: $["paths"]["/v1/contacts/"]["post"]
     update:
       "x-codeSamples":
         - "lang": "php"
           "label": "Php (SDK)"
           "source": "declare(strict_types=1);\n\nrequire 'vendor/autoload.php';\n\nuse Luqra\\LuqraNowPhp;\nuse Luqra\\LuqraNowPhp\\Models\\Operations;\n\n$sdk = LuqraNowPhp\\LuqraNow::builder()\n    ->setSecurity(\n        '<YOUR_BEARER_TOKEN_HERE>'\n    )\n    ->build();\n\n$request = new Operations\\CreateContactRequest(\n    bankAccount: new Operations\\CreateContactBankAccount(\n        achAccountNumber: '<value>',\n        achRoutingNumber: '<value>',\n        subType: Operations\\CreateContactSubType::Checking,\n    ),\n    email: 'Hyman_Krajcik-OHara@yahoo.com',\n    entityType: Operations\\CreateContactEntityType::Business,\n    firstName: 'Lila',\n    lastName: 'Halvorson',\n    legalAddress: new Operations\\CreateContactLegalAddress(\n        addressLine1: '624 Turner View',\n        city: 'Delray Beach',\n        countryCode: 'GT',\n        postalCode: '09260',\n        state: 'Maryland',\n    ),\n    originatorId: '0a3f3b5a-5a52-41c3-b54f-8e133700579f',\n);\n\n$response = $sdk->contacts->create(\n    request: $request\n);\n\nif ($response->object !== null) {\n    // handle response\n}"
-  - target: $["paths"]["/v0/contacts/{id}"]["patch"]
+  - target: $["paths"]["/v1/contacts/{id}"]["patch"]
     update:
       "x-codeSamples":
         - "lang": "php"
           "label": "Php (SDK)"
           "source": "declare(strict_types=1);\n\nrequire 'vendor/autoload.php';\n\nuse Luqra\\LuqraNowPhp;\nuse Luqra\\LuqraNowPhp\\Models\\Operations;\n\n$sdk = LuqraNowPhp\\LuqraNow::builder()\n    ->setSecurity(\n        '<YOUR_BEARER_TOKEN_HERE>'\n    )\n    ->build();\n\n$body = new Operations\\UpdateContactRequestBody();\n\n$response = $sdk->contacts->update(\n    id: '<id>',\n    body: $body\n\n);\n\nif ($response->object !== null) {\n    // handle response\n}"
-  - target: $["paths"]["/v0/originators/"]["get"]
+  - target: $["paths"]["/v1/originators/"]["get"]
     update:
       "x-codeSamples":
         - "lang": "php"
           "label": "Php (SDK)"
-          "source": "declare(strict_types=1);\n\nrequire 'vendor/autoload.php';\n\nuse Luqra\\LuqraNowPhp;\n\n$sdk = LuqraNowPhp\\LuqraNow::builder()\n    ->setSecurity(\n        '<YOUR_BEARER_TOKEN_HERE>'\n    )\n    ->build();\n\n\n\n$response = $sdk->originators->list(\n\n);\n\nif ($response->object !== null) {\n    // handle response\n}"
-  - target: $["paths"]["/v0/payments/"]["get"]
+          "source": "declare(strict_types=1);\n\nrequire 'vendor/autoload.php';\n\nuse Luqra\\LuqraNowPhp;\n\n$sdk = LuqraNowPhp\\LuqraNow::builder()\n    ->setSecurity(\n        '<YOUR_BEARER_TOKEN_HERE>'\n    )\n    ->build();\n\n\n\n$response = $sdk->originators->list(\n    limit: 20\n);\n\nif ($response->object !== null) {\n    // handle response\n}"
+  - target: $["paths"]["/v1/payments/"]["get"]
     update:
       "x-codeSamples":
         - "lang": "php"
           "label": "Php (SDK)"
           "source": "declare(strict_types=1);\n\nrequire 'vendor/autoload.php';\n\nuse Luqra\\LuqraNowPhp;\nuse Luqra\\LuqraNowPhp\\Models\\Operations;\n\n$sdk = LuqraNowPhp\\LuqraNow::builder()\n    ->setSecurity(\n        '<YOUR_BEARER_TOKEN_HERE>'\n    )\n    ->build();\n\n$request = new Operations\\ListPaymentsRequest();\n\n$response = $sdk->payments->list(\n    request: $request\n);\n\nif ($response->object !== null) {\n    // handle response\n}"
-  - target: $["paths"]["/v0/payments/"]["post"]
+  - target: $["paths"]["/v1/payments/"]["post"]
     update:
       "x-codeSamples":
         - "lang": "php"
           "label": "Php (SDK)"
-          "source": "declare(strict_types=1);\n\nrequire 'vendor/autoload.php';\n\nuse Luqra\\LuqraNowPhp;\nuse Luqra\\LuqraNowPhp\\Models\\Operations;\n\n$sdk = LuqraNowPhp\\LuqraNow::builder()\n    ->setSecurity(\n        '<YOUR_BEARER_TOKEN_HERE>'\n    )\n    ->build();\n\n$request = new Operations\\CreatePaymentRequest(\n    contactId: '<id>',\n    direction: Operations\\CreatePaymentDirection::Outbound,\n    originatorId: '<id>',\n    paymentAmount: 960074,\n    paymentNote: '<value>',\n);\n\n$response = $sdk->payments->create(\n    request: $request\n);\n\nif ($response->object !== null) {\n    // handle response\n}"
-  - target: $["paths"]["/v0/payments/{id}"]["get"]
+          "source": "declare(strict_types=1);\n\nrequire 'vendor/autoload.php';\n\nuse Luqra\\LuqraNowPhp;\nuse Luqra\\LuqraNowPhp\\Models\\Operations;\n\n$sdk = LuqraNowPhp\\LuqraNow::builder()\n    ->setSecurity(\n        '<YOUR_BEARER_TOKEN_HERE>'\n    )\n    ->build();\n\n$body = new Operations\\CreatePaymentRequestBody(\n    contactId: '<id>',\n    direction: Operations\\CreatePaymentDirection::Outbound,\n    originatorId: '<id>',\n    paymentAmount: 960074,\n    paymentNote: '<value>',\n);\n\n$response = $sdk->payments->create(\n    idempotencyKey: '<value>',\n    body: $body\n\n);\n\nif ($response->object !== null) {\n    // handle response\n}"
+  - target: $["paths"]["/v1/payments/{id}"]["get"]
     update:
       "x-codeSamples":
         - "lang": "php"
           "label": "Php (SDK)"
           "source": "declare(strict_types=1);\n\nrequire 'vendor/autoload.php';\n\nuse Luqra\\LuqraNowPhp;\n\n$sdk = LuqraNowPhp\\LuqraNow::builder()\n    ->setSecurity(\n        '<YOUR_BEARER_TOKEN_HERE>'\n    )\n    ->build();\n\n\n\n$response = $sdk->payments->get(\n    id: '<id>'\n);\n\nif ($response->object !== null) {\n    // handle response\n}"
+  - target: $["paths"]["/v1/statements/"]["get"]
+    update:
+      "x-codeSamples":
+        - "lang": "php"
+          "label": "Php (SDK)"
+          "source": "declare(strict_types=1);\n\nrequire 'vendor/autoload.php';\n\nuse Luqra\\LuqraNowPhp;\nuse Luqra\\LuqraNowPhp\\Models\\Operations;\n\n$sdk = LuqraNowPhp\\LuqraNow::builder()\n    ->setSecurity(\n        '<YOUR_BEARER_TOKEN_HERE>'\n    )\n    ->build();\n\n$request = new Operations\\ListStatementsRequest();\n\n$response = $sdk->statements->list(\n    request: $request\n);\n\nif ($response->object !== null) {\n    // handle response\n}"
+  - target: $["paths"]["/v1/statements/{id}/download"]["get"]
+    update:
+      "x-codeSamples":
+        - "lang": "php"
+          "label": "Php (SDK)"
+          "source": "declare(strict_types=1);\n\nrequire 'vendor/autoload.php';\n\nuse Luqra\\LuqraNowPhp;\n\n$sdk = LuqraNowPhp\\LuqraNow::builder()\n    ->setSecurity(\n        '<YOUR_BEARER_TOKEN_HERE>'\n    )\n    ->build();\n\n\n\n$response = $sdk->statements->getDownloadUrl(\n    id: 'e31bfa3a-2398-4a8e-9c08-85bf0c1b0bf8'\n);\n\nif ($response->object !== null) {\n    // handle response\n}"
+  - target: $["paths"]["/v1/webhooks/"]["get"]
+    update:
+      "x-codeSamples":
+        - "lang": "php"
+          "label": "Php (SDK)"
+          "source": "declare(strict_types=1);\n\nrequire 'vendor/autoload.php';\n\nuse Luqra\\LuqraNowPhp;\n\n$sdk = LuqraNowPhp\\LuqraNow::builder()\n    ->setSecurity(\n        '<YOUR_BEARER_TOKEN_HERE>'\n    )\n    ->build();\n\n\n\n$response = $sdk->webhooks->list(\n\n);\n\nif ($response->object !== null) {\n    // handle response\n}"
+  - target: $["paths"]["/v1/webhooks/"]["post"]
+    update:
+      "x-codeSamples":
+        - "lang": "php"
+          "label": "Php (SDK)"
+          "source": "declare(strict_types=1);\n\nrequire 'vendor/autoload.php';\n\nuse Luqra\\LuqraNowPhp;\nuse Luqra\\LuqraNowPhp\\Models\\Operations;\n\n$sdk = LuqraNowPhp\\LuqraNow::builder()\n    ->setSecurity(\n        '<YOUR_BEARER_TOKEN_HERE>'\n    )\n    ->build();\n\n$request = new Operations\\CreateWebhookRequest(\n    subscribedEvents: [],\n    url: 'https://sophisticated-exterior.org/',\n);\n\n$response = $sdk->webhooks->create(\n    request: $request\n);\n\nif ($response->object !== null) {\n    // handle response\n}"
+  - target: $["paths"]["/v1/webhooks/{id}"]["delete"]
+    update:
+      "x-codeSamples":
+        - "lang": "php"
+          "label": "Php (SDK)"
+          "source": "declare(strict_types=1);\n\nrequire 'vendor/autoload.php';\n\nuse Luqra\\LuqraNowPhp;\n\n$sdk = LuqraNowPhp\\LuqraNow::builder()\n    ->setSecurity(\n        '<YOUR_BEARER_TOKEN_HERE>'\n    )\n    ->build();\n\n\n\n$response = $sdk->webhooks->delete(\n    id: '2f4cf1de-535d-40b8-9860-de80b52e1022'\n);\n\nif ($response->statusCode === 200) {\n    // handle response\n}"
+  - target: $["paths"]["/v1/webhooks/{id}"]["get"]
+    update:
+      "x-codeSamples":
+        - "lang": "php"
+          "label": "Php (SDK)"
+          "source": "declare(strict_types=1);\n\nrequire 'vendor/autoload.php';\n\nuse Luqra\\LuqraNowPhp;\n\n$sdk = LuqraNowPhp\\LuqraNow::builder()\n    ->setSecurity(\n        '<YOUR_BEARER_TOKEN_HERE>'\n    )\n    ->build();\n\n\n\n$response = $sdk->webhooks->get(\n    id: 'deeb5a05-74d4-40ad-b4be-a9265fd49428'\n);\n\nif ($response->object !== null) {\n    // handle response\n}"
+  - target: $["paths"]["/v1/webhooks/{id}"]["patch"]
+    update:
+      "x-codeSamples":
+        - "lang": "php"
+          "label": "Php (SDK)"
+          "source": "declare(strict_types=1);\n\nrequire 'vendor/autoload.php';\n\nuse Luqra\\LuqraNowPhp;\nuse Luqra\\LuqraNowPhp\\Models\\Operations;\n\n$sdk = LuqraNowPhp\\LuqraNow::builder()\n    ->setSecurity(\n        '<YOUR_BEARER_TOKEN_HERE>'\n    )\n    ->build();\n\n$body = new Operations\\UpdateWebhookRequestBody();\n\n$response = $sdk->webhooks->update(\n    id: 'e80a2243-1644-46d7-8f13-7957345de978',\n    body: $body\n\n);\n\nif ($response->object !== null) {\n    // handle response\n}"
+  - target: $["paths"]["/v1/webhooks/{id}/test"]["post"]
+    update:
+      "x-codeSamples":
+        - "lang": "php"
+          "label": "Php (SDK)"
+          "source": "declare(strict_types=1);\n\nrequire 'vendor/autoload.php';\n\nuse Luqra\\LuqraNowPhp;\n\n$sdk = LuqraNowPhp\\LuqraNow::builder()\n    ->setSecurity(\n        '<YOUR_BEARER_TOKEN_HERE>'\n    )\n    ->build();\n\n\n\n$response = $sdk->webhooks->test(\n    id: '4e1ca4d4-efdb-41f2-a630-999c92178d10'\n);\n\nif ($response->object !== null) {\n    // handle response\n}"

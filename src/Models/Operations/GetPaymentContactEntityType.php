@@ -13,5 +13,4 @@ enum GetPaymentContactEntityType: string
 {
     case Business = 'BUSINESS';
     case Individual = 'INDIVIDUAL';
-    case ProcessingOrg = 'PROCESSING_ORG';
 }

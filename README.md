@@ -53,7 +53,9 @@ $sdk = LuqraNowPhp\LuqraNow::builder()
 
 
 $response = $sdk->contacts->list(
-    originatorId: '1d7999d2-66f8-428f-af77-7a969541638f'
+    originatorId: '1d7999d2-66f8-428f-af77-7a969541638f',
+    limit: 20
+
 );
 
 if ($response->object !== null) {
@@ -90,7 +92,9 @@ $sdk = LuqraNowPhp\LuqraNow::builder()
 
 
 $response = $sdk->contacts->list(
-    originatorId: '1d7999d2-66f8-428f-af77-7a969541638f'
+    originatorId: '1d7999d2-66f8-428f-af77-7a969541638f',
+    limit: 20
+
 );
 
 if ($response->object !== null) {
@@ -120,6 +124,20 @@ if ($response->object !== null) {
 * [list](docs/sdks/payments/README.md#list) - List payments
 * [create](docs/sdks/payments/README.md#create) - Create payment
 * [get](docs/sdks/payments/README.md#get) - Get payment
+
+### [Statements](docs/sdks/statements/README.md)
+
+* [list](docs/sdks/statements/README.md#list) - List statements
+* [getDownloadUrl](docs/sdks/statements/README.md#getdownloadurl) - Get a short-lived signed URL for downloading a statement PDF
+
+### [Webhooks](docs/sdks/webhooks/README.md)
+
+* [list](docs/sdks/webhooks/README.md#list) - List webhook endpoints
+* [create](docs/sdks/webhooks/README.md#create) - Create webhook endpoint
+* [delete](docs/sdks/webhooks/README.md#delete) - Delete webhook endpoint
+* [get](docs/sdks/webhooks/README.md#get) - Get webhook endpoint
+* [update](docs/sdks/webhooks/README.md#update) - Update webhook endpoint
+* [test](docs/sdks/webhooks/README.md#test) - Test webhook endpoint
 
 </details>
 <!-- End Available Resources and Operations [operations] -->
@@ -164,7 +182,9 @@ $sdk = LuqraNowPhp\LuqraNow::builder()
 
 try {
     $response = $sdk->contacts->list(
-        originatorId: '1d7999d2-66f8-428f-af77-7a969541638f'
+        originatorId: '1d7999d2-66f8-428f-af77-7a969541638f',
+        limit: 20
+
     );
 
     if ($response->object !== null) {
@@ -214,7 +234,9 @@ $sdk = LuqraNowPhp\LuqraNow::builder()
 
 
 $response = $sdk->contacts->list(
-    originatorId: '1d7999d2-66f8-428f-af77-7a969541638f'
+    originatorId: '1d7999d2-66f8-428f-af77-7a969541638f',
+    limit: 20
+
 );
 
 if ($response->object !== null) {
@@ -242,7 +264,9 @@ $sdk = LuqraNowPhp\LuqraNow::builder()
 
 
 $response = $sdk->contacts->list(
-    originatorId: '1d7999d2-66f8-428f-af77-7a969541638f'
+    originatorId: '1d7999d2-66f8-428f-af77-7a969541638f',
+    limit: 20
+
 );
 
 if ($response->object !== null) {

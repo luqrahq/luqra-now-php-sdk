@@ -44,10 +44,18 @@ class GetPaymentData
     /**
      * In minor units (cents)
      *
-     * @var int $feeAmount
+     * @var int $discountFee
      */
-    #[\Speakeasy\Serializer\Annotation\SerializedName('feeAmount')]
-    public int $feeAmount;
+    #[\Speakeasy\Serializer\Annotation\SerializedName('discountFee')]
+    public int $discountFee;
+
+    /**
+     * In minor units (cents)
+     *
+     * @var int $flatFee
+     */
+    #[\Speakeasy\Serializer\Annotation\SerializedName('flatFee')]
+    public int $flatFee;
 
     /**
      *
@@ -81,6 +89,14 @@ class GetPaymentData
     public GetPaymentPaymentRail $paymentRail;
 
     /**
+     * In minor units (cents)
+     *
+     * @var int $returnFee
+     */
+    #[\Speakeasy\Serializer\Annotation\SerializedName('returnFee')]
+    public int $returnFee;
+
+    /**
      *
      * @var \Luqra\LuqraNowPhp\Models\Operations\GetPaymentStatus $status
      */
@@ -108,6 +124,21 @@ class GetPaymentData
      */
     #[\Speakeasy\Serializer\Annotation\SerializedName('failedAt')]
     public ?\DateTime $failedAt;
+
+    /**
+     *
+     * @var ?\Luqra\LuqraNowPhp\Models\Operations\GetPaymentFailureCode $failureCode
+     */
+    #[\Speakeasy\Serializer\Annotation\SerializedName('failureCode')]
+    #[\Speakeasy\Serializer\Annotation\Type('\Luqra\LuqraNowPhp\Models\Operations\GetPaymentFailureCode|null')]
+    public ?GetPaymentFailureCode $failureCode;
+
+    /**
+     *
+     * @var ?string $failureMessage
+     */
+    #[\Speakeasy\Serializer\Annotation\SerializedName('failureMessage')]
+    public ?string $failureMessage;
 
     /**
      *
@@ -142,36 +173,44 @@ class GetPaymentData
      * @param  \DateTime  $createdAt
      * @param  string  $currencyCode
      * @param  \Luqra\LuqraNowPhp\Models\Operations\GetPaymentDirection  $direction
-     * @param  int  $feeAmount
+     * @param  int  $discountFee
+     * @param  int  $flatFee
      * @param  \Luqra\LuqraNowPhp\Models\Operations\GetPaymentOriginator  $originator
      * @param  int  $paymentAmount
      * @param  string  $paymentId
      * @param  \Luqra\LuqraNowPhp\Models\Operations\GetPaymentPaymentRail  $paymentRail
+     * @param  int  $returnFee
      * @param  \Luqra\LuqraNowPhp\Models\Operations\GetPaymentStatus  $status
      * @param  ?\DateTime  $completedAt
      * @param  ?string  $externalPaymentId
      * @param  ?\DateTime  $failedAt
+     * @param  ?\Luqra\LuqraNowPhp\Models\Operations\GetPaymentFailureCode  $failureCode
+     * @param  ?string  $failureMessage
      * @param  ?string  $failureReason
      * @param  ?string  $paymentNote
      * @param  ?string  $returnReasonCode
      * @param  ?\DateTime  $returnedAt
      * @phpstan-pure
      */
-    public function __construct(GetPaymentContact $contact, \DateTime $createdAt, string $currencyCode, GetPaymentDirection $direction, int $feeAmount, GetPaymentOriginator $originator, int $paymentAmount, string $paymentId, GetPaymentPaymentRail $paymentRail, GetPaymentStatus $status, ?\DateTime $completedAt = null, ?string $externalPaymentId = null, ?\DateTime $failedAt = null, ?string $failureReason = null, ?string $paymentNote = null, ?string $returnReasonCode = null, ?\DateTime $returnedAt = null)
+    public function __construct(GetPaymentContact $contact, \DateTime $createdAt, string $currencyCode, GetPaymentDirection $direction, int $discountFee, int $flatFee, GetPaymentOriginator $originator, int $paymentAmount, string $paymentId, GetPaymentPaymentRail $paymentRail, int $returnFee, GetPaymentStatus $status, ?\DateTime $completedAt = null, ?string $externalPaymentId = null, ?\DateTime $failedAt = null, ?GetPaymentFailureCode $failureCode = null, ?string $failureMessage = null, ?string $failureReason = null, ?string $paymentNote = null, ?string $returnReasonCode = null, ?\DateTime $returnedAt = null)
     {
         $this->contact = $contact;
         $this->createdAt = $createdAt;
         $this->currencyCode = $currencyCode;
         $this->direction = $direction;
-        $this->feeAmount = $feeAmount;
+        $this->discountFee = $discountFee;
+        $this->flatFee = $flatFee;
         $this->originator = $originator;
         $this->paymentAmount = $paymentAmount;
         $this->paymentId = $paymentId;
         $this->paymentRail = $paymentRail;
+        $this->returnFee = $returnFee;
         $this->status = $status;
         $this->completedAt = $completedAt;
         $this->externalPaymentId = $externalPaymentId;
         $this->failedAt = $failedAt;
+        $this->failureCode = $failureCode;
+        $this->failureMessage = $failureMessage;
         $this->failureReason = $failureReason;
         $this->paymentNote = $paymentNote;
         $this->returnReasonCode = $returnReasonCode;

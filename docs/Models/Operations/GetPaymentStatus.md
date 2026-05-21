@@ -11,7 +11,6 @@
 | `Completed`            | COMPLETED              |
 | `Failed`               | FAILED                 |
 | `FailedInFlight`       | FAILED_IN_FLIGHT       |
-| `PendingCustomerRetry` | PENDING_CUSTOMER_RETRY |
 | `Processing`           | PROCESSING             |
 | `Queued`               | QUEUED                 |
 | `Returned`             | RETURNED               |
