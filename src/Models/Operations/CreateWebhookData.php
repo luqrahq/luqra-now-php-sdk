@@ -42,10 +42,10 @@ class CreateWebhookData
     /**
      * $subscribedEvents
      *
-     * @var array<\Luqra\LuqraNowPhp\Models\Operations\CreateWebhookSubscribedEventResponse> $subscribedEvents
+     * @var array<\Luqra\LuqraNowPhp\Models\Operations\CreateWebhookSubscribedEventPaymentWildcardResponse|\Luqra\LuqraNowPhp\Models\Operations\CreateWebhookSubscribedEventResponseEnum> $subscribedEvents
      */
     #[\Speakeasy\Serializer\Annotation\SerializedName('subscribedEvents')]
-    #[\Speakeasy\Serializer\Annotation\Type('array<\Luqra\LuqraNowPhp\Models\Operations\CreateWebhookSubscribedEventResponse>')]
+    #[\Speakeasy\Serializer\Annotation\Type('array<\Luqra\LuqraNowPhp\Models\Operations\CreateWebhookSubscribedEventPaymentWildcardResponse|\Luqra\LuqraNowPhp\Models\Operations\CreateWebhookSubscribedEventResponseEnum>')]
     public array $subscribedEvents;
 
     /**
@@ -56,15 +56,23 @@ class CreateWebhookData
     public string $url;
 
     /**
+     *
+     * @var ?string $label
+     */
+    #[\Speakeasy\Serializer\Annotation\SerializedName('label')]
+    public ?string $label;
+
+    /**
      * @param  \DateTime  $createdAt
      * @param  bool  $enabled
      * @param  string  $id
      * @param  string  $secret
-     * @param  array<\Luqra\LuqraNowPhp\Models\Operations\CreateWebhookSubscribedEventResponse>  $subscribedEvents
+     * @param  array<\Luqra\LuqraNowPhp\Models\Operations\CreateWebhookSubscribedEventPaymentWildcardResponse|\Luqra\LuqraNowPhp\Models\Operations\CreateWebhookSubscribedEventResponseEnum>  $subscribedEvents
      * @param  string  $url
+     * @param  ?string  $label
      * @phpstan-pure
      */
-    public function __construct(\DateTime $createdAt, bool $enabled, string $id, string $secret, array $subscribedEvents, string $url)
+    public function __construct(\DateTime $createdAt, bool $enabled, string $id, string $secret, array $subscribedEvents, string $url, ?string $label = null)
     {
         $this->createdAt = $createdAt;
         $this->enabled = $enabled;
@@ -72,5 +80,6 @@ class CreateWebhookData
         $this->secret = $secret;
         $this->subscribedEvents = $subscribedEvents;
         $this->url = $url;
+        $this->label = $label;
     }
 }

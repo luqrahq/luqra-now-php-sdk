@@ -7,6 +7,12 @@ Developer-friendly, idiomatic PHP SDK for the *luqra/now-php* API.
 Luqra Now API: External API for Luqra Now
 <!-- End Summary [summary] -->
 
+<!-- Start Summary [summary] -->
+## Summary
+
+Luqra Now API: External API for Luqra Now
+<!-- End Summary [summary] -->
+
 <!-- Start Table of Contents [toc] -->
 ## Table of Contents
 <!-- $toc-max-depth=2 -->
@@ -23,12 +29,32 @@ Luqra Now API: External API for Luqra Now
 <!-- Start SDK Installation [installation] -->
 ## SDK Installation
 
+> [!TIP]
+> To finish publishing your SDK you must [run your first generation action](https://www.speakeasy.com/docs/github-setup#step-by-step-guide).
+
+
 The SDK relies on [Composer](https://getcomposer.org/) to manage its dependencies.
 
-To install the SDK run the following command:
+To install the SDK first add the below to your `composer.json` file:
+
+```json
+{
+    "repositories": [
+        {
+            "type": "github",
+            "url": "<UNSET>.git"
+        }
+    ],
+    "require": {
+        "luqra/now-php": "*"
+    }
+}
+```
+
+Then run the following command:
 
 ```bash
-composer require luqra/now-php
+composer update
 ```
 <!-- End SDK Installation [installation] -->
 
@@ -276,3 +302,5 @@ if ($response->object !== null) {
 <!-- End Server Selection [server] -->
 
 For information on releasing a new version of this SDK, see [RELEASING.md](RELEASING.md).
+
+<!-- Placeholder for Future Speakeasy SDK Sections -->

@@ -92,4 +92,4 @@ actions:
       "x-codeSamples":
         - "lang": "php"
           "label": "Php (SDK)"
-          "source": "declare(strict_types=1);\n\nrequire 'vendor/autoload.php';\n\nuse Luqra\\LuqraNowPhp;\n\n$sdk = LuqraNowPhp\\LuqraNow::builder()\n    ->setSecurity(\n        '<YOUR_BEARER_TOKEN_HERE>'\n    )\n    ->build();\n\n\n\n$response = $sdk->webhooks->test(\n    id: '4e1ca4d4-efdb-41f2-a630-999c92178d10'\n);\n\nif ($response->object !== null) {\n    // handle response\n}"
+          "source": "declare(strict_types=1);\n\nrequire 'vendor/autoload.php';\n\nuse Luqra\\LuqraNowPhp;\nuse Luqra\\LuqraNowPhp\\Models\\Operations;\n\n$sdk = LuqraNowPhp\\LuqraNow::builder()\n    ->setSecurity(\n        '<YOUR_BEARER_TOKEN_HERE>'\n    )\n    ->build();\n\n$body = new Operations\\TestWebhookRequestBody();\n\n$response = $sdk->webhooks->test(\n    id: '4e1ca4d4-efdb-41f2-a630-999c92178d10',\n    body: $body\n\n);\n\nif ($response->object !== null) {\n    // handle response\n}"

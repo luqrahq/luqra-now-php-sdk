@@ -26,6 +26,14 @@ class Error
     public string $message;
 
     /**
+     *
+     * @var ?string $correlationId
+     */
+    #[\Speakeasy\Serializer\Annotation\SerializedName('correlationId')]
+    #[\Speakeasy\Serializer\Annotation\SkipWhenNull]
+    public ?string $correlationId = null;
+
+    /**
      * $details
      *
      * @var ?array<\Luqra\LuqraNowPhp\Models\Components\Detail> $details
@@ -38,13 +46,15 @@ class Error
     /**
      * @param  string  $code
      * @param  string  $message
+     * @param  ?string  $correlationId
      * @param  ?array<\Luqra\LuqraNowPhp\Models\Components\Detail>  $details
      * @phpstan-pure
      */
-    public function __construct(string $code, string $message, ?array $details = null)
+    public function __construct(string $code, string $message, ?string $correlationId = null, ?array $details = null)
     {
         $this->code = $code;
         $this->message = $message;
+        $this->correlationId = $correlationId;
         $this->details = $details;
     }
 }

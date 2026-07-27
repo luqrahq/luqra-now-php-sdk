@@ -1,9 +1,18 @@
 {
     "name": "luqra/sdk-test",
     "description": "Integration test project for luqra/now-php SDK",
+    "repositories": [
+        {
+            "type": "path",
+            "url": "../",
+            "options": {
+                "symlink": true
+            }
+        }
+    ],
     "require": {
         "php": ">=8.2",
-        "luqra/now-php": "^1.0.0",
+        "luqra/now-php": "^1.1.0",
         "vlucas/phpdotenv": "^5.6"
     }
 }

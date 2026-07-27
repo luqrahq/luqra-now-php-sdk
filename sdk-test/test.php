@@ -81,6 +81,8 @@ try {
     check('HTTP 200', $response->statusCode === 200);
     check('Response body present', $response->object !== null);
     check('data is array', is_array($response->object?->data));
+    check('meta.pagination present', isset($response->object?->meta?->pagination));
+    check('pagination.limit is numeric', is_numeric($response->object?->meta?->pagination?->limit ?? null));
 
     $originators = $response->object?->data ?? [];
     check('At least one originator exists', count($originators) > 0, 'need at least one originator to continue');
@@ -109,10 +111,45 @@ try {
     check('Response body present', $response->object !== null);
     check('data is array', is_array($response->object?->data));
     check('meta.timestamp present', isset($response->object?->meta->timestamp));
+    check('meta.pagination present', isset($response->object?->meta?->pagination));
+    check('pagination.limit is numeric', is_numeric($response->object?->meta?->pagination?->limit ?? null));
     $existingContacts = $response->object?->data ?? [];
     echo '  → ' . count($existingContacts) . " contact(s) found\n";
 } catch (Errors\APIException $e) {
     check('List contacts succeeded', false, "HTTP " . $e->statusCode . ": " . $e->getMessage());
+}
+
+// ── 2b. Contacts cursor pagination ────────────────────────────────────────────
+// The contacts list gained cursor/limit params in this release; verify the
+// limit is honored, nextCursor deserializes, and following it yields a
+// different page.
+
+section('2b. Contacts cursor pagination');
+
+try {
+    $page1 = $sdk->contacts->list(originatorId: $originatorId, limit: 1);
+    check('page 1 HTTP 200', $page1->statusCode === 200);
+    check('limit respected on page 1', count($page1->object?->data ?? []) <= 1);
+
+    $nextCursor = $page1->object?->meta?->pagination?->nextCursor ?? null;
+    $id1        = $page1->object?->data[0]?->contactId ?? null;
+
+    if ($nextCursor !== null && $nextCursor !== '' && $id1 !== null) {
+        $page2 = $sdk->contacts->list(originatorId: $originatorId, cursor: $nextCursor, limit: 1);
+        check('cursor page HTTP 200', $page2->statusCode === 200);
+        check('cursor page limit respected', count($page2->object?->data ?? []) <= 1);
+
+        $id2 = $page2->object?->data[0]?->contactId ?? null;
+        if ($id2 !== null) {
+            check('cursor page returns different contactId', $id1 !== $id2, "id1=$id1 id2=$id2");
+        } else {
+            echo "  → cursor page returned no items\n";
+        }
+    } else {
+        echo "  → skipping cursor follow (fewer than 2 contacts or no nextCursor)\n";
+    }
+} catch (Errors\APIException $e) {
+    check('Contacts cursor pagination succeeded', false, "HTTP " . $e->statusCode . ": " . $e->getMessage());
 }
 
 // ── 3. Create contact ─────────────────────────────────────────────────────────
@@ -459,12 +496,17 @@ section('9. Webhooks — create');
 
 $webhookId = null;
 $webhookUrl = 'https://httpbin.org/post';
+$webhookLabel = 'sdk-test webhook';
 
 try {
     $response = $sdk->webhooks->create(
         new Operations\CreateWebhookRequest(
-            subscribedEvents: [Operations\CreateWebhookSubscribedEventRequest::StatementGenerated],
+            subscribedEvents: [
+                Operations\CreateWebhookSubscribedEventRequestEnum::StatementGenerated,
+                Operations\CreateWebhookSubscribedEventPaymentWildcardRequest::PaymentWildcard,
+            ],
             url: $webhookUrl,
+            label: $webhookLabel,
         )
     );
     check('HTTP 201', $response->statusCode === 201);
@@ -472,10 +514,18 @@ try {
     $webhookId = $response->object?->data?->id ?? null;
     check('webhook id returned', $webhookId !== null && $webhookId !== '');
     check('url matches', $response->object?->data?->url === $webhookUrl);
+    check('label matches', $response->object?->data?->label === $webhookLabel);
     check('enabled is true by default', $response->object?->data?->enabled === true);
     check('subscribedEvents present', is_array($response->object?->data?->subscribedEvents));
     check('secret returned on creation', is_string($response->object?->data?->secret ?? null) && ($response->object?->data?->secret ?? '') !== '');
     check('createdAt present', isset($response->object?->data?->createdAt));
+
+    $eventValues = array_map(
+        fn ($e) => $e instanceof \BackedEnum ? $e->value : (string) $e,
+        $response->object?->data?->subscribedEvents ?? []
+    );
+    check('payment.* wildcard round-trips', in_array('payment.*', $eventValues), 'got: ' . implode(', ', $eventValues));
+    check('statement.generated round-trips', in_array('statement.generated', $eventValues), 'got: ' . implode(', ', $eventValues));
     echo "  → created webhookId: $webhookId\n";
 } catch (Errors\ErrorResponseThrowable $e) {
     check('Create webhook succeeded', false, $e->getMessage());
@@ -529,10 +579,13 @@ if ($webhookId === null) {
 } else {
     try {
         $newUrl = 'https://httpbin.org/post?updated=1';
+        $newLabel = 'sdk-test webhook (updated)';
         $response = $sdk->webhooks->update(
             body: new Operations\UpdateWebhookRequestBody(
                 url: $newUrl,
                 enabled: false,
+                label: $newLabel,
+                subscribedEvents: [Operations\UpdateWebhookSubscribedEventRequestEnum::PaymentCompleted],
             ),
             id: $webhookId,
         );
@@ -540,6 +593,7 @@ if ($webhookId === null) {
         check('Response body present', $response->object !== null);
         check('id matches', $response->object?->data?->id === $webhookId);
         check('url updated', $response->object?->data?->url === $newUrl);
+        check('label updated', $response->object?->data?->label === $newLabel);
         check('enabled updated to false', $response->object?->data?->enabled === false);
     } catch (Errors\ErrorResponseThrowable $e) {
         check('Update webhook succeeded', false, $e->getMessage());
@@ -554,7 +608,10 @@ if ($webhookId === null) {
     echo "  Skipped — no webhookId\n";
 } else {
     try {
-        $response = $sdk->webhooks->test(id: $webhookId);
+        $response = $sdk->webhooks->test(
+            id: $webhookId,
+            body: new Operations\TestWebhookRequestBody(eventType: Operations\EventType::PaymentCompleted),
+        );
         check('HTTP 200', $response->statusCode === 200);
         check('Response body present', $response->object !== null);
         check('durationMs present', isset($response->object?->data?->durationMs));
