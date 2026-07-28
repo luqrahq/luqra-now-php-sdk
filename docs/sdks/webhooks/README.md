@@ -273,6 +273,7 @@ declare(strict_types=1);
 require 'vendor/autoload.php';
 
 use Luqra\LuqraNowPhp;
+use Luqra\LuqraNowPhp\Models\Operations;
 
 $sdk = LuqraNowPhp\LuqraNow::builder()
     ->setSecurity(
@@ -280,10 +281,12 @@ $sdk = LuqraNowPhp\LuqraNow::builder()
     )
     ->build();
 
-
+$body = new Operations\TestWebhookRequestBody();
 
 $response = $sdk->webhooks->test(
-    id: '4e1ca4d4-efdb-41f2-a630-999c92178d10'
+    id: '4e1ca4d4-efdb-41f2-a630-999c92178d10',
+    body: $body
+
 );
 
 if ($response->object !== null) {
@@ -293,9 +296,10 @@ if ($response->object !== null) {
 
 ### Parameters
 
-| Parameter          | Type               | Required           | Description        |
-| ------------------ | ------------------ | ------------------ | ------------------ |
-| `id`               | *string*           | :heavy_check_mark: | N/A                |
+| Parameter                                                                              | Type                                                                                   | Required                                                                               | Description                                                                            |
+| -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
+| `id`                                                                                   | *string*                                                                               | :heavy_check_mark:                                                                     | N/A                                                                                    |
+| `body`                                                                                 | [Operations\TestWebhookRequestBody](../../Models/Operations/TestWebhookRequestBody.md) | :heavy_check_mark:                                                                     | N/A                                                                                    |
 
 ### Response
 

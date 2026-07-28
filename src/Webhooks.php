@@ -385,18 +385,25 @@ class Webhooks
      * Test webhook endpoint
      *
      * @param  string  $id
+     * @param  ?\Luqra\LuqraNowPhp\Models\Operations\TestWebhookRequestBody  $body
      * @return \Luqra\LuqraNowPhp\Models\Operations\TestWebhookResponse
      * @throws \Luqra\LuqraNowPhp\Models\Errors\APIException
      */
-    public function test(string $id, ?Options $options = null): Operations\TestWebhookResponse
+    public function test(string $id, ?Operations\TestWebhookRequestBody $body = null, ?Options $options = null): Operations\TestWebhookResponse
     {
         $request = new Operations\TestWebhookRequest(
             id: $id,
+            body: $body,
         );
         $baseUrl = $this->sdkConfiguration->getTemplatedServerUrl();
         $url = Utils\Utils::generateUrl($baseUrl, '/v1/webhooks/{id}/test', Operations\TestWebhookRequest::class, $request);
         $urlOverride = null;
         $httpOptions = ['http_errors' => false];
+        $body = Utils\Utils::serializeRequestBody($request, 'body', 'json');
+        if ($body === null) {
+            throw new \Exception('Request body is required');
+        }
+        $httpOptions = array_merge_recursive($httpOptions, $body);
         $httpOptions['headers']['Accept'] = 'application/json';
         $httpOptions['headers']['user-agent'] = $this->sdkConfiguration->userAgent;
         $httpRequest = new \GuzzleHttp\Psr7\Request('POST', $url);

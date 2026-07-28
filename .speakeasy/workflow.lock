@@ -1,18 +1,18 @@
-speakeasyVersion: 1.768.2
+speakeasyVersion: 1.791.0
 sources:
     luqra-api:
         sourceNamespace: luqra-api
-        sourceRevisionDigest: sha256:82bab2bc5049639a97a4d54adc92c6a7b22dbeb40b0419570d5fcfda2d8f206b
-        sourceBlobDigest: sha256:f53f898c0f88284c1a674ce73cd09d7da1ee9d63fe4bf55ac4f370d05b34e294
+        sourceRevisionDigest: sha256:a2c39fbdd0107e9ff048f0a35e45f5416e544d2edda6e7d52bb15b8b7ae5b866
+        sourceBlobDigest: sha256:92bc1ed9af8ec5bde2dd8cb7d032f9705df05daa4857b126ba5cff59f4d87c6e
         tags:
             - latest
-            - 1.0.0
+            - 1.0.0-staging.481.d954c08
 targets:
     php-sdk:
         source: luqra-api
         sourceNamespace: luqra-api
-        sourceRevisionDigest: sha256:82bab2bc5049639a97a4d54adc92c6a7b22dbeb40b0419570d5fcfda2d8f206b
-        sourceBlobDigest: sha256:f53f898c0f88284c1a674ce73cd09d7da1ee9d63fe4bf55ac4f370d05b34e294
+        sourceRevisionDigest: sha256:a2c39fbdd0107e9ff048f0a35e45f5416e544d2edda6e7d52bb15b8b7ae5b866
+        sourceBlobDigest: sha256:92bc1ed9af8ec5bde2dd8cb7d032f9705df05daa4857b126ba5cff59f4d87c6e
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: latest

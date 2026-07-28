@@ -35,10 +35,10 @@ class GetWebhookData
     /**
      * $subscribedEvents
      *
-     * @var array<\Luqra\LuqraNowPhp\Models\Operations\GetWebhookSubscribedEvent> $subscribedEvents
+     * @var array<\Luqra\LuqraNowPhp\Models\Operations\GetWebhookSubscribedEventPaymentWildcard|\Luqra\LuqraNowPhp\Models\Operations\GetWebhookSubscribedEventEnum> $subscribedEvents
      */
     #[\Speakeasy\Serializer\Annotation\SerializedName('subscribedEvents')]
-    #[\Speakeasy\Serializer\Annotation\Type('array<\Luqra\LuqraNowPhp\Models\Operations\GetWebhookSubscribedEvent>')]
+    #[\Speakeasy\Serializer\Annotation\Type('array<\Luqra\LuqraNowPhp\Models\Operations\GetWebhookSubscribedEventPaymentWildcard|\Luqra\LuqraNowPhp\Models\Operations\GetWebhookSubscribedEventEnum>')]
     public array $subscribedEvents;
 
     /**
@@ -56,15 +56,23 @@ class GetWebhookData
     public string $url;
 
     /**
+     *
+     * @var ?string $label
+     */
+    #[\Speakeasy\Serializer\Annotation\SerializedName('label')]
+    public ?string $label;
+
+    /**
      * @param  \DateTime  $createdAt
      * @param  bool  $enabled
      * @param  string  $id
-     * @param  array<\Luqra\LuqraNowPhp\Models\Operations\GetWebhookSubscribedEvent>  $subscribedEvents
+     * @param  array<\Luqra\LuqraNowPhp\Models\Operations\GetWebhookSubscribedEventPaymentWildcard|\Luqra\LuqraNowPhp\Models\Operations\GetWebhookSubscribedEventEnum>  $subscribedEvents
      * @param  \DateTime  $updatedAt
      * @param  string  $url
+     * @param  ?string  $label
      * @phpstan-pure
      */
-    public function __construct(\DateTime $createdAt, bool $enabled, string $id, array $subscribedEvents, \DateTime $updatedAt, string $url)
+    public function __construct(\DateTime $createdAt, bool $enabled, string $id, array $subscribedEvents, \DateTime $updatedAt, string $url, ?string $label = null)
     {
         $this->createdAt = $createdAt;
         $this->enabled = $enabled;
@@ -72,5 +80,6 @@ class GetWebhookData
         $this->subscribedEvents = $subscribedEvents;
         $this->updatedAt = $updatedAt;
         $this->url = $url;
+        $this->label = $label;
     }
 }

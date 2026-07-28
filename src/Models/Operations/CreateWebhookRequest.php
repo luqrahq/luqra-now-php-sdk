@@ -14,10 +14,10 @@ class CreateWebhookRequest
     /**
      * $subscribedEvents
      *
-     * @var array<\Luqra\LuqraNowPhp\Models\Operations\CreateWebhookSubscribedEventRequest> $subscribedEvents
+     * @var array<\Luqra\LuqraNowPhp\Models\Operations\CreateWebhookSubscribedEventPaymentWildcardRequest|\Luqra\LuqraNowPhp\Models\Operations\CreateWebhookSubscribedEventRequestEnum> $subscribedEvents
      */
     #[\Speakeasy\Serializer\Annotation\SerializedName('subscribedEvents')]
-    #[\Speakeasy\Serializer\Annotation\Type('array<\Luqra\LuqraNowPhp\Models\Operations\CreateWebhookSubscribedEventRequest>')]
+    #[\Speakeasy\Serializer\Annotation\Type('array<\Luqra\LuqraNowPhp\Models\Operations\CreateWebhookSubscribedEventPaymentWildcardRequest|\Luqra\LuqraNowPhp\Models\Operations\CreateWebhookSubscribedEventRequestEnum>')]
     public array $subscribedEvents;
 
     /**
@@ -28,13 +28,23 @@ class CreateWebhookRequest
     public string $url;
 
     /**
-     * @param  array<\Luqra\LuqraNowPhp\Models\Operations\CreateWebhookSubscribedEventRequest>  $subscribedEvents
+     *
+     * @var ?string $label
+     */
+    #[\Speakeasy\Serializer\Annotation\SerializedName('label')]
+    #[\Speakeasy\Serializer\Annotation\SkipWhenNull]
+    public ?string $label = null;
+
+    /**
+     * @param  array<\Luqra\LuqraNowPhp\Models\Operations\CreateWebhookSubscribedEventPaymentWildcardRequest|\Luqra\LuqraNowPhp\Models\Operations\CreateWebhookSubscribedEventRequestEnum>  $subscribedEvents
      * @param  string  $url
+     * @param  ?string  $label
      * @phpstan-pure
      */
-    public function __construct(array $subscribedEvents, string $url)
+    public function __construct(array $subscribedEvents, string $url, ?string $label = null)
     {
         $this->subscribedEvents = $subscribedEvents;
         $this->url = $url;
+        $this->label = $label;
     }
 }

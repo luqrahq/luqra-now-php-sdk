@@ -19,11 +19,20 @@ class TestWebhookRequest
     public string $id;
 
     /**
+     *
+     * @var ?\Luqra\LuqraNowPhp\Models\Operations\TestWebhookRequestBody $body
+     */
+    #[SpeakeasyMetadata('request:mediaType=application/json')]
+    public ?TestWebhookRequestBody $body;
+
+    /**
      * @param  string  $id
+     * @param  ?\Luqra\LuqraNowPhp\Models\Operations\TestWebhookRequestBody  $body
      * @phpstan-pure
      */
-    public function __construct(string $id)
+    public function __construct(string $id, ?TestWebhookRequestBody $body = null)
     {
         $this->id = $id;
+        $this->body = $body;
     }
 }

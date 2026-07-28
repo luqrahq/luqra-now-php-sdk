@@ -22,10 +22,10 @@ class UpdateWebhookRequestBody
     /**
      * $subscribedEvents
      *
-     * @var ?array<\Luqra\LuqraNowPhp\Models\Operations\UpdateWebhookSubscribedEventRequest> $subscribedEvents
+     * @var ?array<\Luqra\LuqraNowPhp\Models\Operations\UpdateWebhookSubscribedEventPaymentWildcardRequest|\Luqra\LuqraNowPhp\Models\Operations\UpdateWebhookSubscribedEventRequestEnum> $subscribedEvents
      */
     #[\Speakeasy\Serializer\Annotation\SerializedName('subscribedEvents')]
-    #[\Speakeasy\Serializer\Annotation\Type('array<\Luqra\LuqraNowPhp\Models\Operations\UpdateWebhookSubscribedEventRequest>|null')]
+    #[\Speakeasy\Serializer\Annotation\Type('array<\Luqra\LuqraNowPhp\Models\Operations\UpdateWebhookSubscribedEventPaymentWildcardRequest|\Luqra\LuqraNowPhp\Models\Operations\UpdateWebhookSubscribedEventRequestEnum>|null')]
     #[\Speakeasy\Serializer\Annotation\SkipWhenNull]
     public ?array $subscribedEvents = null;
 
@@ -38,15 +38,25 @@ class UpdateWebhookRequestBody
     public ?string $url = null;
 
     /**
+     *
+     * @var ?string $label
+     */
+    #[\Speakeasy\Serializer\Annotation\SerializedName('label')]
+    #[\Speakeasy\Serializer\Annotation\SkipWhenNull]
+    public ?string $label = null;
+
+    /**
      * @param  ?bool  $enabled
-     * @param  ?array<\Luqra\LuqraNowPhp\Models\Operations\UpdateWebhookSubscribedEventRequest>  $subscribedEvents
+     * @param  ?array<\Luqra\LuqraNowPhp\Models\Operations\UpdateWebhookSubscribedEventPaymentWildcardRequest|\Luqra\LuqraNowPhp\Models\Operations\UpdateWebhookSubscribedEventRequestEnum>  $subscribedEvents
      * @param  ?string  $url
+     * @param  ?string  $label
      * @phpstan-pure
      */
-    public function __construct(?bool $enabled = null, ?array $subscribedEvents = null, ?string $url = null)
+    public function __construct(?bool $enabled = null, ?array $subscribedEvents = null, ?string $url = null, ?string $label = null)
     {
         $this->enabled = $enabled;
         $this->subscribedEvents = $subscribedEvents;
         $this->url = $url;
+        $this->label = $label;
     }
 }

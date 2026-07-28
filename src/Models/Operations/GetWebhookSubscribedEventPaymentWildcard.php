@@ -9,7 +9,7 @@ declare(strict_types=1);
 namespace Luqra\LuqraNowPhp\Models\Operations;
 
 
-enum CreateWebhookSubscribedEventResponse: string
+enum GetWebhookSubscribedEventPaymentWildcard: string
 {
-    case StatementGenerated = 'STATEMENT_GENERATED';
+    case PaymentWildcard = 'payment.*';
 }
