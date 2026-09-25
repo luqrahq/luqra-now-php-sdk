@@ -6,6 +6,25 @@ on:
     types: [published]
 
 jobs:
+  error-resource-compatibility:
+    name: Error response compatibility
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+
+      - uses: shivammathur/setup-php@7c071dfe9dc99bdf297fa79cb49ea005b9fcadbc # 2.37.1
+        with:
+          php-version: "8.2"
+          tools: composer:v2
+
+      - name: Install dependencies for the SDK checkout under review
+        run: composer install --no-dev --prefer-dist --no-interaction
+
+      - name: Verify error response and constructor compatibility without network requests
+        run: php tests/verify-error-resource-compatibility.php
+
   sdk-test:
     runs-on: ubuntu-latest
     steps:
